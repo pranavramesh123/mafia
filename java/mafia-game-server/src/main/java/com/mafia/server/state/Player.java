@@ -5,8 +5,6 @@
  */
 package com.mafia.server.state;
 
-import javax.websocket.Session;
-
 /**
  *
  * @author w1428368
