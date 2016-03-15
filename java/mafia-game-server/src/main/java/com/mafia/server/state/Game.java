@@ -5,7 +5,7 @@
  */
 package com.mafia.server.state;
 
-import com.mafia.server.ConcurrentArrayList;
+import com.mafia.server.utils.ConcurrentArrayList;
 import java.util.ArrayList;
 
 /**

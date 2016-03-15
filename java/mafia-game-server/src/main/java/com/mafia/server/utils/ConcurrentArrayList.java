@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server;
+package com.mafia.server.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
