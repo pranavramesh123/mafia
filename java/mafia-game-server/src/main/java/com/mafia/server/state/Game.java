@@ -5,6 +5,7 @@
  */
 package com.mafia.server.state;
 
+import com.mafia.server.ConcurrentArrayList;
 import java.util.ArrayList;
 
 /**
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 public class Game {
 
     private String key;
-    private ArrayList<Player> players;
+    private ConcurrentArrayList<Player> players;
 
     private MafiaTypes.GAME_PHASE gameState;
     private MafiaTypes.ACTION_PHASE phase;
 
     public Game(Player creator, String key) {
-        players = new ArrayList<>();
+        players = new ConcurrentArrayList<>();
         players.add(creator);
         gameState = MafiaTypes.GAME_PHASE.PREGAME;
         phase = MafiaTypes.ACTION_PHASE.NONE;
@@ -44,14 +45,14 @@ public class Game {
     /**
      * @return the players
      */
-    public ArrayList<Player> getPlayers() {
+    public ConcurrentArrayList<Player> getPlayers() {
         return players;
     }
 
     /**
      * @param players the players to set
      */
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(ConcurrentArrayList<Player> players) {
         this.players = players;
     }
 
