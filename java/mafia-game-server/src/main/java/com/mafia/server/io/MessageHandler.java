@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.bus;
+package com.mafia.server.io;
 
 import com.mafia.server.state.Game;
 import com.mafia.server.state.Player;
@@ -18,7 +18,7 @@ import javax.websocket.Session;
  *
  * @author Just1689
  */
-public class MessageEvents {
+public class MessageHandler {
 
     public static synchronized void handleMessageFromClient(Session session, String message) {
 
@@ -39,7 +39,7 @@ public class MessageEvents {
             try {
                 session.getBasicRemote().sendText(message);
             } catch (IOException ex) {
-                Logger.getLogger(MessageEvents.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
