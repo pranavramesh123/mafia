@@ -22,8 +22,6 @@ public class Repository {
 
     //Sessions by ID
     private static ConcurrentHashMap<String, Session> sessions;
-    
-    
 
     public Repository() {
         games = new ConcurrentHashMap<>();
