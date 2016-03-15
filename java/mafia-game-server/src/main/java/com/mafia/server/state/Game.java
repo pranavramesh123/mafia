@@ -5,9 +5,7 @@
  */
 package com.mafia.server.state;
 
-import com.mafia.server.utils.ConcurrentArrayList;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.websocket.Session;
 
 /**
@@ -16,17 +14,17 @@ import javax.websocket.Session;
  */
 public class Game {
 
-    private String key;
-    private ConcurrentArrayList<Player> players;
+    private final String key;
+    private final ConcurrentHashMap<String, Player> players;
 
     private MafiaTypes.GAME_PHASE gameState;
     private MafiaTypes.ACTION_PHASE phase;
 
-    public Game(Player creator, String key) {
-        players = new ConcurrentArrayList<>();
-        players.add(creator);
-        gameState = MafiaTypes.GAME_PHASE.PREGAME;
-        phase = MafiaTypes.ACTION_PHASE.NONE;
+    public Game(Session creatorSession, Player creator, String key) {
+        this.players = new ConcurrentHashMap<>();
+        this.players.put(creatorSession.getId(), creator);
+        this.gameState = MafiaTypes.GAME_PHASE.PREGAME;
+        this.phase = MafiaTypes.ACTION_PHASE.NONE;
         this.key = key;
     }
 
@@ -38,24 +36,10 @@ public class Game {
     }
 
     /**
-     * @param key the key to set
-     */
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    /**
      * @return the players
      */
-    public ConcurrentArrayList<Player> getPlayers() {
+    public ConcurrentHashMap<String, Player> getPlayers() {
         return players;
-    }
-
-    /**
-     * @param players the players to set
-     */
-    public void setPlayers(ConcurrentArrayList<Player> players) {
-        this.players = players;
     }
 
     /**
@@ -87,14 +71,7 @@ public class Game {
     }
 
     public void removePlayer(Session session) {
-        Iterator<Player> iterator = players.iterator();
-        while (iterator.hasNext()) {
-            Player player = iterator.next();
-            if (player.getSessionId().equals(session.getId())) {
-                iterator.remove();
-                break;
-            }
-        }
+        players.remove(session.getId());
     }
 
 }

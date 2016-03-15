@@ -5,7 +5,7 @@
  */
 package com.mafia.server.io;
 
-import com.mafia.bus.PlayerEvents;
+import com.mafia.server.bus.PlayerEvents;
 import java.io.IOException;
 import javax.swing.text.PlainDocument;
 import javax.websocket.OnClose;
