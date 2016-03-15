@@ -5,7 +5,9 @@
  */
 package com.mafia.server.io;
 
+import com.mafia.bus.PlayerEvents;
 import java.io.IOException;
+import javax.swing.text.PlainDocument;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -41,6 +43,7 @@ public class WebsocketServlet {
 
     @OnClose
     public void onClose(Session session) {
-        System.out.println("Session " + session.getId() + " has ended");
+        PlayerEvents.playerQuits(session);
+
     }
 }

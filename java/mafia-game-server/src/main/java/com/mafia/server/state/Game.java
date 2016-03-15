@@ -7,6 +7,8 @@ package com.mafia.server.state;
 
 import com.mafia.server.utils.ConcurrentArrayList;
 import java.util.ArrayList;
+import java.util.Iterator;
+import javax.websocket.Session;
 
 /**
  *
@@ -82,6 +84,17 @@ public class Game {
      */
     public void setPhase(MafiaTypes.ACTION_PHASE phase) {
         this.phase = phase;
+    }
+
+    public void removePlayer(Session session) {
+        Iterator<Player> iterator = players.iterator();
+        while (iterator.hasNext()) {
+            Player player = iterator.next();
+            if (player.getSessionId().equals(session.getId())) {
+                iterator.remove();
+                break;
+            }
+        }
     }
 
 }
