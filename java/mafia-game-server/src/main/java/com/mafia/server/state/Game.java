@@ -3,13 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server;
+package com.mafia.server.state;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Just1689
  */
 public class Game {
+
     private String key;
+    private ArrayList<Player> players;
+
+    private MafiaTypes.GAME_PHASE gameState;
+    private MafiaTypes.ACTION_PHASE phase;
+    
     
 }
