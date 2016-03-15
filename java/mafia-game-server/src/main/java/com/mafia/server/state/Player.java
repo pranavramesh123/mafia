@@ -15,12 +15,12 @@ public class Player {
 
     private String name;
     private MafiaTypes.PLAYER_ROLES role;
-    private Session session;
+    private String sessionId;
 
-    public Player(String name, Session session) {
+    public Player(String name, String sessionId) {
         this.name = name;
         this.role = MafiaTypes.PLAYER_ROLES.NONE;
-        this.session = session;
+        this.sessionId = sessionId;
     }
 
     /**
@@ -52,16 +52,16 @@ public class Player {
     }
 
     /**
-     * @return the session
+     * @return the sessionId
      */
-    public Session getSession() {
-        return session;
+    public String getSessionId() {
+        return sessionId;
     }
 
     /**
-     * @param session the session to set
+     * @param sessionId the sessionId to set
      */
-    public void setSession(Session session) {
-        this.session = session;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

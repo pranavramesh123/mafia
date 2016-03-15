@@ -17,13 +17,19 @@ import javax.websocket.Session;
  */
 public class Repository {
 
+    //Games stored by their keys
     private static ConcurrentHashMap<String, Game> games;
+
+    //Sessions by ID
+    private static ConcurrentHashMap<String, Session> sessions;
+    
+    
 
     public Repository() {
         games = new ConcurrentHashMap<>();
     }
 
-    public static synchronized Game getByKey(String key) {
+    public static synchronized Game getGameByKey(String key) {
         Set<String> keys = games.keySet();
         Game result = null;
         for (String rowKey : keys) {
@@ -38,7 +44,7 @@ public class Repository {
         return result;
     }
 
-    public static synchronized Game getBySession(Session session) {
+    public static synchronized Game getGameBySession(Session session) {
         Set<String> keys = games.keySet();
         Game result = null;
         for (String rowKey : keys) {
@@ -47,7 +53,7 @@ public class Repository {
                 Iterator<Player> iterator = game.getPlayers().iterator();
                 while (iterator.hasNext()) {
                     Player player = iterator.next();
-                    if (player.getSession().equals(session)) {
+                    if (player.getSessionId().equals(session.getId())) {
                         result = game;
                         break;
                     }
