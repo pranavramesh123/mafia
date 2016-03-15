@@ -12,7 +12,7 @@ import javax.websocket.Session;
 
 /**
  *
- * @author w1428368
+ * @author Just1689
  */
 public class PlayerEvents {
     

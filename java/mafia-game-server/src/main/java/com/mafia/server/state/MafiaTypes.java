@@ -7,7 +7,7 @@ package com.mafia.server.state;
 
 /**
  *
- * @author w1428368
+ * @author Just1689
  */
 public class MafiaTypes {
 
