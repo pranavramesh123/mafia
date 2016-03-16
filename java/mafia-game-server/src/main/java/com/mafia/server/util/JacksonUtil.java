@@ -28,7 +28,7 @@ public class JacksonUtil<T> {
         return null;
     }
 
-    public String objectToString(T t) {
+    public static String objectToString(Object t) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(t);

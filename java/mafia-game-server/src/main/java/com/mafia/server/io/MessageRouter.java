@@ -39,12 +39,12 @@ public class MessageRouter {
     }
 
     public static void sendMessage(Game game, Object t) {
-        String json = new JacksonUtil().objectToString(t);
+        String json = JacksonUtil.objectToString(t);
         MessageHandler.sendMessage(game, json);
     }
 
     public static void sendMessage(Player player, Object t) {
-        String json = new JacksonUtil().objectToString(t);
+        String json = JacksonUtil.objectToString(t);
         MessageHandler.sendMessage(player, json);
     }
 
