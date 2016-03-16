@@ -43,4 +43,16 @@ public class Repository {
         games.put(game.getKey(), game);
     }
 
+    public static void addPlayer(Player player) {
+        players.put(player.getSessionId(), player);
+    }
+
+    public static void addSession(Session session) {
+        sessions.put(session.getId(), session);
+    }
+
+    public static void removeSession(Session session) {
+        sessions.remove(session.getId());
+    }
+
 }
