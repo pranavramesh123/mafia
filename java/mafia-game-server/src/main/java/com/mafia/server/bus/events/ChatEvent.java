@@ -20,8 +20,14 @@ public class ChatEvent implements Runnable, Event {
 
     @Override
     public void run() {
+        if (data == null || data.getMessage() == null || data.getMessage().trim().isEmpty()) {
+            //Sillyness
+            return;
+        }
+
         //impl
         System.out.println(data.toString());
+
         ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), data.getMessage());
 
     }
