@@ -6,7 +6,6 @@
 package com.mafia.server.model.state;
 
 import java.util.concurrent.ConcurrentHashMap;
-import javax.websocket.Session;
 
 /**
  *
