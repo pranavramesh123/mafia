@@ -73,4 +73,8 @@ public class Game {
         players.remove(player.getSessionId());
     }
 
+    public void addPlayer(Player player) {
+        players.put(player.getSessionId(), player);
+    }
+
 }

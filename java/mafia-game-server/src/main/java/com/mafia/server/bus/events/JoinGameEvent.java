@@ -5,7 +5,12 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.ent.GameEvents;
+import com.mafia.server.bus.ent.PlayerEvents;
 import com.mafia.server.model.comm.client.JoinGame;
+import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.Player;
+import com.mafia.server.model.state.Repository;
 
 /**
  *
@@ -20,6 +25,14 @@ public class JoinGameEvent implements Runnable, Event {
     public void run() {
         //impl
         System.out.println(data.toString());
+
+        Player player = new Player(data.getName(), data.getPassCode(), createdBy);
+        Repository.addPlayer(player);
+
+        Game game = Repository.getGameByKey(data.getKey());
+
+        PlayerEvents.joinGame(player, game);
+
     }
 
     @Override
