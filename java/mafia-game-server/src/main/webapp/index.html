@@ -69,6 +69,12 @@
 
             }
 
+            function sendChatKeyDown() {
+                if (event.keyCode == 13) {
+                    sendChat();
+                }
+            }
+
             function sendChat() {
                 // Construct a msg object containing the data the server needs to process the message from the chat client.
                 var msg = {
@@ -76,8 +82,10 @@
                     event: "ChatEvent",
                     message: document.getElementById("lips").value
                 };
-
+                document.getElementById("lips").value = "";
                 socket.send(JSON.stringify(msg));
+                document.getElementById("lips").focus();
+
 
             }
 
@@ -90,7 +98,6 @@
                     passCode: document.getElementById("passCode").value,
                     key: document.getElementById("gameCode").value
                 };
-
                 socket.send(JSON.stringify(msg));
 
             }
@@ -175,7 +182,7 @@
                                 <textarea class="form-control" rows="10" name="out" id="out" readonly></textarea>
                             </div>
                             <div class="row">
-                                <input class="form-control" name="lips" id="lips" />
+                                <input class="form-control" name="lips" id="lips" onkeydown="sendChatKeyDown();" />
                                 <button  class="form-control" onclick="sendChat();" >Talk!</button>
                             </div>
                             <!--</div>-->
