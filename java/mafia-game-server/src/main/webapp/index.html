@@ -3,6 +3,30 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.min.css" rel="stylesheet">
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="starter-template.css" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="ie-emulation-modes-warning.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->        
+
+
     </head>
     <body>
         <script>
@@ -12,16 +36,16 @@
 
             socket.onmessage = function (event) {
                 var messageFromServer = JSON.parse(event.data);
-                
+
                 //Message is a chat message
                 if (messageFromServer.event === "ChatMessage") {
                     document.getElementById("out").value = document.getElementById("out").value + messageFromServer.player + ": " + messageFromServer.message + "\n";
-                    
-                //We dont know what this is
+
+                    //We dont know what this is
                 } else {
                     document.getElementById("out").value = document.getElementById("out").value + messageFromServer + "\n";
                 }
-            }
+            };
 
 
             function createGame() {
@@ -66,25 +90,67 @@
             }
         </script>
 
-        <h1>Hello World!</h1>
 
-        <textarea name="textarea" ></textarea>
-        <input name="name" id="name" />
-        <input name="passCode" id="passCode" />
-        <button onclick="createGame();" >Create a game!</button>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./">Mafia</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <div class="container">
 
-        <textarea name="out" id="out" ></textarea>
-        <input name="lips" id="lips" />
-        <button onclick="sendChat();" >Talk!</button>
+            <div class="starter-template">
+
+                <h1>Create a Game!</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input class="form-control" name="name" id="name" placeholder="Your name" />
+                                <input class="form-control" name="passCode" id="passCode" placeholder="Passcode" />
+                                <button class="form-control" onclick="createGame();" >Create a game!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <br />
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!--<div class="form-group">-->
+                            <textarea name="out" id="out" ></textarea>
+                            <input name="lips" id="lips" />
+                            <button onclick="sendChat();" >Talk!</button>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div><!-- /.container -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="ie10-viewport-bug-workaround.js"></script>
 
     </body>
 </html>
