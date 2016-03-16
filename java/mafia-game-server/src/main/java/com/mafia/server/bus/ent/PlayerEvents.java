@@ -16,18 +16,18 @@ import javax.websocket.Session;
  * @author Just1689
  */
 public class PlayerEvents {
-    
+
     public static void playerQuits(Session session) {
         Player player = Repository.getPlayerBySession(session);
         player.getGame().removePlayer(player);
 
         //Todo: notify?
     }
-    
+
     public static void joinGame(Player player, Game game) {
         player.setGame(game);
         game.addPlayer(player);
         GameNotify.sendGameState(game);
     }
-    
+
 }

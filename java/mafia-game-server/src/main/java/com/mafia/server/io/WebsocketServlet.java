@@ -5,7 +5,6 @@
  */
 package com.mafia.server.io;
 
-import java.io.IOException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;

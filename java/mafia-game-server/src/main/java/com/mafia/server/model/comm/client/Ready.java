@@ -28,10 +28,10 @@ public class Ready {
     public void setOk(boolean ok) {
         this.ok = ok;
     }
-    
+
     @Override
     public String toString() {
         return JacksonUtils.objectToString(this);
     }
-    
+
 }
