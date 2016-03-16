@@ -11,4 +11,14 @@ package com.mafia.server.model.comm.client;
  */
 public class KickPlayer {
 
+    private String player;
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
+
 }

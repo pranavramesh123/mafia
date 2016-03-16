@@ -11,4 +11,19 @@ package com.mafia.server.model.comm.client;
  */
 public class VotePlayer {
 
+    private String player;
+
+    /**
+     * @return the player
+     */
+    public String getPlayer() {
+        return player;
+    }
+
+    /**
+     * @param player the player to set
+     */
+    public void setPlayer(String player) {
+        this.player = player;
+    }
 }

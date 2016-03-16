@@ -11,4 +11,23 @@ package com.mafia.server.model.comm.client;
  */
 public class CreateGame {
 
+    private String name;
+    private String passCode;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
+    }
+
 }
