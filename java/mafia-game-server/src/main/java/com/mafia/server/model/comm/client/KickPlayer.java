@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.comm.client;
 
+import com.mafia.server.util.JacksonUtils;
+
 /**
  *
  * @author Just1689
@@ -21,4 +23,8 @@ public class KickPlayer {
         this.player = player;
     }
 
+    @Override
+    public String toString() {
+        return JacksonUtils.objectToString(this);
+    }
 }

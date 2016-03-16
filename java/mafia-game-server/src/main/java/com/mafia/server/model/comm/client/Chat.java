@@ -11,27 +11,27 @@ import com.mafia.server.util.JacksonUtils;
  *
  * @author Just1689
  */
-public class Ready {
+public class Chat {
 
-    private boolean ok;
+    private String message;
 
-    /**
-     * @return the ok
-     */
-    public boolean isOk() {
-        return ok;
-    }
-
-    /**
-     * @param ok the ok to set
-     */
-    public void setOk(boolean ok) {
-        this.ok = ok;
-    }
-    
     @Override
     public String toString() {
         return JacksonUtils.objectToString(this);
     }
-    
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 }

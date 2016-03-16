@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.comm.client;
 
+import com.mafia.server.util.JacksonUtils;
+
 /**
  *
  * @author Just1689
@@ -28,6 +30,11 @@ public class CreateGame {
 
     public void setPassCode(String passCode) {
         this.passCode = passCode;
+    }
+
+    @Override
+    public String toString() {
+        return JacksonUtils.objectToString(this);
     }
 
 }

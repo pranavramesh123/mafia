@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.comm.client;
 
+import com.mafia.server.util.JacksonUtils;
+
 /**
  *
  * @author Just1689
@@ -25,5 +27,10 @@ public class LeaveGame {
      */
     public void setOk(boolean ok) {
         this.ok = ok;
+    }
+
+    @Override
+    public String toString() {
+        return JacksonUtils.objectToString(this);
     }
 }

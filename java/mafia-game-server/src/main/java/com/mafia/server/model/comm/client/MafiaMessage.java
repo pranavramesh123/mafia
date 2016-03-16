@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.comm.client;
 
+import com.mafia.server.util.JacksonUtils;
+
 /**
  *
  * @author Just1689
@@ -40,6 +42,11 @@ public class MafiaMessage {
      */
     public void setEvent(String event) {
         this.event = event;
+    }
+
+    @Override
+    public String toString() {
+        return JacksonUtils.objectToString(this);
     }
 
 }
