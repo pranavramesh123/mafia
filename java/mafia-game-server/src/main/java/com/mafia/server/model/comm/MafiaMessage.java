@@ -11,19 +11,35 @@ package com.mafia.server.model.comm;
  */
 public class MafiaMessage {
 
-    private String action;
+    private String type;
+    private String event;
 
     /**
-     * @return the action
+     * @return the type
      */
-    public String getAction() {
-        return action;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @param action the action to set
+     * @param type the type to set
      */
-    public void setAction(String action) {
-        this.action = action;
+    public void setType(String type) {
+        this.type = type;
     }
+
+    /**
+     * @return the event
+     */
+    public String getEvent() {
+        return event;
+    }
+
+    /**
+     * @param event the event to set
+     */
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
 }
