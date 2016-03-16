@@ -23,11 +23,13 @@ public class MessageHandler {
 
     public static void handleMessageFromClient(Session session, String message) {
         MessageRouter.handleIncoming(message, session.getId());
+
     }
 
     public static void handleDisconnect(Session session) {
         Repository.removeSession(session);
         PlayerEvents.playerQuits(session);
+        System.out.println("Session closed");
     }
 
     public static synchronized void sendMessage(Game game, String message) {
@@ -40,6 +42,7 @@ public class MessageHandler {
     }
 
     public static void sendMessage(Player player, String message) {
+        System.out.println("Sending: " + message);
         Session session = Repository.getSessionByPlayer(player);
         if (session != null) {
             try {
@@ -52,6 +55,7 @@ public class MessageHandler {
 
     public static void handleConnect(Session session) {
         Repository.addSession(session);
+        System.out.println("Session opened");
     }
 
 }
