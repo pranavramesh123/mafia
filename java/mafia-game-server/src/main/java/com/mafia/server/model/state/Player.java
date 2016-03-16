@@ -12,8 +12,10 @@ package com.mafia.server.model.state;
 public class Player {
 
     private String name;
+    private String passKey;
     private MafiaTypes.PLAYER_ROLES role;
     private String sessionId;
+    private Game game;
 
     public Player(String name, String sessionId) {
         this.name = name;
@@ -61,5 +63,33 @@ public class Player {
      */
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    /**
+     * @return the passKey
+     */
+    public String getPassKey() {
+        return passKey;
+    }
+
+    /**
+     * @param passKey the passKey to set
+     */
+    public void setPassKey(String passKey) {
+        this.passKey = passKey;
+    }
+
+    /**
+     * @return the game
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * @param game the game to set
+     */
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

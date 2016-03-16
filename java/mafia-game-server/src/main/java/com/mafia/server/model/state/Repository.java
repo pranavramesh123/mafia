@@ -5,7 +5,6 @@
  */
 package com.mafia.server.model.state;
 
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.websocket.Session;
 
@@ -16,42 +15,32 @@ import javax.websocket.Session;
 public class Repository {
 
     //Games stored by their keys
-    public static ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
 
     //Sessions by ID
-    public static ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
-    public static synchronized Game getGameByKey(String key) {
-        Set<String> keys = games.keySet();
-        Game result = null;
-        for (String rowKey : keys) {
-            Game game = games.get(rowKey);
-            if (game != null) {
-                if (game.getKey().equals(key)) {
-                    result = game;
-                    break;
-                }
-            }
-        }
-        return result;
+    //Player by ID
+    private static ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
+
+    public static Game getGameByKey(String key) {
+        return games.get(key);
     }
 
-    public static synchronized Game getGameBySession(Session session) {
-        Set<String> keys = games.keySet();
-        Game result = null;
-        for (String rowKey : keys) {
-            Game game = games.get(rowKey);
-            if (game != null) {
-                if (game.getPlayers().get(session.getId()) != null) {
-                    result = game;
-                    break;
-                }
-            }
-            if (result != null) {
-                break;
-            }
-        }
-        return result;
+    public static Player getPlayerBySession(Session session) {
+        return getPlayerBySessionId(session.getId());
+    }
+
+    public static Player getPlayerBySessionId(String id) {
+        return players.get(id);
+    }
+
+    public static Session getSessionByPlayer(Player player) {
+        return sessions.get(player.getSessionId());
+    }
+
+    public static void createGame(Game game) {
+        games.put(game.getKey(), game);
     }
 
 }

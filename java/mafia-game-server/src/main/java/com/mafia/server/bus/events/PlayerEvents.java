@@ -16,15 +16,15 @@ import javax.websocket.Session;
  */
 public class PlayerEvents {
 
-    public static synchronized void playerQuits(Session session) {
-        Game game = Repository.getGameBySession(session);
-        game.removePlayer(session);
+    public static void playerQuits(Session session) {
+        Player player = Repository.getPlayerBySession(session);
+        player.getGame().removePlayer(player);
 
         //Todo: notify?
     }
 
     public static void joinGame(Player player, Game game) {
-
+        player.setGame(game);
     }
 
 }

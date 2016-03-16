@@ -5,7 +5,6 @@
  */
 package com.mafia.server.util;
 
-import com.mafia.server.model.state.Repository;
 import java.util.UUID;
 
 /**
@@ -15,13 +14,7 @@ import java.util.UUID;
 public class StringUtils {
 
     public static String makeUniqueKey(int end) {
-        boolean ok = false;
-        String key = null;
-        while (!ok) {
-            key = UUID.randomUUID().toString().toUpperCase().substring(1, end);
-            ok = !Repository.games.contains(key);
-        }
-        return key;
+        return UUID.randomUUID().toString().toUpperCase().substring(1, end);
     }
 
 }

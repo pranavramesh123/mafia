@@ -9,7 +9,6 @@ import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 import com.mafia.server.util.StringUtils;
-import javax.websocket.Session;
 
 /**
  *
@@ -17,10 +16,17 @@ import javax.websocket.Session;
  */
 public class GameEvents {
 
-    public static synchronized Game create(Player player, Session session) {
+    public static synchronized Game create(Player player) {
+
+        //Create a unique key
         String newKey = StringUtils.makeUniqueKey(5);
-        Game game = new Game(session, player, newKey);
-        Repository.games.put(newKey, game);
+        while (Repository.getGameByKey(newKey) != null) {
+            newKey = StringUtils.makeUniqueKey(5);
+        }
+
+        Game game = new Game(player, newKey);
+        Repository.createGame(game);
+
         PlayerEvents.joinGame(player, game);
         return game;
     }

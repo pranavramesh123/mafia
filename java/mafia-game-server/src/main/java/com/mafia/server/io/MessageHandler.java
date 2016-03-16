@@ -39,7 +39,7 @@ public class MessageHandler {
     }
 
     public static synchronized void sendMessage(Player player, String message) {
-        Session session = Repository.sessions.get(player.getSessionId());
+        Session session = Repository.getSessionByPlayer(player);
         if (session != null) {
             try {
                 session.getBasicRemote().sendText(message);

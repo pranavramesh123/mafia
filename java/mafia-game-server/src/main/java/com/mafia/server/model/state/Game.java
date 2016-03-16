@@ -20,9 +20,9 @@ public class Game {
     private MafiaTypes.GAME_PHASE gameState;
     private MafiaTypes.ACTION_PHASE phase;
 
-    public Game(Session creatorSession, Player creator, String key) {
+    public Game(Player creator, String key) {
         this.players = new ConcurrentHashMap<>();
-        this.players.put(creatorSession.getId(), creator);
+        this.players.put(creator.getSessionId(), creator);
         this.gameState = MafiaTypes.GAME_PHASE.PREGAME;
         this.phase = MafiaTypes.ACTION_PHASE.NONE;
         this.key = key;
@@ -70,8 +70,8 @@ public class Game {
         this.phase = phase;
     }
 
-    public void removePlayer(Session session) {
-        players.remove(session.getId());
+    public void removePlayer(Player player) {
+        players.remove(player.getSessionId());
     }
 
 }
