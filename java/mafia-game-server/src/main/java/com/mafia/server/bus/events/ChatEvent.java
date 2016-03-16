@@ -22,7 +22,7 @@ public class ChatEvent implements Runnable, Event {
     public void run() {
         //impl
         System.out.println(data.toString());
-        ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), createdBy);
+        ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), data.getMessage());
 
     }
 

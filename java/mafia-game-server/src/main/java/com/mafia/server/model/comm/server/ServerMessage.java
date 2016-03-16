@@ -23,7 +23,7 @@ public class ServerMessage {
 
     public void resolveEventName() {
         if (event == null || event.isEmpty()) {
-            event = this.getClass().getName();
+            event = this.getClass().getSimpleName();
         }
     }
 

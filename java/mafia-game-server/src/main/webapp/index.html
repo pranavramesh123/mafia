@@ -11,8 +11,16 @@
             var clientID;
 
             socket.onmessage = function (event) {
-                var messageFromServer = event.data;
-                document.getElementById("out").value = document.getElementById("out").value + "<br />" + messageFromServer;
+                var messageFromServer = JSON.parse(event.data);
+                
+                //Message is a chat message
+                if (messageFromServer.event === "ChatMessage") {
+                    document.getElementById("out").value = document.getElementById("out").value + messageFromServer.player + ": " + messageFromServer.message + "\n";
+                    
+                //We dont know what this is
+                } else {
+                    document.getElementById("out").value = document.getElementById("out").value + messageFromServer + "\n";
+                }
             }
 
 
