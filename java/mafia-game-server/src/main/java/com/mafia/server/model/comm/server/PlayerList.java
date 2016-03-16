@@ -10,5 +10,5 @@ package com.mafia.server.model.comm.server;
  * @author Just1689
  */
 public class PlayerList {
-    
+
 }

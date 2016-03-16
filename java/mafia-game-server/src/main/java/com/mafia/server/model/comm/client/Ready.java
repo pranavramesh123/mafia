@@ -10,5 +10,5 @@ package com.mafia.server.model.comm.client;
  * @author Just1689
  */
 public class Ready {
-    
+
 }
