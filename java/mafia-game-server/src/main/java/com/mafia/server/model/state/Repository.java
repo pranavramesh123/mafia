@@ -16,14 +16,10 @@ import javax.websocket.Session;
 public class Repository {
 
     //Games stored by their keys
-    public static ConcurrentHashMap<String, Game> games;
+    public static ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
 
     //Sessions by ID
-    public static ConcurrentHashMap<String, Session> sessions;
-
-    public Repository() {
-        games = new ConcurrentHashMap<>();
-    }
+    public static ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public static synchronized Game getGameByKey(String key) {
         Set<String> keys = games.keySet();
