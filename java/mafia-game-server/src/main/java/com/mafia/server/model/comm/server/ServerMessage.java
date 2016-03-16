@@ -9,25 +9,16 @@ package com.mafia.server.model.comm.server;
  *
  * @author Just1689
  */
-public interface ServerMessage {
+public class ServerMessage {
 
-    /**
-     * @return the type
-     */
-    public String getType();
+    private String event;
 
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type);
+    public String getEvent() {
+        return event;
+    }
 
-    /**
-     * @return the event
-     */
-    public String getEvent();
+    public void setEvent(String event) {
+        this.event = event;
+    }
 
-    /**
-     * @param event the event to set
-     */
-    public void setEvent(String event);
 }
