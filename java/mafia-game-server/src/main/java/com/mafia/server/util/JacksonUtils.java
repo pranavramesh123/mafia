@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Just1689
  */
-public class JacksonUtil<T> {
+public class JacksonUtils<T> {
 
     public T stringToObject(String json, Class clazz) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -33,7 +33,7 @@ public class JacksonUtil<T> {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(t);
         } catch (JsonProcessingException ex) {
-            Logger.getLogger(JacksonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JacksonUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

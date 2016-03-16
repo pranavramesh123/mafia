@@ -10,7 +10,7 @@ import com.mafia.server.model.comm.client.MafiaMessage;
 import com.mafia.server.model.comm.server.ServerMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
-import com.mafia.server.util.JacksonUtil;
+import com.mafia.server.util.JacksonUtils;
 import com.mafia.server.util.ReflectionUtils;
 
 /**
@@ -22,12 +22,12 @@ public class MessageRouter {
     public static void handleIncoming(String message, String sessionId) {
 
         //Get an object with the type and the 
-        JacksonUtil<MafiaMessage> util = new JacksonUtil<>();
+        JacksonUtils<MafiaMessage> util = new JacksonUtils<>();
         MafiaMessage mafiaMessage = util.stringToObject(message, MafiaMessage.class);
 
         //Get the data
         Class clazz = ReflectionUtils.getClassByName("com.mafia.server.model.comm.client." + mafiaMessage.getType());
-        Object data = new JacksonUtil<>().stringToObject(message, clazz);
+        Object data = new JacksonUtils<>().stringToObject(message, clazz);
 
         //Get the event
         Class eventClass = ReflectionUtils.getClassByName("com.mafia.server.bus.events." + mafiaMessage.getEvent());
@@ -41,14 +41,14 @@ public class MessageRouter {
 
     public static void sendMessage(Game game, ServerMessage serverMessage) {
         serverMessage.resolveEventName();
-        String json = JacksonUtil.objectToString(serverMessage);
+        String json = JacksonUtils.objectToString(serverMessage);
         MessageHandler.sendMessage(game, json);
 
     }
 
     public static void sendMessage(Player player, ServerMessage serverMessage) {
         serverMessage.resolveEventName();
-        String json = JacksonUtil.objectToString(serverMessage);
+        String json = JacksonUtils.objectToString(serverMessage);
         MessageHandler.sendMessage(player, json);
 
     }
