@@ -5,6 +5,7 @@
  */
 package com.mafia.server.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,6 +24,16 @@ public class JacksonUtil<T> {
             return result;
         } catch (IOException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String objectToString(T t) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(t);
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(JacksonUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
