@@ -20,6 +20,7 @@ public class CreateGameEvent implements Runnable, Event {
     public void run() {
         //impl
         System.out.println(data.toString());
+
     }
 
     @Override
