@@ -7,6 +7,7 @@ package com.mafia.server.io;
 
 import com.mafia.server.bus.events.Event;
 import com.mafia.server.model.comm.client.MafiaMessage;
+import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.util.JacksonUtil;
 import com.mafia.server.util.ReflectionUtils;
@@ -35,6 +36,16 @@ public class MessageRouter {
         ((Event) event).setData(data, sessionId);
         ((Runnable) event).run();
 
+    }
+
+    public static void sendMessage(Game game, Object t) {
+        String json = new JacksonUtil().objectToString(t);
+        MessageHandler.sendMessage(game, json);
+    }
+
+    public static void sendMessage(Player player, Object t) {
+        String json = new JacksonUtil().objectToString(t);
+        MessageHandler.sendMessage(player, json);
     }
 
 }
