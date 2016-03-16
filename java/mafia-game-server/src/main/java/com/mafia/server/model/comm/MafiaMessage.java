@@ -9,7 +9,7 @@ package com.mafia.server.model.comm;
  *
  * @author Just1689
  */
-public class MessageTemplate {
+public class MafiaMessage {
 
     private String messageType;
 }
