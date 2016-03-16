@@ -21,4 +21,10 @@ public class ServerMessage {
         this.event = event;
     }
 
+    public void resolveEventName() {
+        if (event == null || event.isEmpty()) {
+            event = this.getClass().getName();
+        }
+    }
+
 }

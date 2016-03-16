@@ -22,7 +22,7 @@ import javax.websocket.Session;
 public class MessageHandler {
 
     public static void handleMessageFromClient(Session session, String message) {
-        MessageRouter.handle(message, session.getId());
+        MessageRouter.handleIncoming(message, session.getId());
     }
 
     public static void handleDisconnect(Session session) {
