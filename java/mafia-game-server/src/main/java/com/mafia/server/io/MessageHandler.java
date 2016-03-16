@@ -5,9 +5,10 @@
  */
 package com.mafia.server.io;
 
-import com.mafia.server.state.Game;
-import com.mafia.server.state.Player;
-import com.mafia.server.state.Repository;
+import com.mafia.server.bus.events.PlayerEvents;
+import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.Player;
+import com.mafia.server.model.state.Repository;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.logging.Level;
@@ -22,6 +23,10 @@ public class MessageHandler {
 
     public static synchronized void handleMessageFromClient(Session session, String message) {
 
+    }
+
+    public static synchronized void handleDisconnect(Session session) {
+        PlayerEvents.playerQuits(session);
     }
 
     public static synchronized void sendMessage(Game game, String message) {

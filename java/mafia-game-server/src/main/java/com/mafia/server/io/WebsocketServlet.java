@@ -36,7 +36,6 @@ public class WebsocketServlet {
 
     @OnClose
     public void onClose(Session session) {
-        PlayerEvents.playerQuits(session);
-
+        MessageHandler.handleDisconnect(session);
     }
 }
