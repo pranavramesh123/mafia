@@ -5,6 +5,7 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.ent.GameEvents;
 import com.mafia.server.model.comm.client.CreateGame;
 
 /**
@@ -20,6 +21,7 @@ public class CreateGameEvent implements Runnable, Event {
     public void run() {
         //impl
         System.out.println(data.toString());
+        GameEvents.create(data.getName(), data.getPassCode(), createdBy);
 
     }
 

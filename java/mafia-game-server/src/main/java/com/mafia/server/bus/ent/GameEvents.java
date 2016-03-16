@@ -16,6 +16,12 @@ import com.mafia.server.util.StringUtils;
  */
 public class GameEvents {
 
+    public static Game create(String name, String passCode, String createdBy) {
+        Player player = new Player(name, passCode, createdBy);
+        Repository.addPlayer(player);
+        return create(player);
+    }
+
     public static synchronized Game create(Player player) {
 
         //Create a unique key
