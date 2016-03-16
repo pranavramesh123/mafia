@@ -11,24 +11,27 @@ package com.mafia.server.model.comm.server;
  */
 public class PlayerList implements ServerMessage {
 
+    private String type;
+    private String event;
+
     @Override
     public String getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return type;
     }
 
     @Override
     public void setType(String type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.type = type;
     }
 
     @Override
     public String getEvent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return event;
     }
 
     @Override
     public void setEvent(String event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.event = event;
     }
 
 }
