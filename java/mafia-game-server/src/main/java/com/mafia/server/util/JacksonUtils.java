@@ -6,6 +6,7 @@
 package com.mafia.server.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ public class JacksonUtils<T> {
 
     public T stringToObject(String json, Class clazz) {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             T result = (T) objectMapper.readValue(json, clazz);
             return result;
