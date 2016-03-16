@@ -14,15 +14,19 @@ import com.mafia.server.model.comm.client.LeaveGame;
 public class LeaveGameEvent implements Runnable, Event {
 
     private LeaveGame data;
+    private String createdBy;
 
     @Override
     public void run() {
         //impl
+        System.out.println(data.toString());
     }
 
     @Override
-    public void setData(Object obj) {
+    public void setData(Object obj, String sessionId) {
         this.data = (LeaveGame) obj;
+        this.createdBy = sessionId;
+
     }
 
 }

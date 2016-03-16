@@ -14,15 +14,19 @@ import com.mafia.server.model.comm.client.CreateGame;
 public class CreateGameEvent implements Runnable, Event {
 
     private CreateGame data;
+    private String createdBy;
 
     @Override
     public void run() {
         //impl
+        System.out.println(data.toString());
     }
 
     @Override
-    public void setData(Object obj) {
+    public void setData(Object obj, String sessionId) {
         this.data = (CreateGame) obj;
+        this.createdBy = sessionId;
+
     }
 
 }

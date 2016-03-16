@@ -11,6 +11,6 @@ package com.mafia.server.bus.events;
  */
 public interface Event {
 
-    public void setData(Object obj);
+    public void setData(Object obj, String sessionId);
 
 }

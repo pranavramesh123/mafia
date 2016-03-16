@@ -14,15 +14,19 @@ import com.mafia.server.model.comm.client.KickPlayer;
 public class KickPlayerEvent implements Runnable, Event {
 
     private KickPlayer data;
+    private String createdBy;
 
     @Override
     public void run() {
         //impl
+        System.out.println(data.toString());
     }
 
     @Override
-    public void setData(Object obj) {
+    public void setData(Object obj, String sessionId) {
         this.data = (KickPlayer) obj;
+        this.createdBy = sessionId;
+
     }
 
 }
