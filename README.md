@@ -1,6 +1,4 @@
-Mafia
-======
-[![Build Status](https://travis-ci.org/team142/mafia.svg?branch=master)](https://travis-ci.org/team142/mafia)
+# Mafia [![Build Status](https://travis-ci.org/team142/mafia.svg?branch=master)](https://travis-ci.org/team142/mafia)
 
 Mafia is a Java implementation of a game by the same name.
 
