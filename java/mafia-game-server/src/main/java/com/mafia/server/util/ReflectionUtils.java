@@ -5,6 +5,7 @@
  */
 package com.mafia.server.util;
 
+import com.mafia.server.io.MessageRouter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,4 +24,16 @@ public class ReflectionUtils {
         return null;
 
     }
+
+    public static Object newObject(Class clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MessageRouter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MessageRouter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }
