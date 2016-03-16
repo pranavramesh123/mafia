@@ -44,7 +44,7 @@
                 } else if (messageFromServer.event === "GameState") {
                     //Hide the login bit
                     document.getElementById("createGameDiv").style.display = 'none';
-
+                    document.getElementById("chatDiv").style.display = 'block';
 
                 } else {
                     //We dont know what this is
@@ -77,6 +77,19 @@
 
             }
 
+            function joinGame() {
+                // Construct a msg object containing the data the server needs to process the message from the chat client.
+                var msg = {
+                    type: "JoinGame",
+                    event: "JoinGameEvent",
+                    name: document.getElementById("name").value,
+                    passCode: document.getElementById("passCode").value,
+                    key:  document.getElementById("gameCode").value
+                };
+
+                socket.send(JSON.stringify(msg));
+
+            }
 
             function sendText() {
                 // Construct a msg object containing the data the server needs to process the message from the chat client.
@@ -121,32 +134,50 @@
                 <h1>Create a Game!</h1>
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-3"></div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <input class="form-control" name="name" id="name" placeholder="Your name" />
                                 <input class="form-control" name="passCode" id="passCode" placeholder="Passcode" />
-                                <button class="form-control" onclick="createGame();" >Create a game!</button>
+                                <button class="form-control" onclick="createGame();" >Create a game</button>
+                                <br />
+                                <input class="form-control" name="gameCode" id="gameCode" placeholder="Game Code" />
+                                <button class="form-control" onclick="joinGame();" >Join a game</button>
                             </div>
                         </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
 
-            <br />
-            <br />
-            <br />
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <!--<div class="form-group">-->
-                        <textarea name="out" id="out" ></textarea>
-                        <input name="lips" id="lips" />
-                        <button onclick="sendChat();" >Talk!</button>
-                        <!--</div>-->
+            <div id="chatDiv">
+                <h1>Chat</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <!--<div class="form-group">-->
+                            <textarea name="out" id="out" ></textarea>
+                            <input name="lips" id="lips" />
+                            <button onclick="sendChat();" >Talk!</button>
+                            <!--</div>-->
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
+            <script>
+                document.getElementById("chatDiv").style.display = 'none';
+            </script>
 
 
 
