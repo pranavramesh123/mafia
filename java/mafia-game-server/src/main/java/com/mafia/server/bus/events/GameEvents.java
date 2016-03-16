@@ -5,10 +5,10 @@
  */
 package com.mafia.server.bus.events;
 
-import com.mafia.server.state.Game;
-import com.mafia.server.state.Player;
-import com.mafia.server.state.Repository;
-import java.util.UUID;
+import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.Player;
+import com.mafia.server.model.state.Repository;
+import com.mafia.server.util.StringUtils;
 import javax.websocket.Session;
 
 /**
@@ -18,21 +18,11 @@ import javax.websocket.Session;
 public class GameEvents {
 
     public static synchronized Game create(Player player, Session session) {
-        String newKey = makeUniqueKey();
+        String newKey = StringUtils.makeUniqueKey(5);
         Game game = new Game(session, player, newKey);
         Repository.games.put(newKey, game);
         PlayerEvents.joinGame(player, game);
         return game;
-    }
-
-    private static String makeUniqueKey() {
-        boolean ok = false;
-        String key = null;
-        while (!ok) {
-            key = UUID.randomUUID().toString().toUpperCase().substring(1, 5);
-            ok = !Repository.games.contains(key);
-        }
-        return key;
     }
 
 }
