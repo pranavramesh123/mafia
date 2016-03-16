@@ -6,7 +6,7 @@
 package com.mafia.server.io;
 
 import com.mafia.server.bus.events.Event;
-import com.mafia.server.model.comm.MafiaMessage;
+import com.mafia.server.model.comm.client.MafiaMessage;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.util.JacksonUtil;
 import com.mafia.server.util.ReflectionUtils;
