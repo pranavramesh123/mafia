@@ -21,11 +21,11 @@ import javax.websocket.Session;
  */
 public class MessageHandler {
 
-    public static synchronized void handleMessageFromClient(Session session, String message) {
-
+    public static void handleMessageFromClient(Session session, String message) {
+        MessageRouter.handle(message, session.getId());
     }
 
-    public static synchronized void handleDisconnect(Session session) {
+    public static void handleDisconnect(Session session) {
         PlayerEvents.playerQuits(session);
     }
 
@@ -38,7 +38,7 @@ public class MessageHandler {
 
     }
 
-    public static synchronized void sendMessage(Player player, String message) {
+    public static void sendMessage(Player player, String message) {
         Session session = Repository.getSessionByPlayer(player);
         if (session != null) {
             try {
