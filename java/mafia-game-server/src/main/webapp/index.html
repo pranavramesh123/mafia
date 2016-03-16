@@ -46,6 +46,9 @@
                     document.getElementById("createGameDiv").style.display = 'none';
                     document.getElementById("chatDiv").style.display = 'block';
 
+                    document.getElementById("topLeftA").innerHTML = "Game: " + messageFromServer.key;
+
+
                 } else {
                     //We dont know what this is
                     document.getElementById("out").value = document.getElementById("out").value + messageFromServer + "\n";
@@ -118,7 +121,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./">Mafia</a>
+                    <span id="topLeftA" class="navbar-brand">Mafia</span>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
