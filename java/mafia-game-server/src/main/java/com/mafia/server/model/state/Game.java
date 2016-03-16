@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.state;
+package com.mafia.server.model.state;
 
 import java.util.concurrent.ConcurrentHashMap;
 import javax.websocket.Session;
