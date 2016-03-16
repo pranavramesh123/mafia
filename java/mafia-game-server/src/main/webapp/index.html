@@ -5,6 +5,78 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <script>
+
+            var socket = new WebSocket("ws://localhost:8080/mafia-game-server/ws");
+            var clientID;
+
+            socket.onmessage = function (event) {
+                var messageFromServer = event.data;
+                document.getElementById("out").value = document.getElementById("out").value + "<br />" + messageFromServer;
+            }
+
+
+            function createGame() {
+                var msg = {
+                    type: "CreateGame",
+                    event: "CreateGameEvent",
+                    name: document.getElementById("name").value,
+                    passCode: document.getElementById("passCode").value
+                };
+
+                socket.send(JSON.stringify(msg));
+
+            }
+
+            function sendChat() {
+                // Construct a msg object containing the data the server needs to process the message from the chat client.
+                var msg = {
+                    type: "Chat",
+                    event: "ChatEvent",
+                    message: document.getElementById("lips").value
+                };
+
+                socket.send(JSON.stringify(msg));
+
+            }
+
+
+            function sendText() {
+                // Construct a msg object containing the data the server needs to process the message from the chat client.
+                var msg = {
+                    type: "message",
+                    text: document.getElementById("in").value,
+                    id: clientID,
+                    date: Date.now()
+                };
+
+                // Send the msg object as a JSON-formatted string.
+                socket.send(JSON.stringify(msg));
+
+                // Blank the text input element, ready to receive the next line of text from the user.
+                document.getElementById("in").value = "";
+            }
+        </script>
+
         <h1>Hello World!</h1>
+
+        <textarea name="textarea" ></textarea>
+        <input name="name" id="name" />
+        <input name="passCode" id="passCode" />
+        <button onclick="createGame();" >Create a game!</button>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <textarea name="out" id="out" ></textarea>
+        <input name="lips" id="lips" />
+        <button onclick="sendChat();" >Talk!</button>
+
     </body>
 </html>
