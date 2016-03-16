@@ -17,8 +17,9 @@ public class Player {
     private String sessionId;
     private Game game;
 
-    public Player(String name, String sessionId) {
+    public Player(String name, String passCode, String sessionId) {
         this.name = name;
+        this.passKey = passCode;
         this.role = MafiaTypes.PLAYER_ROLES.NONE;
         this.sessionId = sessionId;
     }
