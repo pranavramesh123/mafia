@@ -166,9 +166,14 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-3">
                             <!--<div class="form-group">-->
-                            <textarea name="out" id="out" ></textarea>
-                            <input name="lips" id="lips" />
-                            <button onclick="sendChat();" >Talk!</button>
+
+                            <div class="row">
+                                <textarea class="form-control" rows="10" name="out" id="out" readonly></textarea>
+                            </div>
+                            <div class="row">
+                                <input class="form-control" name="lips" id="lips" />
+                                <button  class="form-control" onclick="sendChat();" >Talk!</button>
+                            </div>
                             <!--</div>-->
                         </div>
                         <div class="col-md-3"></div>
