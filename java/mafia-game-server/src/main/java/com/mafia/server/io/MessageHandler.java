@@ -26,6 +26,7 @@ public class MessageHandler {
     }
 
     public static void handleDisconnect(Session session) {
+        Repository.removeSession(session);
         PlayerEvents.playerQuits(session);
     }
 
@@ -47,6 +48,10 @@ public class MessageHandler {
                 Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public static void handleConnect(Session session) {
+        Repository.addSession(session);
     }
 
 }

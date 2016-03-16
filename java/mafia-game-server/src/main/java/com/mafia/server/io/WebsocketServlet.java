@@ -21,11 +21,7 @@ public class WebsocketServlet {
 
     @OnOpen
     public void onOpen(Session session) {
-        try {
-            session.getBasicRemote().sendText("Connection Established");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        MessageHandler.handleConnect(session);
     }
 
     @OnMessage
