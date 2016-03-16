@@ -8,17 +8,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap.min.css" rel="stylesheet">
+        <link href="resources/bootstrap.min.css" rel="stylesheet">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="resources/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="starter-template.css" rel="stylesheet">
+        <link href="resources/starter-template.css" rel="stylesheet">
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-        <script src="ie-emulation-modes-warning.js"></script>
+        <script src="resources/ie-emulation-modes-warning.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -84,7 +84,7 @@
                     event: "JoinGameEvent",
                     name: document.getElementById("name").value,
                     passCode: document.getElementById("passCode").value,
-                    key:  document.getElementById("gameCode").value
+                    key: document.getElementById("gameCode").value
                 };
 
                 socket.send(JSON.stringify(msg));
@@ -184,9 +184,9 @@
         </div><!-- /.container -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="bootstrap.min.js"></script>
+        <script src="resources/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="ie10-viewport-bug-workaround.js"></script>
+        <script src="resources/ie10-viewport-bug-workaround.js"></script>
 
     </body>
 </html>
