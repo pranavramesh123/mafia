@@ -29,7 +29,6 @@ public class MessageHandler {
     public static void handleDisconnect(Session session) {
         Repository.removeSession(session);
         PlayerEvents.playerQuits(session);
-        System.out.println("Session closed");
     }
 
     public static synchronized void sendMessage(Game game, String message) {
@@ -55,7 +54,6 @@ public class MessageHandler {
 
     public static void handleConnect(Session session) {
         Repository.addSession(session);
-        System.out.println("Session opened");
     }
 
 }

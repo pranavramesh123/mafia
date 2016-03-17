@@ -18,7 +18,6 @@ public class GameNotify {
     public static void sendGameState(Game game) {
         GameState gameState = new GameState(game.getGameState().toString(), game.getKey());
         MessageRouter.sendMessage(game, gameState);
-        System.out.println("Sending game state.");
 
     }
 
