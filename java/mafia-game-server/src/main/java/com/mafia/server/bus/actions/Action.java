@@ -9,7 +9,7 @@ package com.mafia.server.bus.actions;
  *
  * @author Just1689
  */
-public interface Event {
+public interface Action {
 
     public void setData(Object obj, String sessionId);
 

@@ -5,36 +5,26 @@
  */
 package com.mafia.server.bus.actions;
 
-import com.mafia.server.bus.events.ChatEvents;
-import com.mafia.server.model.comm.client.Chat;
-import com.mafia.server.model.state.Repository;
+import com.mafia.server.model.comm.client.CreateGame;
 
 /**
  *
  * @author Just1689
  */
-public class ChatEvent implements Runnable, Event {
+public class VotePlayerAction implements Runnable, Action {
 
-    private Chat data;
+    private CreateGame data;
     private String createdBy;
 
     @Override
     public void run() {
-        if (data == null || data.getMessage() == null || data.getMessage().trim().isEmpty()) {
-            //Sillyness
-            return;
-        }
-
         //impl
         System.out.println(data.toString());
-
-        ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), data.getMessage());
-
     }
 
     @Override
     public void setData(Object obj, String sessionId) {
-        this.data = (Chat) obj;
+        this.data = (CreateGame) obj;
         this.createdBy = sessionId;
 
     }

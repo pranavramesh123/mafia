@@ -5,26 +5,32 @@
  */
 package com.mafia.server.bus.actions;
 
-import com.mafia.server.model.comm.client.KickPlayer;
+import com.mafia.server.bus.events.GameEvents;
+import com.mafia.server.bus.notify.GameNotify;
+import com.mafia.server.model.comm.client.CreateGame;
+import com.mafia.server.model.state.Game;
 
 /**
  *
  * @author Just1689
  */
-public class KickPlayerEvent implements Runnable, Event {
+public class CreateGameAction implements Runnable, Action {
 
-    private KickPlayer data;
+    private CreateGame data;
     private String createdBy;
 
     @Override
     public void run() {
         //impl
         System.out.println(data.toString());
+        Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);
+
+        GameNotify.sendGameState(game);
     }
 
     @Override
     public void setData(Object obj, String sessionId) {
-        this.data = (KickPlayer) obj;
+        this.data = (CreateGame) obj;
         this.createdBy = sessionId;
 
     }

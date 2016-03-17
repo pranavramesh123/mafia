@@ -5,13 +5,13 @@
  */
 package com.mafia.server.io;
 
-import com.mafia.server.bus.actions.Event;
 import com.mafia.server.model.comm.client.MafiaMessage;
 import com.mafia.server.model.comm.server.ServerMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.util.JacksonUtils;
 import com.mafia.server.util.ReflectionUtils;
+import com.mafia.server.bus.actions.Action;
 
 /**
  *
@@ -24,18 +24,20 @@ public class MessageRouter {
         //Get an object with the type and the 
         JacksonUtils<MafiaMessage> util = new JacksonUtils<>();
         MafiaMessage mafiaMessage = util.stringToObject(message, MafiaMessage.class);
+        System.out.println("com.mafia.server.io.MessageRouter.handleIncoming(1) Type: " + mafiaMessage.getType());
+        System.out.println("com.mafia.server.io.MessageRouter.handleIncoming(2) Action: " + mafiaMessage.getAction());
 
         //Get the data
         Class clazz = ReflectionUtils.getClassByName("com.mafia.server.model.comm.client." + mafiaMessage.getType());
         Object data = new JacksonUtils<>().stringToObject(message, clazz);
 
-        //Get the event
-        Class eventClass = ReflectionUtils.getClassByName("com.mafia.server.bus.actions." + mafiaMessage.getEvent());
-        Object event = ReflectionUtils.newObject(eventClass);
+        //Get the action
+        Class actionClass = ReflectionUtils.getClassByName("com.mafia.server.bus.actions." + mafiaMessage.getAction());
+        Object action = ReflectionUtils.newObject(actionClass);
 
-        //Put the data into the event and run it
-        ((Event) event).setData(data, sessionId);
-        ((Runnable) event).run();
+        //Put the data into the action and run it
+        ((Action) action).setData(data, sessionId);
+        ((Runnable) action).run();
 
     }
 

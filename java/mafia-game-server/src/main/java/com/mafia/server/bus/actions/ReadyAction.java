@@ -5,15 +5,15 @@
  */
 package com.mafia.server.bus.actions;
 
-import com.mafia.server.model.comm.client.CreateGame;
+import com.mafia.server.model.comm.client.Ready;
 
 /**
  *
  * @author Just1689
  */
-public class VotePlayerEvent implements Runnable, Event {
+public class ReadyAction implements Runnable, Action {
 
-    private CreateGame data;
+    private Ready data;
     private String createdBy;
 
     @Override
@@ -24,7 +24,7 @@ public class VotePlayerEvent implements Runnable, Event {
 
     @Override
     public void setData(Object obj, String sessionId) {
-        this.data = (CreateGame) obj;
+        this.data = (Ready) obj;
         this.createdBy = sessionId;
 
     }

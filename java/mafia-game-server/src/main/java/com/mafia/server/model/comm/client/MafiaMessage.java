@@ -14,7 +14,7 @@ import com.mafia.server.util.JacksonUtils;
 public class MafiaMessage {
 
     private String type;
-    private String event;
+    private String action;
 
     /**
      * @return the type
@@ -31,17 +31,17 @@ public class MafiaMessage {
     }
 
     /**
-     * @return the event
+     * @return the action
      */
-    public String getEvent() {
-        return event;
+    public String getAction() {
+        return action;
     }
 
     /**
-     * @param event the event to set
+     * @param action the action to set
      */
-    public void setEvent(String event) {
-        this.event = event;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     @Override

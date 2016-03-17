@@ -15,7 +15,7 @@ import com.mafia.server.model.state.Repository;
  *
  * @author Just1689
  */
-public class JoinGameEvent implements Runnable, Event {
+public class JoinGameAction implements Runnable, Action {
 
     private JoinGame data;
     private String createdBy;

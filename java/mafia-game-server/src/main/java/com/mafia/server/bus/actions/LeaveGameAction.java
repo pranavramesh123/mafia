@@ -11,7 +11,7 @@ import com.mafia.server.model.comm.client.LeaveGame;
  *
  * @author Just1689
  */
-public class LeaveGameEvent implements Runnable, Event {
+public class LeaveGameAction implements Runnable, Action {
 
     private LeaveGame data;
     private String createdBy;

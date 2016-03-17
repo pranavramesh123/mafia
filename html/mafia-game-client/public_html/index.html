@@ -67,7 +67,7 @@
             function createGame() {
                 var msg = {
                     type: "CreateGame",
-                    event: "CreateGameEvent",
+                    action: "CreateGameAction",
                     name: document.getElementById("name").value,
                     passCode: document.getElementById("passCode").value
                 };
@@ -86,7 +86,7 @@
                 // Construct a msg object containing the data the server needs to process the message from the chat client.
                 var msg = {
                     type: "Chat",
-                    event: "ChatEvent",
+                    action: "ChatAction",
                     message: document.getElementById("lips").value
                 };
                 document.getElementById("lips").value = "";
@@ -100,7 +100,7 @@
                 // Construct a msg object containing the data the server needs to process the message from the chat client.
                 var msg = {
                     type: "JoinGame",
-                    event: "JoinGameEvent",
+                    action: "JoinGameAction",
                     name: document.getElementById("name").value,
                     passCode: document.getElementById("passCode").value,
                     key: document.getElementById("gameCode").value
