@@ -1,3 +1,13 @@
 language: java
 sudo: false
 script: mvn -f java/mafia-game-server/pom.xml clean install
+after_success:
+  - mvn -f java/mafia-game-server/pom.xml clean cobertura:cobertura coveralls:report
+after_success:
+  - mvn -f java/mafia-game-server/pom.xml clean test jacoco:report coveralls:report
+after_success:
+  - mvn -f java/mafia-game-server/pom.xml clean test saga:coverage coveralls:report
+after_success:
+  - mvn -f java/mafia-game-server/pom.xml clean test saga:coverage cobertura:cobertura coveralls:report
+
+
