@@ -26,6 +26,7 @@ public class CreateGameAction implements Runnable, Action {
         Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);
 
         GameNotify.sendGameState(game);
+        GameNotify.notifyCreatorOfGameCode(createdBy, game.getKey());
     }
 
     @Override
