@@ -55,4 +55,8 @@ public class Repository {
         sessions.remove(session.getId());
     }
 
+    public static void removeGame(Game game) {
+        games.remove(game.getKey());
+    }
+
 }
