@@ -5,13 +5,13 @@
  */
 package com.mafia.server.io;
 
+import com.mafia.server.bus.actions.Action;
 import com.mafia.server.model.comm.client.MafiaMessage;
 import com.mafia.server.model.comm.server.ServerMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.util.JacksonUtils;
 import com.mafia.server.util.ReflectionUtils;
-import com.mafia.server.bus.actions.Action;
 import java.util.List;
 
 /**
