@@ -15,8 +15,8 @@ import javax.websocket.server.ServerEndpoint;
  *
  * @author Just1689
  */
-@ServerEndpoint("/ws")
-public class WebsocketServlet {
+@ServerEndpoint("/admin")
+public class AdminWebsocket {
 
     @OnOpen
     public void onOpen(Session session) {
