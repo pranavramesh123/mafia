@@ -180,6 +180,8 @@
 
             function leaveAction() {
                 socket.close();
+                document.getElementById("reconnectDiv").style.visibility = 'visible';
+
             }
 
 
@@ -223,7 +225,7 @@
                                 <h1>Join a Game</h1>
                                 <input class="form-control" name="gameCode" id="gameCode" placeholder="Game Code" />
                                 <div style="height:5px;" ></div>
-                                <button type="btn" class="form-control btn btn-primary" onclick="joinGame();" >Join a game</button>
+                                <button type="button" class="form-control btn btn-primary" onclick="joinGame();" >Join a game</button>
                             </div>
                         </div>
                         <div class="col-md-4"></div>
@@ -260,9 +262,26 @@
                 </div>
             </div>
 
+
+            <div id="reconnectDiv">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <h1>Reconnect</h1>
+                                <button type="button" class="form-control btn btn-primary" onclick="window.open('./index.html', '_self');" >OK</button>
+                            </div>
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+            </div>            
+
             <script>
                 document.getElementById("chatDiv").style.display = 'none';
                 document.getElementById("leaveButton").style.visibility = 'hidden';
+                document.getElementById("reconnectDiv").style.visibility = 'hidden';
             </script>
 
 
