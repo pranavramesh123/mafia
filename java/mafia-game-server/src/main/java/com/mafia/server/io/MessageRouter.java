@@ -25,8 +25,7 @@ public class MessageRouter {
         //Get an object with the type and the 
         JacksonUtils<MafiaMessage> util = new JacksonUtils<>();
         MafiaMessage mafiaMessage = util.stringToObject(message, MafiaMessage.class);
-        System.out.println("com.mafia.server.io.MessageRouter.handleIncoming(1) Type: " + mafiaMessage.getType());
-        System.out.println("com.mafia.server.io.MessageRouter.handleIncoming(2) Action: " + mafiaMessage.getAction());
+        System.out.println("Received: " + message);
 
         //Get the data
         Class clazz = ReflectionUtils.getClassByName("com.mafia.server.model.comm.client." + mafiaMessage.getType());
