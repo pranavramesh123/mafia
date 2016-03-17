@@ -25,10 +25,19 @@ public class JoinGameEvent implements Runnable, Event {
         //impl
         System.out.println(data.toString());
 
-        Player player = new Player(data.getName(), data.getPassCode(), createdBy);
-        Repository.addPlayer(player);
+        if (data.getName() == null || data.getName().trim().isEmpty()) {
+            //Say something
+            return;
+        }
 
         Game game = Repository.getGameByKey(data.getKey());
+        if (game == null) {
+            //Say something
+            return;
+        }
+
+        Player player = new Player(data.getName(), data.getPassCode(), createdBy);
+        Repository.addPlayer(player);
 
         PlayerEvents.joinGame(player, game);
 
