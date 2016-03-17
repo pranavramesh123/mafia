@@ -21,6 +21,11 @@ public class ChatMessage extends ServerMessage {
         this.message = message;
     }
 
+    public ChatMessage(String name, String message) {
+        this.player = name;
+        this.message = message;
+    }
+
     /**
      * @return the player
      */
