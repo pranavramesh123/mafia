@@ -17,6 +17,8 @@ public class Game {
     private final String key;
     private final ConcurrentHashMap<String, Player> players;
 
+    private Player creator;
+
     private MafiaTypes.GAME_PHASE gameState;
     private MafiaTypes.ACTION_PHASE phase;
 
@@ -26,6 +28,7 @@ public class Game {
         this.gameState = MafiaTypes.GAME_PHASE.PREGAME;
         this.phase = MafiaTypes.ACTION_PHASE.NONE;
         this.key = key;
+        this.creator = creator;
     }
 
     /**
@@ -82,14 +85,29 @@ public class Game {
     }
 
     public Player getPlayerByName(String playerName) {
+        playerName = playerName.toUpperCase();
         Enumeration<Player> elements = players.elements();
         while (elements.hasMoreElements()) {
             Player player = elements.nextElement();
-            if (player.getName().equals(playerName)) {
+            if (player.getName().toUpperCase().equals(playerName)) {
                 return player;
             }
         }
         return null;
+    }
+
+    /**
+     * @return the creator
+     */
+    public Player getCreator() {
+        return creator;
+    }
+
+    /**
+     * @param creator the creator to set
+     */
+    public void setCreator(Player creator) {
+        this.creator = creator;
     }
 
 }

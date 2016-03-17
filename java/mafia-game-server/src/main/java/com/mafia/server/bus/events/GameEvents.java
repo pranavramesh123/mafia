@@ -53,14 +53,25 @@ public class GameEvents {
     }
 
     public static void kickPlayer(Player player, String playerName) {
-        //Check if they can kick
-        // TODO
+
+        //Get the game
         Game game = player.getGame();
 
-        Player playerToKick = game.getPlayerByName(playerName);
-        if (playerToKick != null) {
-            Session session = Repository.getSessionByPlayer(playerToKick);
-            MessageHandler.closeSession(session);
+        //Check if game ok?
+        if (game == null) {
+            System.out.println("Error: No game (GameEvents.kickPlayer()");
+            return;
+        }
+
+        if (player.equals(game.getCreator())) {
+
+            Player playerToKick = game.getPlayerByName(playerName);
+            if (playerToKick != null) {
+                Session session = Repository.getSessionByPlayer(playerToKick);
+                MessageHandler.closeSession(session);
+            }
+        } else {
+            MessageboxEvents.notifyOfFail("Error", "You are not creator", player);
         }
 
     }
