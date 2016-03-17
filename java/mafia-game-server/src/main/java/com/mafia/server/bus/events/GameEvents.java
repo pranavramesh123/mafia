@@ -76,4 +76,10 @@ public class GameEvents {
 
     }
 
+    public static void checkGame(Game game) {
+        if (game.isAbandoned()) {
+            Repository.removeGame(game);
+        }
+    }
+
 }
