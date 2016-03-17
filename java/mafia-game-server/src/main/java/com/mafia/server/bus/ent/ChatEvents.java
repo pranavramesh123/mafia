@@ -21,11 +21,19 @@ public class ChatEvents {
 
         StringBuilder out = new StringBuilder();
         if (message.startsWith("\\me")) {
-            out.append("- " + creator.getName());
+            out.append("<i>").append(creator.getName());
+            message = message.substring(3);
+            out.append(message);
+            out.append("</i>");
         } else {
-            out.append("> " + creator.getName());
+            out.append("> ");
+            out.append("<font color='blue'>");
+            out.append(creator.getName());
+            out.append("</font>");
+            out.append(": ");
+            out.append(message);
         }
-        out.append(message);
+        out.append("<br />");
         ChatMessage chatMessage = new ChatMessage(out.toString());
         MessageRouter.sendMessage(game, chatMessage);
 

@@ -7,6 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
         <!-- Bootstrap core CSS -->
         <link href="resources/bootstrap.min.css" rel="stylesheet">
 
@@ -21,8 +23,6 @@
         <script src="resources/ie-emulation-modes-warning.js"></script>
 
 
-        <script type="text/javascript" src="resources/jquery.colorfy.js"></script>
-        <script type="text/javascript" src="resources/jquery.colorfy.markdown.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,10 +43,9 @@
 
                 //Message is a chat message
                 if (messageFromServer.event === "ChatMessage") {
-                    document.getElementById("out").value = document.getElementById("out").value + messageFromServer.line + "\n";
-                    var textarea = document.getElementById('out');
-                    textarea.scrollTop = textarea.scrollHeight;
-                    textarea.colorfy("markdown");
+                    var div = document.getElementById('out');
+                    div.innerHTML = div.innerHTML + messageFromServer.line;
+                    div.scrollTop = div.scrollHeight;
 
                 } else if (messageFromServer.event === "GameState") {
                     //Hide the login bit
@@ -186,7 +185,7 @@
                             <!--<div class="form-group">-->
 
                             <div class="row">
-                                <textarea class="form-control" rows="10" name="out" id="out" readonly></textarea>
+                                <div style="width:100%; height: 200px; overflow:scroll; overflow-x: hidden;"  id="out"></div>
                             </div>
                             <div class="row">
                                 <input class="form-control" name="lips" id="lips" onkeydown="sendChatKeyDown();" />
@@ -203,9 +202,9 @@
 
 
 
+
         </div><!-- /.container -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="resources/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="resources/ie10-viewport-bug-workaround.js"></script>
