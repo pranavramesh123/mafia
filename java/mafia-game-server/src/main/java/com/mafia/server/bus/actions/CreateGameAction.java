@@ -7,9 +7,7 @@ package com.mafia.server.bus.actions;
 
 import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.bus.events.MessageboxEvents;
-import com.mafia.server.bus.notify.GameNotify;
 import com.mafia.server.model.comm.client.CreateGame;
-import com.mafia.server.model.state.Game;
 
 /**
  *
@@ -31,13 +29,8 @@ public class CreateGameAction implements Runnable, Action {
             MessageboxEvents.notifyOfFail("Missing info", "Please enter a passcode", createdBy);
             return;
         }
+        GameEvents.create(data.getName(), data.getPassCode(), createdBy);
 
-        //impl
-        System.out.println(data.toString());
-        Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);
-
-        GameNotify.sendGameState(game);
-        GameNotify.notifyCreatorOfGameCode(createdBy, game.getKey());
     }
 
     @Override

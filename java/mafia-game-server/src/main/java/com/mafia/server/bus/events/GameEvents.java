@@ -5,6 +5,7 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.notify.GameNotify;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
@@ -16,13 +17,13 @@ import com.mafia.server.util.StringUtils;
  */
 public class GameEvents {
 
-    public static Game create(String name, String passCode, String createdBy) {
-        Player player = new Player(name, passCode, createdBy);
+    public static void create(String playerName, String playerPassCode, String createdBy) {
+        Player player = new Player(playerName, playerPassCode, createdBy);
         Repository.addPlayer(player);
-        return create(player);
+        createGame(player);
     }
 
-    public static synchronized Game create(Player player) {
+    private static synchronized void createGame(Player player) {
 
         //Create a unique key
         String newKey = StringUtils.makeUniqueKey(5);
@@ -34,7 +35,10 @@ public class GameEvents {
         Repository.createGame(game);
 
         PlayerEvents.joinGame(player, game);
-        return game;
+
+        GameNotify.sendGameState(game);
+        GameNotify.notifyCreatorOfGameCode(player.getSessionId(), game.getKey());
+
     }
 
 }
