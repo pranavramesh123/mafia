@@ -186,7 +186,7 @@
         </script>
 
 
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -196,8 +196,6 @@
                         <span class="icon-bar"></span>
                     </button>
                     <span id="topLeftA" class="navbar-brand">Mafia</span>
-                </div>
-                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a id="leaveButton" onclick="leaveAction();">Leave</a></li>
                     </ul>
@@ -209,18 +207,23 @@
 
 
             <div id="createGameDiv">
-                <h1>Create a Game!</h1>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div class="form-group">
+                                <h1>Create a Game</h1>
                                 <input class="form-control" name="name" id="name" placeholder="Your name" />
+                                <div style="height:5px;" ></div>
                                 <input class="form-control" name="passCode" id="passCode" placeholder="Passcode" />
-                                <button class="form-control" onclick="createGame();" >Create a game</button>
+                                <div style="height:5px;" ></div>
+                                <button type="button" class="form-control btn btn-primary" onclick="createGame();" >Create a game</button>
                                 <br />
+                                <br />
+                                <h1>Join a Game</h1>
                                 <input class="form-control" name="gameCode" id="gameCode" placeholder="Game Code" />
-                                <button class="form-control" onclick="joinGame();" >Join a game</button>
+                                <div style="height:5px;" ></div>
+                                <button type="btn" class="form-control btn btn-primary" onclick="joinGame();" >Join a game</button>
                             </div>
                         </div>
                         <div class="col-md-4"></div>
@@ -238,13 +241,12 @@
 
 
             <div id="chatDiv">
-                <h1>Chat</h1>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <!--<div class="form-group">-->
-
+                            <h1>Chat</h1>
                             <div class="row">
                                 <div style="width:100%; height: 200px; overflow:scroll; overflow-x: hidden;"  id="out"></div>
                             </div>
