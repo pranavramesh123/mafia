@@ -40,7 +40,7 @@ public class JoinGameAction implements Runnable, Action {
         Player player = new Player(data.getName(), data.getPassCode(), createdBy);
         Repository.addPlayer(player);
 
-        MessageboxEvents.showMessageboxTimed(game, "New Player", player.getName() + " has joined");
+        MessageboxEvents.showMessageboxTimed(game, player.getName(), "has joined");
 
         PlayerEvents.joinGame(player, game);
 

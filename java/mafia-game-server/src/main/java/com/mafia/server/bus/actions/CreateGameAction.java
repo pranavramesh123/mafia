@@ -6,6 +6,7 @@
 package com.mafia.server.bus.actions;
 
 import com.mafia.server.bus.events.GameEvents;
+import com.mafia.server.bus.events.MessageboxEvents;
 import com.mafia.server.bus.notify.GameNotify;
 import com.mafia.server.model.comm.client.CreateGame;
 import com.mafia.server.model.state.Game;
@@ -21,6 +22,16 @@ public class CreateGameAction implements Runnable, Action {
 
     @Override
     public void run() {
+        
+        if (data.getName() == null || data.getName().trim().isEmpty()) {
+            MessageboxEvents.notifyOfFail("Please enter a name", createdBy);
+            return;
+        }
+        if (data.getPassCode()== null || data.getPassCode().trim().isEmpty()) {
+            MessageboxEvents.notifyOfFail("Please enter a passcode", createdBy);
+            return;
+        }
+        
         //impl
         System.out.println(data.toString());
         Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);
