@@ -34,7 +34,6 @@ public class GameEvents {
         Repository.createGame(game);
 
         PlayerEvents.joinGame(player, game);
-        System.out.println("Game created.");
         return game;
     }
 
