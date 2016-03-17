@@ -13,7 +13,7 @@ public class MafiaTypes {
 
     public enum PLAYER_ROLES {
 
-        NONE, CIVILIAN, KILLER, DETECTIVE, VIGILANTE
+        NONE, CIVILIAN, KILLER, INVESTIGATOR, WITCH_TYPE, VIGILANTE, HANDICAPPED, SUICIDE
     }
 
     public enum GAME_PHASE {
@@ -23,7 +23,7 @@ public class MafiaTypes {
 
     public enum ACTION_PHASE {
 
-        NONE, NIGHT, DAY
+        NONE, NIGHT, DAWN, DAY
     }
 
 }
