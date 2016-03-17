@@ -12,6 +12,7 @@ import com.mafia.server.model.state.Player;
 import com.mafia.server.util.JacksonUtils;
 import com.mafia.server.util.ReflectionUtils;
 import com.mafia.server.bus.actions.Action;
+import java.util.List;
 
 /**
  *
@@ -53,6 +54,14 @@ public class MessageRouter {
         String json = JacksonUtils.objectToString(serverMessage);
         MessageHandler.sendMessage(player, json);
 
+    }
+
+    public static void sendMessage(List<Player> players, ServerMessage serverMessage) {
+        if ((players != null) && (!players.isEmpty())) {
+            for (Player player : players) {
+                sendMessage(player, serverMessage);
+            }
+        }
     }
 
 }
