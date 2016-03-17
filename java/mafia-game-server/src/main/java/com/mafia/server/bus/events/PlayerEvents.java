@@ -25,6 +25,10 @@ public class PlayerEvents {
         //Todo: notify?
     }
 
+    public static Player makePlayer(String name, String passCode, String sessionId) {
+        return new Player(name, passCode, sessionId);
+    }
+
     public static void joinGame(Player player, Game game) {
         player.setGame(game);
         game.addPlayer(player);

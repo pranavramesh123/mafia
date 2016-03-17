@@ -18,7 +18,7 @@ import com.mafia.server.util.StringUtils;
 public class GameEvents {
 
     public static void create(String playerName, String playerPassCode, String createdBy) {
-        Player player = new Player(playerName, playerPassCode, createdBy);
+        Player player = PlayerEvents.makePlayer(playerName, playerPassCode, createdBy);
         Repository.addPlayer(player);
         createGame(player);
     }
@@ -38,6 +38,14 @@ public class GameEvents {
 
         GameNotify.sendGameState(game);
         GameNotify.notifyCreatorOfGameCode(player.getSessionId(), game.getKey());
+
+    }
+
+    public static void newPlayerJoinsGame(String name, String passCode, String createdBy, Game game) {
+        Player player = PlayerEvents.makePlayer(name, passCode, createdBy);
+        Repository.addPlayer(player);
+        MessageboxEvents.showMessageboxTimed(game, player.getName(), "has joined");
+        PlayerEvents.joinGame(player, game);
 
     }
 

@@ -5,11 +5,10 @@
  */
 package com.mafia.server.bus.actions;
 
+import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.bus.events.MessageboxEvents;
-import com.mafia.server.bus.events.PlayerEvents;
 import com.mafia.server.model.comm.client.JoinGame;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 
 /**
@@ -41,12 +40,7 @@ public class JoinGameAction implements Runnable, Action {
             return;
         }
 
-        Player player = new Player(data.getName(), data.getPassCode(), createdBy);
-        Repository.addPlayer(player);
-
-        MessageboxEvents.showMessageboxTimed(game, player.getName(), "has joined");
-
-        PlayerEvents.joinGame(player, game);
+        GameEvents.newPlayerJoinsGame(data.getName(), data.getPassCode(), createdBy, game);
 
     }
 
