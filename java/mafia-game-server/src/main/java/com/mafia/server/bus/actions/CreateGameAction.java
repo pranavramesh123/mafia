@@ -22,16 +22,16 @@ public class CreateGameAction implements Runnable, Action {
 
     @Override
     public void run() {
-        
+
         if (data.getName() == null || data.getName().trim().isEmpty()) {
-            MessageboxEvents.notifyOfFail("Please enter a name", createdBy);
+            MessageboxEvents.notifyOfFail("Missing info", "Please enter a name", createdBy);
             return;
         }
-        if (data.getPassCode()== null || data.getPassCode().trim().isEmpty()) {
-            MessageboxEvents.notifyOfFail("Please enter a passcode", createdBy);
+        if (data.getPassCode() == null || data.getPassCode().trim().isEmpty()) {
+            MessageboxEvents.notifyOfFail("Missing info", "Please enter a passcode", createdBy);
             return;
         }
-        
+
         //impl
         System.out.println(data.toString());
         Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);

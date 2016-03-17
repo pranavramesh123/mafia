@@ -28,9 +28,9 @@ public class MessageboxEvents {
         MessageRouter.sendMessage(game, messagebox);
     }
 
-    public static void notifyOfFail(String message, String sessionId) {
+    public static void notifyOfFail(String title, String message, String sessionId) {
         Messagebox messagebox = new Messagebox();
-        messagebox.setAsMessageBoxOk(message);
+        messagebox.setAsMessageBoxError(title, message);
         Player player = new Player("", "", sessionId);
         MessageRouter.sendMessage(player, messagebox);
 
