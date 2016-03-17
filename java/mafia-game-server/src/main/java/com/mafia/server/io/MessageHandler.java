@@ -69,4 +69,12 @@ public class MessageHandler {
         Repository.addSession(session);
     }
 
+    public static void closeSession(Session session) {
+        try {
+            session.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

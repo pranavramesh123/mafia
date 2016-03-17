@@ -5,6 +5,7 @@
  */
 package com.mafia.server.model.state;
 
+import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -78,6 +79,17 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.put(player.getSessionId(), player);
+    }
+
+    public Player getPlayerByName(String playerName) {
+        Enumeration<Player> elements = players.elements();
+        while (elements.hasMoreElements()) {
+            Player player = elements.nextElement();
+            if (player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
     }
 
 }

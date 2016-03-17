@@ -5,7 +5,9 @@
  */
 package com.mafia.server.bus.actions;
 
+import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.model.comm.client.KickPlayer;
+import com.mafia.server.model.state.Repository;
 
 /**
  *
@@ -19,7 +21,7 @@ public class KickPlayerAction implements Runnable, Action {
     @Override
     public void run() {
         //impl
-        System.out.println(data.toString());
+        GameEvents.kickPlayer(Repository.getPlayerBySessionId(createdBy), data.getPlayer());
     }
 
     @Override

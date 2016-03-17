@@ -6,10 +6,12 @@
 package com.mafia.server.bus.events;
 
 import com.mafia.server.bus.notify.GameNotify;
+import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 import com.mafia.server.util.StringUtils;
+import javax.websocket.Session;
 
 /**
  *
@@ -46,6 +48,19 @@ public class GameEvents {
         Repository.addPlayer(player);
         MessageboxEvents.showMessageboxTimed(game, player.getName(), "has joined");
         PlayerEvents.joinGame(player, game);
+
+    }
+
+    public static void kickPlayer(Player player, String playerName) {
+        //Check if they can kick
+        // TODO
+        Game game = player.getGame();
+
+        Player playerToKick = game.getPlayerByName(playerName);
+        if (playerToKick != null) {
+            Session session = Repository.getSessionByPlayer(playerToKick);
+            MessageHandler.closeSession(session);
+        }
 
     }
 
