@@ -110,4 +110,8 @@ public class Game {
         this.creator = creator;
     }
 
+    public boolean isAbandoned() {
+        return players.isEmpty();
+    }
+
 }
