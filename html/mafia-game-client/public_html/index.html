@@ -68,6 +68,8 @@
                     } else if (messageFromServer.type === "messageBoxTimed") {
                         messageBoxTimed(messageFromServer.title, messageFromServer.text);
 
+                    } else if (messageFromServer.type === "messageBoxError") {
+                        messageBoxError(messageFromServer.title, messageFromServer.text);
                     }
 
 
@@ -152,6 +154,9 @@
             }
             function messageBoxTimed(inTitle, inText) {
                 swal({title: inTitle, text: inText, timer: 1000, showConfirmButton: false});
+            }
+            function messageBoxError(inTitle, inText) {
+                swal({title: inTitle, text: inText, type: "error", confirmButtonText: "OK"});
             }
 
 
