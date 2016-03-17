@@ -27,13 +27,17 @@ public class JoinGameAction implements Runnable, Action {
         System.out.println(data.toString());
 
         if (data.getName() == null || data.getName().trim().isEmpty()) {
-            //Say something
+            MessageboxEvents.notifyOfFail("Please enter a name", createdBy);
+            return;
+        }
+        if (data.getPassCode() == null || data.getPassCode().trim().isEmpty()) {
+            MessageboxEvents.notifyOfFail("Please enter a passcode", createdBy);
             return;
         }
 
         Game game = Repository.getGameByKey(data.getKey());
         if (game == null) {
-            //Say something
+            MessageboxEvents.notifyOfFail("Please enter a key", createdBy);
             return;
         }
 
