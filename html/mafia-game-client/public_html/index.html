@@ -40,7 +40,9 @@
                 //Message is a chat message
                 if (messageFromServer.event === "ChatMessage") {
                     document.getElementById("out").value = document.getElementById("out").value + messageFromServer.player + ": " + messageFromServer.message + "\n";
-
+                    var textarea = document.getElementById('out');
+                    textarea.scrollTop = textarea.scrollHeight;
+                    
                 } else if (messageFromServer.event === "GameState") {
                     //Hide the login bit
                     document.getElementById("createGameDiv").style.display = 'none';
