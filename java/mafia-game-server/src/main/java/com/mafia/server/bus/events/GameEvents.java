@@ -6,6 +6,7 @@
 package com.mafia.server.bus.events;
 
 import com.mafia.server.bus.notify.NotifyGame;
+import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
@@ -38,7 +39,7 @@ public class GameEvents {
 
         PlayerEvents.joinGame(player, game);
 
-        NotifyGame.sendGameState(game);
+        NotifyViewState.nofity(game);
         NotifyGame.notifyCreatorOfGameCode(player.getSessionId(), game.getKey());
 
     }

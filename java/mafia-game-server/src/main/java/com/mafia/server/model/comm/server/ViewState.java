@@ -11,6 +11,7 @@ package com.mafia.server.model.comm.server;
  */
 public class ViewState extends ServerMessage {
 
+    private String key;
     private boolean createOrJoin;
     private boolean chat;
     private boolean chatInput;
@@ -100,6 +101,20 @@ public class ViewState extends ServerMessage {
      */
     public void setReady(boolean ready) {
         this.ready = ready;
+    }
+
+    /**
+     * @return the key
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * @param key the key to set
+     */
+    public void setKey(String key) {
+        this.key = key;
     }
 
 }
