@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.bus.ent;
+package com.mafia.server.bus.events;
 
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.ChatMessage;

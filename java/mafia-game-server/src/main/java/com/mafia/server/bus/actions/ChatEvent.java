@@ -5,7 +5,7 @@
  */
 package com.mafia.server.bus.actions;
 
-import com.mafia.server.bus.ent.ChatEvents;
+import com.mafia.server.bus.events.ChatEvents;
 import com.mafia.server.model.comm.client.Chat;
 import com.mafia.server.model.state.Repository;
 

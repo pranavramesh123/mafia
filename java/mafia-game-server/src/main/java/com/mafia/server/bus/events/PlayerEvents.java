@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.bus.ent;
+package com.mafia.server.bus.events;
 
 import com.mafia.server.bus.notify.GameNotify;
 import com.mafia.server.model.state.Game;

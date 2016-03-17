@@ -5,7 +5,7 @@
  */
 package com.mafia.server.bus.actions;
 
-import com.mafia.server.bus.ent.PlayerEvents;
+import com.mafia.server.bus.events.PlayerEvents;
 import com.mafia.server.model.comm.client.JoinGame;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
