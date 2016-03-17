@@ -18,7 +18,7 @@ public class JoinGame {
     private String key;
 
     public String getKey() {
-        return key;
+        return key.toUpperCase();
     }
 
     public String getName() {
@@ -30,7 +30,7 @@ public class JoinGame {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key = key.toUpperCase();
     }
 
     public void setName(String name) {
