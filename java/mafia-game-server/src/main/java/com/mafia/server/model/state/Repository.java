@@ -41,6 +41,7 @@ public class Repository {
 
     public static void createGame(Game game) {
         games.put(game.getKey(), game);
+        reportGameCount();
     }
 
     public static void addPlayer(Player player) {
@@ -57,6 +58,13 @@ public class Repository {
 
     public static void removeGame(Game game) {
         games.remove(game.getKey());
+        System.out.println("Removed game.");
+        reportGameCount();
+    }
+
+    private static void reportGameCount() {
+        System.out.println("Game count: " + games.size());
+
     }
 
 }
