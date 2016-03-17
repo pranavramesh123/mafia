@@ -18,8 +18,6 @@ public class VotePlayerAction implements Runnable, Action {
 
     @Override
     public void run() {
-        //impl
-        System.out.println(data.toString());
     }
 
     @Override

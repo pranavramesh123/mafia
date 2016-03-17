@@ -20,7 +20,6 @@ public class KickPlayerAction implements Runnable, Action {
 
     @Override
     public void run() {
-        //impl
         GameEvents.kickPlayer(Repository.getPlayerBySessionId(createdBy), data.getPlayer());
     }
 

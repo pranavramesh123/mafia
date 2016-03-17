@@ -22,8 +22,6 @@ public class JoinGameAction implements Runnable, Action {
 
     @Override
     public void run() {
-        //impl
-        System.out.println(data.toString());
 
         if (data.getName() == null || data.getName().trim().isEmpty()) {
             MessageboxEvents.notifyOfFail("Missing info", "Please enter a name", createdBy);
