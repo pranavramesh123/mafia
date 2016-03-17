@@ -14,11 +14,17 @@ import com.mafia.server.model.state.Game;
  * @author Just1689
  */
 public class MessageboxEvents {
-    
-    public static void showMessagebox(Game game, String message) {
+
+    public static void showMessageboxOk(Game game, String message) {
         Messagebox messagebox = new Messagebox();
         messagebox.setAsMessageBoxOk(message);
         MessageRouter.sendMessage(game, messagebox);
     }
-    
+
+    public static void showMessageboxTimed(Game game, String title, String message) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setAsMessageBoxTimed(title, message);
+        MessageRouter.sendMessage(game, messagebox);
+    }
+
 }
