@@ -8,6 +8,7 @@ package com.mafia.server.bus.events;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.Player;
 
 /**
  *
@@ -25,6 +26,14 @@ public class MessageboxEvents {
         Messagebox messagebox = new Messagebox();
         messagebox.setAsMessageBoxTimed(title, message);
         MessageRouter.sendMessage(game, messagebox);
+    }
+
+    public static void notifyOfFail(String message, String sessionId) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setAsMessageBoxOk(message);
+        Player player = new Player("", "", sessionId);
+        MessageRouter.sendMessage(player, messagebox);
+
     }
 
 }
