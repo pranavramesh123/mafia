@@ -70,6 +70,9 @@ public class Game {
     }
 
     public void removePlayer(Player player) {
+        if (player == null) {
+            return;
+        }
         players.remove(player.getSessionId());
     }
 

@@ -19,8 +19,9 @@ public class PlayerEvents {
 
     public static void playerQuits(Session session) {
         Player player = Repository.getPlayerBySession(session);
-        player.getGame().removePlayer(player);
-
+        if (player != null) {
+            player.getGame().removePlayer(player);
+        }
         //Todo: notify?
     }
 
