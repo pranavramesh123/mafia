@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.bus.events;
+package com.mafia.server.bus.actions;
 
+import com.mafia.server.bus.ent.GameEvents;
+import com.mafia.server.bus.notify.GameNotify;
 import com.mafia.server.model.comm.client.CreateGame;
+import com.mafia.server.model.state.Game;
 
 /**
  *
  * @author Just1689
  */
-public class VotePlayerEvent implements Runnable, Event {
+public class CreateGameEvent implements Runnable, Event {
 
     private CreateGame data;
     private String createdBy;
@@ -20,6 +23,9 @@ public class VotePlayerEvent implements Runnable, Event {
     public void run() {
         //impl
         System.out.println(data.toString());
+        Game game = GameEvents.create(data.getName(), data.getPassCode(), createdBy);
+
+        GameNotify.sendGameState(game);
     }
 
     @Override

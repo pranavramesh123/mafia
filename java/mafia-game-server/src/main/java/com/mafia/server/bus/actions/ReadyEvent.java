@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.bus.events;
+package com.mafia.server.bus.actions;
 
-import com.mafia.server.model.comm.client.KickPlayer;
+import com.mafia.server.model.comm.client.Ready;
 
 /**
  *
  * @author Just1689
  */
-public class KickPlayerEvent implements Runnable, Event {
+public class ReadyEvent implements Runnable, Event {
 
-    private KickPlayer data;
+    private Ready data;
     private String createdBy;
 
     @Override
@@ -24,7 +24,7 @@ public class KickPlayerEvent implements Runnable, Event {
 
     @Override
     public void setData(Object obj, String sessionId) {
-        this.data = (KickPlayer) obj;
+        this.data = (Ready) obj;
         this.createdBy = sessionId;
 
     }

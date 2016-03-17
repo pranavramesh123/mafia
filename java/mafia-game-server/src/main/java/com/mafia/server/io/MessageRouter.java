@@ -5,7 +5,7 @@
  */
 package com.mafia.server.io;
 
-import com.mafia.server.bus.events.Event;
+import com.mafia.server.bus.actions.Event;
 import com.mafia.server.model.comm.client.MafiaMessage;
 import com.mafia.server.model.comm.server.ServerMessage;
 import com.mafia.server.model.state.Game;
@@ -30,7 +30,7 @@ public class MessageRouter {
         Object data = new JacksonUtils<>().stringToObject(message, clazz);
 
         //Get the event
-        Class eventClass = ReflectionUtils.getClassByName("com.mafia.server.bus.events." + mafiaMessage.getEvent());
+        Class eventClass = ReflectionUtils.getClassByName("com.mafia.server.bus.actions." + mafiaMessage.getEvent());
         Object event = ReflectionUtils.newObject(eventClass);
 
         //Put the data into the event and run it
