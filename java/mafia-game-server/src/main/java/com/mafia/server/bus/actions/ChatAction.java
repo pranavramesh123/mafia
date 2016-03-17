@@ -21,22 +21,15 @@ public class ChatAction implements Runnable, Action {
     @Override
     public void run() {
         if (data == null || data.getMessage() == null || data.getMessage().trim().isEmpty()) {
-            //Sillyness
             return;
         }
-
-        //impl
-        System.out.println(data.toString());
-
         ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), data.getMessage());
-
     }
 
     @Override
     public void setData(Object obj, String sessionId) {
         this.data = (Chat) obj;
         this.createdBy = sessionId;
-
     }
 
 }
