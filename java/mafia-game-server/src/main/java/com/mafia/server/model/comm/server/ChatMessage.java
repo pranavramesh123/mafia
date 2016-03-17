@@ -54,4 +54,9 @@ public class ChatMessage extends ServerMessage {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "Player: " + player + ", message: " + message;
+    }
+
 }

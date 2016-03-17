@@ -39,20 +39,6 @@ public class JacksonUtilsTest {
     }
 
     /**
-     * Test of stringToObject method, of class JacksonUtils.
-     */
-    @Test
-    public void testStringToObject() {
-        String json = "{\"event\":\"ChatMessage\",\"player\":\"Zog\",\"message\":\"11\"}";
-        Class clazz = ChatMessage.class;
-        JacksonUtils<ChatMessage> instance = new JacksonUtils();
-        ChatMessage result = instance.stringToObject(json, clazz);
-        assertEquals(result.getEvent(), "ChatMessage");
-        assertEquals(result.getPlayer(), "Zog");
-        assertEquals(result.getMessage(), "11");
-    }
-
-    /**
      * Test of objectToString method, of class JacksonUtils.
      */
     @Test
