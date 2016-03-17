@@ -16,6 +16,7 @@ public class ViewState extends ServerMessage {
     private boolean chatInput;
     private boolean leaveGame;
     private boolean vote;
+    private boolean ready;
 
     /**
      * @return the createOrJoin
@@ -85,6 +86,20 @@ public class ViewState extends ServerMessage {
      */
     public void setVote(boolean vote) {
         this.vote = vote;
+    }
+
+    /**
+     * @return the ready
+     */
+    public boolean isReady() {
+        return ready;
+    }
+
+    /**
+     * @param ready the ready to set
+     */
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 
 }

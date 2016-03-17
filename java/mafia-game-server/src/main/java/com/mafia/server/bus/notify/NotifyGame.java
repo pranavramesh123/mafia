@@ -16,7 +16,7 @@ import com.mafia.server.model.state.Repository;
  *
  * @author Just1689
  */
-public class GameNotify {
+public class NotifyGame {
 
     public static void sendGameState(Game game) {
         GameState gameState = new GameState(game.getGameState().toString(), game.getKey());

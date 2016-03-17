@@ -5,7 +5,7 @@
  */
 package com.mafia.server.bus.events;
 
-import com.mafia.server.bus.notify.GameNotify;
+import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
@@ -32,7 +32,7 @@ public class PlayerEvents {
     public static void joinGame(Player player, Game game) {
         player.setGame(game);
         game.addPlayer(player);
-        GameNotify.sendGameState(game);
+        NotifyGame.sendGameState(game);
     }
 
 }
