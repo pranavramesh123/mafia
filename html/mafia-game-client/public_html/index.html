@@ -54,11 +54,29 @@
                     div.innerHTML = div.innerHTML + messageFromServer.line;
                     div.scrollTop = div.scrollHeight;
 
-                } else if (messageFromServer.event === "GameState") {
+                } else if (messageFromServer.event === "ViewState") {
                     //Hide the login bit
-                    document.getElementById("createGameDiv").style.display = 'none';
-                    document.getElementById("chatDiv").style.display = 'block';
                     document.getElementById("topLeftA").innerHTML = "Game: " + messageFromServer.key;
+                    if (messageFromServer.createOrJoin === true) {
+                        document.getElementById("createGameDiv").style.display = 'block';
+                    } else {
+                        document.getElementById("createGameDiv").style.display = 'none';
+                    }
+                    if (messageFromServer.chat === true) {
+                        document.getElementById("chatDiv").style.display = 'block';
+                    } else {
+                        document.getElementById("chatDiv").style.display = 'none';
+                    }
+                    if (messageFromServer.leaveGame === true) {
+                        document.getElementById("leaveButton").style.display = 'block';
+                        messageBoxTimed("Result", "True");
+                    } else {
+                        document.getElementById("leaveButton").style.display = 'none';
+                        messageBoxTimed("Result", "False");
+                    }
+
+
+                    div.innerHTML = div.innerHTML + event.data;
 
                 } else if (messageFromServer.event === "Messagebox") {
                     if (messageFromServer.type === "messageBoxOk") {
@@ -176,8 +194,11 @@
                     </button>
                     <span id="topLeftA" class="navbar-brand">Mafia</span>
                 </div>
-                <div id="navbar" class="collapse navbar-collapse">
+                <div id="leaveButton" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -235,8 +256,11 @@
                     </div>
                 </div>
             </div>
+
             <script>
-                document.getElementById("chatDiv").style.display = 'none';</script>
+                document.getElementById("chatDiv").style.display = 'none';
+                document.getElementById("leaveButton").style.display = 'none';
+            </script>
 
 
 
