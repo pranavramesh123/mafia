@@ -5,6 +5,7 @@
  */
 package com.mafia.server.io;
 
+import com.mafia.server.bus.events.MessageboxEvents;
 import com.mafia.server.bus.events.PlayerEvents;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
@@ -27,8 +28,20 @@ public class MessageHandler {
     }
 
     public static void handleDisconnect(Session session) {
+        Game game = null;
+
+        Player player = Repository.getPlayerBySession(session);
+        if (player != null) {
+            game = player.getGame();
+        }
+
         Repository.removeSession(session);
         PlayerEvents.playerQuits(session);
+
+        if (player != null) {
+            MessageboxEvents.showMessageboxTimed(game, player.getName(), "has left");
+        }
+
     }
 
     public static synchronized void sendMessage(Game game, String message) {
