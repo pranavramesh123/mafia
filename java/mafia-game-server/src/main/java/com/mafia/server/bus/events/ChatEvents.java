@@ -5,7 +5,9 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.actions.KickPlayerAction;
 import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.comm.client.KickPlayer;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
@@ -25,6 +27,14 @@ public class ChatEvents {
             message = message.substring(3);
             out.append(message);
             out.append("</i>");
+        } else if (message.startsWith("\\kick")) {
+            message = message.substring(6);
+            KickPlayer kickPlayer = new KickPlayer();
+            kickPlayer.setPlayer(message);
+            KickPlayerAction kickPlayerAction = new KickPlayerAction();
+            kickPlayerAction.setData(kickPlayer, creator.getSessionId());
+            kickPlayerAction.run();
+
         } else {
             out.append("> ");
             out.append("<font color='blue'>");
