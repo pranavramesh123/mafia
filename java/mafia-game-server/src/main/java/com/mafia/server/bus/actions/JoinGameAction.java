@@ -5,6 +5,7 @@
  */
 package com.mafia.server.bus.actions;
 
+import com.mafia.server.bus.events.MessageboxEvents;
 import com.mafia.server.bus.events.PlayerEvents;
 import com.mafia.server.model.comm.client.JoinGame;
 import com.mafia.server.model.state.Game;
@@ -38,6 +39,8 @@ public class JoinGameAction implements Runnable, Action {
 
         Player player = new Player(data.getName(), data.getPassCode(), createdBy);
         Repository.addPlayer(player);
+
+        MessageboxEvents.showMessageboxTimed(game, "New Player", player.getName() + " has joined");
 
         PlayerEvents.joinGame(player, game);
 
