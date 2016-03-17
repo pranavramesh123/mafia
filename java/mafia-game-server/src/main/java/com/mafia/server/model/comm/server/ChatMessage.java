@@ -5,58 +5,35 @@
  */
 package com.mafia.server.model.comm.server;
 
-import com.mafia.server.model.state.Player;
-
 /**
  *
  * @author Just1689
  */
 public class ChatMessage extends ServerMessage {
 
-    private String player;
-    private String message;
+    private String line;
 
-    public ChatMessage(Player creator, String message) {
-        this.player = creator.getName();
-        this.message = message;
-    }
-
-    public ChatMessage(String name, String message) {
-        this.player = name;
-        this.message = message;
-    }
-
-    /**
-     * @return the player
-     */
-    public String getPlayer() {
-        return player;
-    }
-
-    /**
-     * @param player the player to set
-     */
-    public void setPlayer(String player) {
-        this.player = player;
-    }
-
-    /**
-     * @return the message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
+    public ChatMessage(String line) {
+        this.line = line;
     }
 
     @Override
     public String toString() {
-        return "Player: " + player + ", message: " + message;
+        return "Message: " + line;
+    }
+
+    /**
+     * @return the line
+     */
+    public String getLine() {
+        return line;
+    }
+
+    /**
+     * @param line the line to set
+     */
+    public void setLine(String line) {
+        this.line = line;
     }
 
 }

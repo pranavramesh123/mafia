@@ -43,10 +43,10 @@ public class JacksonUtilsTest {
      */
     @Test
     public void testObjectToString() {
-        ChatMessage chatMessage = new ChatMessage("Zog", "11");
+        ChatMessage chatMessage = new ChatMessage("Zog11");
         chatMessage.setEvent("ChatMessage");
         String result = JacksonUtils.objectToString(chatMessage);
-        assertEquals("{\"event\":\"ChatMessage\",\"player\":\"Zog\",\"message\":\"11\"}", result);
+        assertEquals("{\"event\":\"ChatMessage\",\"line\":\"Zog11\"}", result);
     }
 
 }

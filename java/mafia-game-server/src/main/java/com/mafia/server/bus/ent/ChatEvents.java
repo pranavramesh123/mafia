@@ -18,7 +18,15 @@ public class ChatEvents {
 
     public static void messageEveryoneInGame(Player creator, String message) {
         Game game = creator.getGame();
-        ChatMessage chatMessage = new ChatMessage(creator, message);
+
+        StringBuilder out = new StringBuilder();
+        if (message.startsWith("\\me")) {
+            out.append("- " + creator.getName());
+        } else {
+            out.append("> " + creator.getName());
+        }
+        out.append(message);
+        ChatMessage chatMessage = new ChatMessage(out.toString());
         MessageRouter.sendMessage(game, chatMessage);
 
     }
