@@ -15,13 +15,13 @@ import javax.websocket.Session;
 public class Repository {
 
     //Games stored by their keys
-    private static ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
 
     //Sessions by ID
-    private static ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     //Player by ID
-    private static ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
 
     public static Game getGameByKey(String key) {
         return games.get(key);
