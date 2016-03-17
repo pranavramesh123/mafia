@@ -14,7 +14,7 @@ import java.util.UUID;
 public class StringUtils {
 
     public static String makeUniqueKey(int end) {
-        return UUID.randomUUID().toString().toUpperCase().substring(1, end);
+        return UUID.randomUUID().toString().toUpperCase().substring(1, end + 1);
     }
 
 }
