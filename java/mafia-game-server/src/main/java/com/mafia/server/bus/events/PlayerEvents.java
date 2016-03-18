@@ -5,6 +5,7 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
@@ -18,20 +19,22 @@ import javax.websocket.Session;
 public class PlayerEvents {
 
     public static void playerQuits(Session session) {
-        
+
         Player player = Repository.getPlayerBySession(session);
         if (player == null) {
             return;
         }
-        if (player.getGame() == null) {
+        Game game = player.getGame();
+        if (game == null) {
             return;
         }
-        
-        player.getGame().removePlayer(player);
-        GameEvents.checkGame(player.getGame());
-        NotifyViewState.nofity(player.getGame());
+
+        game.removePlayer(player);
+        GameEvents.checkGame(game);
+        NotifyViewState.nofity(game);
         Repository.removePlayer(player);
         player.setGame(null);
+        NotifyGame.sendPlayerList(game);
 
     }
 

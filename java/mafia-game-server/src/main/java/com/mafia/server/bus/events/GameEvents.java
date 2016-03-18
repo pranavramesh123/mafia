@@ -8,6 +8,8 @@ package com.mafia.server.bus.events;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
+import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.comm.server.PlayerList;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
@@ -49,6 +51,7 @@ public class GameEvents {
         Repository.addPlayer(player);
         MessageboxEvents.showMessageboxTimed(game, player.getName(), "has joined");
         PlayerEvents.joinGame(player, game);
+        NotifyGame.sendPlayerList(game);
 
     }
 
@@ -73,6 +76,8 @@ public class GameEvents {
         } else {
             MessageboxEvents.notifyOfFail("Error", "You are not creator", player);
         }
+
+        NotifyGame.sendPlayerList(game);
 
     }
 
