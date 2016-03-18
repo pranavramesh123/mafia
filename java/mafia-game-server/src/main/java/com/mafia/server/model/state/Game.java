@@ -144,4 +144,18 @@ public class Game {
         activities.clear();
     }
 
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
+    public ArrayList<Player> getPlayersWithRole(MafiaTypes.PLAYER_ROLES player_roles) {
+        ArrayList<Player> results = new ArrayList<>();
+        for (Player player : getPlayersAsList()) {
+            if (player.getRole().equals(player_roles)) {
+                results.add(player);
+            }
+        }
+        return results;
+    }
+
 }
