@@ -9,6 +9,9 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.comm.server.PlayerList;
 import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.MafiaTypes;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
@@ -30,6 +33,14 @@ public class NotifyGame {
             PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
             MessageRouter.sendMessage(game, playerList);
             return;
+        }
+
+        if (game.getGamePhase().equals(ACTIVITY)) {
+            if (game.getActivityPhase().equals(NIGHT)) {
+                PlayerList playerList = new PlayerList(game.getPlayersAsList());
+                MessageRouter.sendMessage(game, playerList);
+                return;
+            }
         }
 
         PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
