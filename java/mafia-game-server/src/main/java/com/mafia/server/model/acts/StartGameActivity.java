@@ -25,12 +25,12 @@ public class StartGameActivity extends Activity {
     public void vote(Player player, String vote) {
         getVotes().put(player, vote);
         ActivityCycler.checkGame(player.getGame());
-        
+
     }
 
     @Override
     public boolean isDone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPlayers().size() == getVotes().size();
     }
 
     public void addPlayer(Player player) {
