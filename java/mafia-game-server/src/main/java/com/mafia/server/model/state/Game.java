@@ -142,6 +142,10 @@ public class Game {
 
     public void removeActivities() {
         activities.clear();
+        //Remove the activity from the player
+        for (Player player : getPlayersAsList()) {
+            player.setActivity(null);
+        }
     }
 
     public void addActivity(Activity activity) {

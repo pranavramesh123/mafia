@@ -63,11 +63,6 @@ public class ActivityCycler {
         //Remove the previous days activities
         game.removeActivities();
 
-        //Remove the activity from the player
-        for (Player player : game.getPlayersAsList()) {
-            player.setActivity(null);
-        }
-
         switch (activityPhase) {
             case NONE:
 
