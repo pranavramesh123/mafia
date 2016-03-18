@@ -28,6 +28,8 @@ public abstract class Activity {
 
     public abstract void vote(Player player, String vote);
 
+    public abstract void execute();
+
     public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType, ArrayList<Player> players) {
         this.votes = new ConcurrentHashMap<>();
         this.concensusPercentage = concensusPercentage;

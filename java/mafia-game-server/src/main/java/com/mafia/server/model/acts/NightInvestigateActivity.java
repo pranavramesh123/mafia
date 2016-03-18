@@ -10,7 +10,6 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.MafiaTypes;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION.INDIVIDUAL;
 import com.mafia.server.model.state.Player;
 
@@ -49,6 +48,11 @@ public class NightInvestigateActivity extends Activity {
     
     @Override
     public boolean isDone() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void execute() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

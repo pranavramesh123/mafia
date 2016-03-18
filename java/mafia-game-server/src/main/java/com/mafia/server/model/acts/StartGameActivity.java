@@ -57,4 +57,9 @@ public class StartGameActivity extends Activity {
         getPlayers().put(player.getSessionId(), player);
     }
 
+    @Override
+    public void execute() {
+        //No specifics required here
+    }
+
 }
