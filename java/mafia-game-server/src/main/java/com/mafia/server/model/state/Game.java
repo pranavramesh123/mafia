@@ -22,13 +22,13 @@ public class Game {
     private Player creator;
 
     private MafiaTypes.GAME_PHASE gameState;
-    private MafiaTypes.ACTION_PHASE phase;
+    private MafiaTypes.ACTIVITY_PHASE phase;
 
     public Game(Player creator, String key) {
         this.players = new ConcurrentHashMap<>();
         this.players.put(creator.getSessionId(), creator);
         this.gameState = MafiaTypes.GAME_PHASE.PREGAME;
-        this.phase = MafiaTypes.ACTION_PHASE.NONE;
+        this.phase = MafiaTypes.ACTIVITY_PHASE.NONE;
         this.key = key;
         this.creator = creator;
     }
@@ -64,14 +64,14 @@ public class Game {
     /**
      * @return the phase
      */
-    public MafiaTypes.ACTION_PHASE getPhase() {
+    public MafiaTypes.ACTIVITY_PHASE getPhase() {
         return phase;
     }
 
     /**
      * @param phase the phase to set
      */
-    public void setPhase(MafiaTypes.ACTION_PHASE phase) {
+    public void setPhase(MafiaTypes.ACTIVITY_PHASE phase) {
         this.phase = phase;
     }
 

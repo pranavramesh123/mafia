@@ -18,10 +18,10 @@ public class MafiaTypes {
 
     public enum GAME_PHASE {
 
-        PREGAME, ACTION, POSTGAME
+        PREGAME, ACTIVITY, POSTGAME
     }
 
-    public enum ACTION_PHASE {
+    public enum ACTIVITY_PHASE {
 
         NONE, NIGHT, DAWN, DAY
     }
