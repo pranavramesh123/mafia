@@ -17,14 +17,12 @@ import com.mafia.server.model.state.Player;
 public class MessageboxEvents {
 
     public static void showMessageboxOk(Game game, String message) {
-        Messagebox messagebox = new Messagebox();
-        messagebox.setAsMessageBoxOk(message);
+        Messagebox messagebox = Messagebox.createMessageBoxOk(message);
         MessageRouter.sendMessage(game, messagebox);
     }
 
     public static void showMessageboxTimed(Game game, String title, String message) {
-        Messagebox messagebox = new Messagebox();
-        messagebox.setAsMessageBoxTimed(title, message);
+        Messagebox messagebox = Messagebox.createMessageBoxTimed(title, message);
         MessageRouter.sendMessage(game, messagebox);
     }
 
@@ -35,8 +33,7 @@ public class MessageboxEvents {
     }
 
     public static void notifyOfFail(String title, String message, Player player) {
-        Messagebox messagebox = new Messagebox();
-        messagebox.setAsMessageBoxError(title, message);
+        Messagebox messagebox = Messagebox.createMessageBoxError(title, message);
         MessageRouter.sendMessage(player, messagebox);
 
     }

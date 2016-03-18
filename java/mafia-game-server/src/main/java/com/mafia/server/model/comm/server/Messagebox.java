@@ -10,42 +10,52 @@ package com.mafia.server.model.comm.server;
  * @author Just1689
  */
 public class Messagebox extends ServerMessage {
-    
+
     private String type;
     private String title;
     private String text;
     private String url;
-    
-    public void setAsMessageBoxOk(String text) {
-        this.type = "messageBoxOk";
-        this.text = text;
+
+    public static Messagebox createMessageBoxOk(String text) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setType("messageBoxOk");
+        messagebox.setText(text);
+        return messagebox;
     }
-    
-    public void setAsMessageBoxOkImage(String title, String text, String url) {
-        this.type = "messageBoxOkImage";
-        setTitleAndText(title, text);
-        this.url = url;
+
+    public static Messagebox createMessageBoxOkImage(String title, String text, String url) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setType("messageBoxOkImage");
+        messagebox.setTitleAndText(title, text);
+        messagebox.setUrl(url);
+        return messagebox;
     }
-    
-    public void setAsMessageBoxSuccess(String title, String text) {
-        this.type = "messageBoxSuccess";
-        setTitleAndText(title, text);
+
+    public static Messagebox createMessageBoxSuccess(String title, String text) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setType("messageBoxSuccess");
+        messagebox.setTitleAndText(title, text);
+        return messagebox;
     }
-    
-    public void setAsMessageBoxTimed(String title, String text) {
-        this.type = "messageBoxTimed";
-        setTitleAndText(title, text);
+
+    public static Messagebox createMessageBoxTimed(String title, String text) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setType("messageBoxTimed");
+        messagebox.setTitleAndText(title, text);
+        return messagebox;
     }
-    
-    public void setAsMessageBoxError(String title, String text) {
-        this.type = "messageBoxError";
-        setTitleAndText(title, text);
+
+    public static Messagebox createMessageBoxError(String title, String text) {
+        Messagebox messagebox = new Messagebox();
+        messagebox.setType("messageBoxError");
+        messagebox.setTitleAndText(title, text);
+        return messagebox;
     }
-    
-    private void setTitleAndText(String title, String text) {
+
+    public void setTitleAndText(String title, String text) {
         this.title = title;
         this.text = text;
-        
+
     }
 
     /**
@@ -103,5 +113,5 @@ public class Messagebox extends ServerMessage {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
 }

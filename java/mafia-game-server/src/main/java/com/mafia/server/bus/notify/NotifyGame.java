@@ -18,8 +18,7 @@ public class NotifyGame {
 
     public static void notifyCreatorOfGameCode(String createdBy, String key) {
         Player player = Repository.getPlayerBySessionId(createdBy);
-        Messagebox messagebox = new Messagebox();
-        messagebox.setAsMessageBoxSuccess("Game Code", key);
+        Messagebox messagebox = Messagebox.createMessageBoxSuccess("Game Code", key);
         MessageRouter.sendMessage(player, messagebox);
     }
 
