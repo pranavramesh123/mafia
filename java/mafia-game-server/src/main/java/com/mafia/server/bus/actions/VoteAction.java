@@ -32,6 +32,12 @@ public class VoteAction implements Runnable, Action {
             System.out.println("No activity to use (VoteAction.run())");
             return;
         }
+
+        if (data.getPlayer().equals("not ready")) {
+            //Will remove the item from the vote map
+            data.setPlayer(null);
+        }
+
         activity.vote(player, data.getPlayer());
     }
 
