@@ -48,4 +48,10 @@ public class PlayerEvents {
         NotifyViewState.nofity(game);
     }
 
+    public static void playerDies(Player playerToKill) {
+        playerToKill.setAlive(false);
+        Game game = playerToKill.getGame();
+        NotifyViewState.nofity(game);
+    }
+
 }

@@ -19,12 +19,14 @@ public class Player {
     private String sessionId;
     private Game game;
     private Activity activity;
+    private boolean alive;
 
     public Player(String name, String passCode, String sessionId) {
         this.name = name;
         this.passKey = passCode;
         this.role = MafiaTypes.PLAYER_ROLES.NONE;
         this.sessionId = sessionId;
+        this.alive = true;
     }
 
     public boolean hasVoted() {
@@ -116,6 +118,20 @@ public class Player {
     @Override
     public boolean equals(Object obj) {
         return getSessionId().equals(((Player) obj).sessionId);
+    }
+
+    /**
+     * @return the alive
+     */
+    public boolean isAlive() {
+        return alive;
+    }
+
+    /**
+     * @param alive the alive to set
+     */
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
 }
