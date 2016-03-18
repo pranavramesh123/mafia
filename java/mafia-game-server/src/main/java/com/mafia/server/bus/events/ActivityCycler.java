@@ -5,8 +5,12 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.bus.notify.NotifyGame;
+import com.mafia.server.bus.notify.NotifyViewState;
+import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.acts.NightInvestigateActivity;
 import com.mafia.server.model.acts.NightMurderActivity;
+import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
@@ -98,6 +102,10 @@ public class ActivityCycler {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
         }
+        
+        MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong>"));
+        NotifyViewState.nofity(game);
+        NotifyGame.sendPlayerList(game);
 
     }
 }
