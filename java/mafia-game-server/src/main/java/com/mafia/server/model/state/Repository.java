@@ -17,10 +17,10 @@ public class Repository {
     //Games stored by their keys
     private static final ConcurrentHashMap<String, Game> games = new ConcurrentHashMap<>();
 
-    //Sessions by ID
+    //Sessions by sessionID
     private static final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
-    //Player by ID
+    //Player by sessionID
     private static final ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
 
     public static Game getGameByKey(String key) {
@@ -65,6 +65,10 @@ public class Repository {
     private static void reportGameCount() {
         System.out.println("Game count: " + games.size());
 
+    }
+
+    public static void removePlayer(Player player) {
+        players.remove(player.getSessionId());
     }
 
 }

@@ -16,27 +16,33 @@ import javax.websocket.Session;
  * @author Just1689
  */
 public class PlayerEvents {
-    
+
     public static void playerQuits(Session session) {
+        
         Player player = Repository.getPlayerBySession(session);
-        if (player != null) {
-            if (player.getGame() == null) {
-                return;
-            }
-            player.getGame().removePlayer(player);
-            GameEvents.checkGame(player.getGame());
-            
+        if (player == null) {
+            return;
         }
+        if (player.getGame() == null) {
+            return;
+        }
+        
+        player.getGame().removePlayer(player);
+        GameEvents.checkGame(player.getGame());
+        NotifyViewState.nofity(player.getGame());
+        Repository.removePlayer(player);
+        player.setGame(null);
+
     }
-    
+
     public static Player makePlayer(String name, String passCode, String sessionId) {
         return new Player(name, passCode, sessionId);
     }
-    
+
     public static void joinGame(Player player, Game game) {
         player.setGame(game);
         game.addPlayer(player);
         NotifyViewState.nofity(game);
     }
-    
+
 }
