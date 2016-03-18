@@ -9,6 +9,7 @@ import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.bus.events.MessageboxEvents;
 import com.mafia.server.model.comm.client.JoinGame;
 import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Repository;
 
 /**
@@ -35,6 +36,16 @@ public class JoinGameAction implements Runnable, Action {
         Game game = Repository.getGameByKey(data.getKey());
         if (game == null) {
             MessageboxEvents.notifyOfFail("Missing info", "Please enter a key", createdBy);
+            return;
+        }
+
+        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.ACTION)) {
+            MessageboxEvents.notifyOfFail("Error", "Game has already started", createdBy);
+            return;
+        }
+
+        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.POSTGAME)) {
+            MessageboxEvents.notifyOfFail("Error", "Game is already over", createdBy);
             return;
         }
 
