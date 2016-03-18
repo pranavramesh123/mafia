@@ -5,8 +5,20 @@
  */
 package com.mafia.server.bus.events;
 
+import com.mafia.server.model.acts.NightInvestigateActivity;
+import com.mafia.server.model.acts.NightMurderActivity;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
+import com.mafia.server.model.state.Player;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,23 +36,73 @@ public class ActivityCycler {
     }
 
     private static void moveGameToNextState(Game game) {
-        if (game.getGamePhase().equals(MafiaTypes.GAME_PHASE.PREGAME)) {
-            moveGameToPhase(game);
+        if (game.getGamePhase().equals(PREGAME)) {
+            moveGameToPhase(game, ACTIVITY);
             return;
         }
 
-        if (game.getActivityPhase().equals(MafiaTypes.ACTIVITY_PHASE.DAWN)) {
-            moveGameToActivity(game, MafiaTypes.ACTIVITY_PHASE.DAY);
+        if (game.getActivityPhase().equals(DAWN)) {
+            moveGameToActivity(game, DAY);
             return;
         }
 
     }
 
-    private static void moveGameToPhase(Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void moveGameToPhase(Game game, MafiaTypes.GAME_PHASE phase) {
+        //Set the new phase
+        game.setGamePhase(phase);
+
+        //Conform state to that phase
+        if (phase.equals(ACTIVITY)) {
+            moveGameToActivity(game, NIGHT);
+            return;
+        }
     }
 
-    private static void moveGameToActivity(Game game, MafiaTypes.ACTIVITY_PHASE activity_phase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void moveGameToActivity(Game game, MafiaTypes.ACTIVITY_PHASE activityPhase) {
+        //Remove the previous days activities
+        game.removeActivities();
+
+        //Remove the activity from the player
+        for (Player player : game.getPlayersAsList()) {
+            player.setActivity(null);
+        }
+
+        switch (activityPhase) {
+            case NONE:
+
+                break;
+            case NIGHT:
+                moveGameToActivityNight(game);
+                break;
+            case DAWN:
+
+                break;
+            case DAY:
+
+                break;
+            default:
+
+                break;
+
+        }
+
+    }
+
+    private static void moveGameToActivityNight(Game game) {
+        game.setActivityPhase(NIGHT);
+
+        //Handle Killers
+        ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
+        NightMurderActivity nightMurderActivity = new NightMurderActivity(killerPlayers, true);
+        game.addActivity(nightMurderActivity);
+
+        //Handle investigators
+        ArrayList<Player> investigatorPlayers = game.getPlayersWithRole(INVESTIGATOR);
+        for (Player player : investigatorPlayers) {
+            NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
+            game.addActivity(nightInvestigateActivity);
+        }
+
     }
 }
