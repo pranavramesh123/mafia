@@ -140,4 +140,8 @@ public class Game {
         return true;
     }
 
+    public void removeActivities() {
+        activities.clear();
+    }
+
 }
