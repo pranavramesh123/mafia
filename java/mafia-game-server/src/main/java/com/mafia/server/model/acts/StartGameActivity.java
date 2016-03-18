@@ -6,6 +6,9 @@
 package com.mafia.server.model.acts;
 
 import com.mafia.server.bus.events.ActivityCycler;
+import com.mafia.server.bus.notify.NotifyGame;
+import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
@@ -23,9 +26,26 @@ public class StartGameActivity extends Activity {
 
     @Override
     public void vote(Player player, String vote) {
-        getVotes().put(player, vote);
-        ActivityCycler.checkGame(player.getGame());
+        if (vote == null) {
+            getVotes().remove(player);
+            NotifyGame.sendPlayerList(player.getGame());
+            return;
+        }
 
+//        if (!vote.equals("ready") && player.getGame().getPlayerByName(vote) == null) {
+//            Messagebox messagebox = Messagebox.createMessageBoxError("Error", "Cannot vote for: " + vote);
+//            MessageRouter.sendMessage(player, messagebox);
+//            return;
+//        }
+        if (!vote.equals("ready")) {
+            Messagebox messagebox = Messagebox.createMessageBoxError("Error", "Vote ready or not ready");
+            MessageRouter.sendMessage(player, messagebox);
+            return;
+        }
+
+        getVotes().put(player, vote);
+        NotifyGame.sendPlayerList(player.getGame());
+        ActivityCycler.checkGame(player.getGame());
     }
 
     @Override
