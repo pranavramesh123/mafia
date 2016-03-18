@@ -26,6 +26,8 @@ public class NotifyViewState {
             viewState.setLeaveGame(true);
             viewState.setVote(false);
             viewState.setReady(true);
+            viewState.setInstructDiv(true);
+            viewState.setInstructMessage("<strong>Next: </strong>Type \"\\ready\" when ready to begin game");
             MessageRouter.sendMessage(game, viewState);
         }
     }

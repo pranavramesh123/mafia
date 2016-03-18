@@ -12,12 +12,19 @@ package com.mafia.server.model.comm.server;
 public class ViewState extends ServerMessage {
 
     private String key;
+    private String instructMessage;
+
     private boolean createOrJoin;
     private boolean chat;
     private boolean chatInput;
     private boolean leaveGame;
     private boolean vote;
     private boolean ready;
+    private boolean instructDiv;
+
+    public ViewState() {
+        instructMessage = "";
+    }
 
     /**
      * @return the createOrJoin
@@ -115,6 +122,34 @@ public class ViewState extends ServerMessage {
      */
     public void setKey(String key) {
         this.key = key;
+    }
+
+    /**
+     * @return the instructDiv
+     */
+    public boolean isInstructDiv() {
+        return instructDiv;
+    }
+
+    /**
+     * @param instructDiv the instructDiv to set
+     */
+    public void setInstructDiv(boolean instructDiv) {
+        this.instructDiv = instructDiv;
+    }
+
+    /**
+     * @return the instructMessage
+     */
+    public String getInstructMessage() {
+        return instructMessage;
+    }
+
+    /**
+     * @param instructMessage the instructMessage to set
+     */
+    public void setInstructMessage(String instructMessage) {
+        this.instructMessage = instructMessage;
     }
 
 }
