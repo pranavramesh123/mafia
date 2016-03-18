@@ -23,7 +23,7 @@ public class ChatAction implements Runnable, Action {
         if (data == null || data.getMessage() == null || data.getMessage().trim().isEmpty()) {
             return;
         }
-        ChatEvents.messageEveryoneInGame(Repository.getPlayerBySessionId(createdBy), data.getMessage());
+        ChatEvents.handleChatMessageFromClients(Repository.getPlayerBySessionId(createdBy), data.getMessage());
     }
 
     @Override
