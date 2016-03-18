@@ -17,7 +17,7 @@ import com.mafia.server.model.state.MafiaTypes;
 public class NotifyViewState {
 
     public static void nofity(Game game) {
-        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.PREGAME)) {
+        if (game.getGamePhase().equals(MafiaTypes.GAME_PHASE.PREGAME)) {
             ViewState viewState = new ViewState();
             viewState.setKey(game.getKey());
             viewState.setChat(true);

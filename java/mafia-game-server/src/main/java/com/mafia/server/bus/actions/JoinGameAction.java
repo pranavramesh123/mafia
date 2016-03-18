@@ -40,12 +40,12 @@ public class JoinGameAction implements Runnable, Action {
             return;
         }
 
-        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.ACTIVITY)) {
+        if (game.getGamePhase().equals(MafiaTypes.GAME_PHASE.ACTIVITY)) {
             MessageboxEvents.notifyOfFail("Error", "Game has already started", createdBy);
             return;
         }
 
-        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.POSTGAME)) {
+        if (game.getGamePhase().equals(MafiaTypes.GAME_PHASE.POSTGAME)) {
             MessageboxEvents.notifyOfFail("Error", "Game is already over", createdBy);
             return;
         }
