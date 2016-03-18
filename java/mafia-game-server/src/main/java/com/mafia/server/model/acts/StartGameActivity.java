@@ -6,6 +6,7 @@
 package com.mafia.server.model.acts;
 
 import com.mafia.server.bus.events.ActivityCycler;
+import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
@@ -19,11 +20,11 @@ import java.util.Collection;
  * @author Just1689
  */
 public class StartGameActivity extends Activity {
-
+    
     public StartGameActivity(Collection<Player> players) {
         super(100, MafiaTypes.ACTIVITY_PARTICIPATION.GROUP, new ArrayList<>(players));
     }
-
+    
     @Override
     public void vote(Player player, String vote) {
         if (vote == null) {
@@ -42,24 +43,24 @@ public class StartGameActivity extends Activity {
             MessageRouter.sendMessage(player, messagebox);
             return;
         }
-
+        
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
         ActivityCycler.checkGame(player.getGame());
     }
-
+    
     @Override
     public boolean isDone() {
-        return getPlayers().size() == getVotes().size();
+        return getPlayers().size() == getVotes().size() && getPlayers().size() > 1;
     }
-
+    
     public void addPlayer(Player player) {
         getPlayers().put(player.getSessionId(), player);
     }
-
+    
     @Override
     public void execute() {
-        //No specifics required here
+        GameEvents.assignRoles(getAPlayer().getGame());
     }
-
+    
 }

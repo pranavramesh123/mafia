@@ -85,4 +85,8 @@ public class GameEvents {
         }
     }
 
+    public static void assignRoles(Game game) {
+        //To implement
+    }
+
 }
