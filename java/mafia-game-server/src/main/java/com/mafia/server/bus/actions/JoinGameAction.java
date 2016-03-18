@@ -10,6 +10,7 @@ import com.mafia.server.bus.events.MessageboxEvents;
 import com.mafia.server.model.comm.client.JoinGame;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
+import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 
 /**
@@ -47,6 +48,21 @@ public class JoinGameAction implements Runnable, Action {
         if (game.getGameState().equals(MafiaTypes.GAME_PHASE.POSTGAME)) {
             MessageboxEvents.notifyOfFail("Error", "Game is already over", createdBy);
             return;
+        }
+
+        Player player = game.getPlayerByName(data.getName());
+        if (player != null) {
+            //This name is already in use!
+
+            if (!data.getPassCode().equals(player.getPassKey())) {
+                MessageboxEvents.notifyOfFail("Error", "Bad passcode", createdBy);
+                return;
+            }
+
+            //Correct name and key?
+            MessageboxEvents.notifyOfFail("Error", "Not implemented yet", createdBy);
+            return;
+
         }
 
         GameEvents.newPlayerJoinsGame(data.getName(), data.getPassCode(), createdBy, game);
