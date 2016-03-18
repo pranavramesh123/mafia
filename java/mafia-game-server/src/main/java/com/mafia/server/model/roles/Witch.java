@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mafia.server.model.comm.roles;
+package com.mafia.server.model.roles;
 
 import com.mafia.server.bus.actions.Action;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author connavar
  */
-public class Civilian implements Role {
+public class Witch implements Role {
 
     @Override
     public String getDescription() {
