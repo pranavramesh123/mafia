@@ -7,6 +7,7 @@ package com.mafia.server.model.acts;
 
 import com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION;
 import com.mafia.server.model.state.Player;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -27,12 +28,25 @@ public abstract class Activity {
 
     public abstract void vote(Player player, String vote);
 
-    public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType) {
-        this.players = new ConcurrentHashMap<>();
+    public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType, ArrayList<Player> players) {
         this.votes = new ConcurrentHashMap<>();
         this.concensusPercentage = concensusPercentage;
         this.participationType = participationType;
+        this.players = new ConcurrentHashMap<>();
+        for (Player player : players) {
+            this.players.put(player.getSessionId(), player);
+        }
     }
+
+    public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType) {
+        this(concensusPercentage, participationType, new ArrayList<Player>());
+    }
+
+    /**
+     *
+     * @return a specific implementations understanding of is it done
+     */
+    public abstract boolean isDone();
 
     /**
      * @return the players

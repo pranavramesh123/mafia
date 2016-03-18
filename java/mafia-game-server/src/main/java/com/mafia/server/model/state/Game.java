@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.state;
 
+import com.mafia.server.model.acts.Activity;
+import com.mafia.server.model.acts.StartGameActivity;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,18 +21,22 @@ public class Game {
     private final String key;
     private final ConcurrentHashMap<String, Player> players;
 
+    private ArrayList<Activity> activities;
+
     private Player creator;
 
-    private MafiaTypes.GAME_PHASE gameState;
-    private MafiaTypes.ACTIVITY_PHASE phase;
+    private MafiaTypes.GAME_PHASE gamePhase;
+    private MafiaTypes.ACTIVITY_PHASE activityPhase;
 
     public Game(Player creator, String key) {
         this.players = new ConcurrentHashMap<>();
         this.players.put(creator.getSessionId(), creator);
-        this.gameState = MafiaTypes.GAME_PHASE.PREGAME;
-        this.phase = MafiaTypes.ACTIVITY_PHASE.NONE;
+        this.gamePhase = MafiaTypes.GAME_PHASE.PREGAME;
+        this.activityPhase = MafiaTypes.ACTIVITY_PHASE.NONE;
         this.key = key;
         this.creator = creator;
+        this.activities = new ArrayList<>();
+        this.activities.add(new StartGameActivity(players.values()));
     }
 
     /**
@@ -50,29 +56,29 @@ public class Game {
     /**
      * @return the gameState
      */
-    public MafiaTypes.GAME_PHASE getGameState() {
-        return gameState;
+    public MafiaTypes.GAME_PHASE getGamePhase() {
+        return gamePhase;
     }
 
     /**
-     * @param gameState the gameState to set
+     * @param gamePhase the gameState to set
      */
-    public void setGameState(MafiaTypes.GAME_PHASE gameState) {
-        this.gameState = gameState;
+    public void setGamePhase(MafiaTypes.GAME_PHASE gamePhase) {
+        this.gamePhase = gamePhase;
     }
 
     /**
      * @return the phase
      */
-    public MafiaTypes.ACTIVITY_PHASE getPhase() {
-        return phase;
+    public MafiaTypes.ACTIVITY_PHASE getActivityPhase() {
+        return activityPhase;
     }
 
     /**
-     * @param phase the phase to set
+     * @param activityPhase the phase to set
      */
-    public void setPhase(MafiaTypes.ACTIVITY_PHASE phase) {
-        this.phase = phase;
+    public void setActivityPhase(MafiaTypes.ACTIVITY_PHASE activityPhase) {
+        this.activityPhase = activityPhase;
     }
 
     public void removePlayer(Player player) {
@@ -84,6 +90,11 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.put(player.getSessionId(), player);
+        if (gamePhase.equals(MafiaTypes.GAME_PHASE.PREGAME)) {
+            StartGameActivity activity = (StartGameActivity) activities.get(0);
+            activity.addPlayer(player);
+            player.setActivity(activity);
+        }
     }
 
     public Player getPlayerByName(String playerName) {
@@ -118,6 +129,15 @@ public class Game {
 
     public List<Player> getPlayersAsList() {
         return new ArrayList<>(players.values());
+    }
+
+    public boolean isActivityComplete() {
+        for (Activity activity : activities) {
+            if (!activity.isDone()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

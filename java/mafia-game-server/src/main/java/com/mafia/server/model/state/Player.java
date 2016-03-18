@@ -5,6 +5,8 @@
  */
 package com.mafia.server.model.state;
 
+import com.mafia.server.model.acts.Activity;
+
 /**
  *
  * @author Just1689
@@ -16,12 +18,21 @@ public class Player {
     private MafiaTypes.PLAYER_ROLES role;
     private String sessionId;
     private Game game;
+    private Activity activity;
 
     public Player(String name, String passCode, String sessionId) {
         this.name = name;
         this.passKey = passCode;
         this.role = MafiaTypes.PLAYER_ROLES.NONE;
         this.sessionId = sessionId;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     /**
