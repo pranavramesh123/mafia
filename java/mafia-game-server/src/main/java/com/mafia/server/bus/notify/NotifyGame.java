@@ -9,6 +9,7 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.comm.server.PlayerList;
 import com.mafia.server.model.state.Game;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 
@@ -25,7 +26,13 @@ public class NotifyGame {
     }
 
     public static void sendPlayerList(Game game) {
-        PlayerList playerList = new PlayerList(game.getPlayersAsList());
+        if (game.getGamePhase().equals(PREGAME)) {
+            PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
+            MessageRouter.sendMessage(game, playerList);
+            return;
+        }
+
+        PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
         MessageRouter.sendMessage(game, playerList);
     }
 
