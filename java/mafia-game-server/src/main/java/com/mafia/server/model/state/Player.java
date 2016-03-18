@@ -27,6 +27,14 @@ public class Player {
         this.sessionId = sessionId;
     }
 
+    public boolean hasVoted() {
+        if (activity == null) {
+            return false;
+        }
+        String vote = activity.getVotes().get(this);
+        return vote != null;
+    }
+
     public Activity getActivity() {
         return activity;
     }
