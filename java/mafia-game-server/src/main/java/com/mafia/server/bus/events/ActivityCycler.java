@@ -103,7 +103,7 @@ public class ActivityCycler {
             game.addActivity(nightInvestigateActivity);
         }
         
-        MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong>"));
+        MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);
 
