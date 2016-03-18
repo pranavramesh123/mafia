@@ -7,6 +7,8 @@ package com.mafia.server.bus.notify;
 
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
+import com.mafia.server.model.comm.server.PlayerList;
+import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 
@@ -20,6 +22,11 @@ public class NotifyGame {
         Player player = Repository.getPlayerBySessionId(createdBy);
         Messagebox messagebox = Messagebox.createMessageBoxSuccess("Game Code", key);
         MessageRouter.sendMessage(player, messagebox);
+    }
+
+    public static void sendPlayerList(Game game) {
+        PlayerList playerList = new PlayerList(game.getPlayersAsList());
+        MessageRouter.sendMessage(game, playerList);
     }
 
 }
