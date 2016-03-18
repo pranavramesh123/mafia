@@ -24,7 +24,7 @@ public class Repository {
     private static final ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
 
     public static Game getGameByKey(String key) {
-        return games.get(key);
+        return games.get(key.toUpperCase());
     }
 
     public static Player getPlayerBySession(Session session) {
@@ -40,7 +40,7 @@ public class Repository {
     }
 
     public static void createGame(Game game) {
-        games.put(game.getKey(), game);
+        games.put(game.getKey().toUpperCase(), game);
         reportGameCount();
     }
 
