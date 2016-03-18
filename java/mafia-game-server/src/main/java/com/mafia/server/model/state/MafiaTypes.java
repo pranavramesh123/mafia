@@ -26,4 +26,10 @@ public class MafiaTypes {
         NONE, NIGHT, DAWN, DAY
     }
 
+    public enum ACTIVITY_PARTICIPATION {
+
+        INDIVIDUAL, GROUP
+
+    }
+
 }
