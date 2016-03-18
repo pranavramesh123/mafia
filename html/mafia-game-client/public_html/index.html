@@ -83,7 +83,8 @@
                         document.getElementById("instructDiv").style.visibility = 'hidden';
                     }
 
-
+                } else if (messageFromServer.event === "PlayerList") {
+                    document.getElementById("playerListDivMessage").innerHTML = messageFromServer.message;
 
                 } else if (messageFromServer.event === "Messagebox") {
                     if (messageFromServer.type === "messageBoxOk") {
@@ -113,6 +114,7 @@
                 document.getElementById("topLeftA").innerHTML = "Mafia";
                 document.getElementById("leaveButton").style.visibility = 'hidden';
                 document.getElementById("instructDiv").style.visibility = 'hidden';
+                document.getElementById("playerListDivMessage").innerHTML = "";
 
                 messageBoxError("Network", "Disconnected");
 
@@ -288,6 +290,21 @@
                 </div>
             </div>
 
+            <br />
+            <div id="playerListDiv">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div id="playerListDivMessage">
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>     
 
             <div id="reconnectDiv">
                 <div class="container">
