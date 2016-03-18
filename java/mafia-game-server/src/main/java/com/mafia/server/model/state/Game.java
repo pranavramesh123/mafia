@@ -5,7 +5,9 @@
  */
 package com.mafia.server.model.state;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -112,6 +114,10 @@ public class Game {
 
     public boolean isAbandoned() {
         return players.isEmpty();
+    }
+
+    public List<Player> getPlayersAsList() {
+        return new ArrayList<>(players.values());
     }
 
 }
