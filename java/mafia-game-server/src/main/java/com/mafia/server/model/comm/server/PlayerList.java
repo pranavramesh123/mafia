@@ -14,7 +14,27 @@ import java.util.List;
  */
 public class PlayerList extends ServerMessage {
 
+    public static PlayerList makeReadyVsNot(List<Player> players) {
+        PlayerList playerList = new PlayerList();
+        StringBuilder out = new StringBuilder();
+        for (Player player : players) {
+            if (player.hasVoted()) {
+                out.append("<span class=\"label label-success\">");
+            } else {
+                out.append("<span class=\"label label-default\">");
+            }
+            out.append(player.getName());
+            out.append("</span> ");
+        }
+        playerList.setMessage(out.toString());
+        return playerList;
+    }
+
     private String message;
+
+    public PlayerList() {
+
+    }
 
     public PlayerList(List<Player> players) {
         StringBuilder out = new StringBuilder();
