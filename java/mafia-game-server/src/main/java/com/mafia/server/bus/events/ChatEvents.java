@@ -38,6 +38,7 @@ public class ChatEvents {
             kickPlayerAction.run();
         } else if (message.startsWith("\\vote")) {
             message = message.substring(6);
+            System.out.println("Vote for: " + message);
             Vote vote = new Vote();
             vote.setPlayer(message);
             VoteAction voteAction = new VoteAction();
