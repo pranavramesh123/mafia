@@ -8,6 +8,7 @@ package com.mafia.server.model.acts;
 import com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -42,6 +43,12 @@ public abstract class Activity {
 
     public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType) {
         this(concensusPercentage, participationType, new ArrayList<Player>());
+    }
+
+    public Player getAPlayer() {
+        Enumeration<Player> elements = getPlayers().elements();
+        elements.hasMoreElements();
+        return elements.nextElement();
     }
 
     /**
