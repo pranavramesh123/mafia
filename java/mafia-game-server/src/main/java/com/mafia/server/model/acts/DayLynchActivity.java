@@ -10,6 +10,9 @@ import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -17,8 +20,8 @@ import com.mafia.server.model.state.Player;
  */
 public class DayLynchActivity extends Activity {
 
-    public DayLynchActivity() {
-        super(100, MafiaTypes.ACTIVITY_PARTICIPATION.GROUP);
+    public DayLynchActivity(Collection<Player> players) {
+        super(100, MafiaTypes.ACTIVITY_PARTICIPATION.GROUP, new ArrayList<>(players));
     }
 
     @Override
@@ -29,16 +32,11 @@ public class DayLynchActivity extends Activity {
             return;
         }
 
-        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.PREGAME)) {
-            //They are voting to start the game
-            return;
-        }
-        if (game.getGameState().equals(MafiaTypes.GAME_PHASE.POSTGAME)) {
-            Messagebox messagebox = Messagebox.createMessageBoxError("Error", "Cannot vote after game");
-            MessageRouter.sendMessage(player, messagebox);
-            return;
-        }
+    }
 
+    @Override
+    public boolean isDone() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
