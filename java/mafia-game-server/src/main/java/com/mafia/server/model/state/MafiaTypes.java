@@ -11,9 +11,24 @@ package com.mafia.server.model.state;
  */
 public class MafiaTypes {
 
+    public enum TEAM {
+
+        NONE, CIVILIAN, KILLER;
+    }
+
     public enum PLAYER_ROLES {
 
-        NONE, CIVILIAN, KILLER, INVESTIGATOR, WITCH_TYPE, VIGILANTE, HANDICAPPED, SUICIDE
+        NONE(TEAM.NONE), CIVILIAN(TEAM.CIVILIAN), KILLER(TEAM.KILLER), INVESTIGATOR(TEAM.CIVILIAN), WITCH_TYPE(TEAM.CIVILIAN), VIGILANTE(TEAM.CIVILIAN), HANDICAPPED(TEAM.CIVILIAN), SUICIDE(TEAM.CIVILIAN);
+
+        private final TEAM team;
+
+        PLAYER_ROLES(TEAM teamS) {
+            this.team = teamS;
+        }
+
+        public TEAM getTeam() {
+            return team;
+        }
     }
 
     public enum GAME_PHASE {
