@@ -45,4 +45,9 @@ public class JoinGame {
     public String toString() {
         return JacksonUtils.objectToString(this);
     }
+
+    public void formatName() {
+        name = (getName().charAt(0) + "").toUpperCase()
+                + getName().substring(1).toLowerCase();
+    }
 }

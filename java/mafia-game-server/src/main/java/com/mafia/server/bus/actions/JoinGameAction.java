@@ -12,6 +12,7 @@ import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
+import com.mafia.server.util.NameUtils;
 
 /**
  *
@@ -27,6 +28,12 @@ public class JoinGameAction implements Runnable, Action {
 
         if (data.getName() == null || data.getName().trim().isEmpty()) {
             MessageboxEvents.notifyOfFail("Missing info", "Please enter a name", createdBy);
+            return;
+        }
+        data.formatName();
+        
+        if (!NameUtils.isNameOk(data.getName())) {
+            MessageboxEvents.notifyOfFail("Bad name", "Use only letters", createdBy);
             return;
         }
         if (data.getPassCode() == null || data.getPassCode().trim().isEmpty()) {
