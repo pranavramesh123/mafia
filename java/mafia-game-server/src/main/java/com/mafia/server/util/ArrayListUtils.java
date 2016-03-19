@@ -7,6 +7,8 @@ package com.mafia.server.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -18,5 +20,20 @@ public class ArrayListUtils<T> {
     public void orderRandomly(ArrayList<T> list) {
         Collections.shuffle(list, new Random());
         Collections.shuffle(list, new Random());
+    }
+
+    public interface Checker<T> {
+
+        public boolean check(T t);
+    }
+
+    public void removeSome(ArrayList<T> list, Checker<T> checker) {
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            T next = iterator.next();
+            if (checker.check(next)) {
+                iterator.remove();
+            }
+        }
     }
 }
