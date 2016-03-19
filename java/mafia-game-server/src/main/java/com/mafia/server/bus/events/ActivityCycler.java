@@ -135,12 +135,13 @@ public class ActivityCycler {
             System.out.println("Added NightInvestA to " + player.getName() );
         }
 
-        //Handle witch killers
+        //Handle WITCH  killers
         ArrayList<Player> witchPlayers = game.getPlayersWithRole(WITCH_TYPE);
         for (Player player : witchPlayers) {
             NightWitchActivity nightWitchActivity = new NightWitchActivity();
             game.addActivity(nightWitchActivity);
             player.setActivity(nightWitchActivity);
+            nightWitchActivity.getPlayers().put(player.getSessionId(), player);
             System.out.println("Added NightWitchrA to " + player.getName() );
         }
         
