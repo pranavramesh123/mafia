@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * @author Just1689
  */
 public class ActivityCycler {
-    
+
     public static void checkGame(Game game) {
         if (game.isActivityComplete()) {
             System.out.println("Activity is complete");
@@ -42,30 +42,30 @@ public class ActivityCycler {
             System.out.println("Activity is not complete");
         }
     }
-    
+
     private static void moveGameToNextSomething(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
             moveGameToGamePhase(game, ACTIVITY);
-            
+
             return;
         }
-        
+
         if (game.getGamePhase().equals(ACTIVITY)) {
             if (game.getActivityPhase().equals(NIGHT)) {
                 moveGameToActivity(game, DAWN);
                 return;
             }
-            
+
             return;
         }
-        
+
         if (game.getActivityPhase().equals(DAWN)) {
             moveGameToActivity(game, DAY);
             return;
         }
-        
+
     }
-    
+
     private static void moveGameToGamePhase(Game game, MafiaTypes.GAME_PHASE phase) {
         //Set the new phase
         game.setGamePhase(phase);
@@ -81,14 +81,15 @@ public class ActivityCycler {
             return;
         }
     }
-    
+
     private static void moveGameToActivity(Game game, MafiaTypes.ACTIVITY_PHASE activityPhase) {
         //Remove the previous days activities
+        game.executeActivities();
         game.removeActivities();
-        
+
         switch (activityPhase) {
             case NONE:
-                
+
                 break;
             case NIGHT:
                 moveGameToActivityNight(game);
@@ -97,19 +98,19 @@ public class ActivityCycler {
                 moveGameToActivityDawn(game);
                 break;
             case DAY:
-                
+
                 break;
             default:
-                
+
                 break;
-            
+
         }
-        
+
     }
-    
+
     private static void moveGameToActivityNight(Game game) {
         game.setActivityPhase(NIGHT);
-        
+
         Checker checker = new Checker<Player>() {
             public boolean check(Player player) {
                 return !player.isAlive();
@@ -123,7 +124,7 @@ public class ActivityCycler {
         for (Player player : killerPlayers) {
             nightkillerActivity.getPlayers().put(player.getSessionId(), player);
             player.setActivity(nightkillerActivity);
-            System.out.println("Added NightMurderA to " + player.getName() );
+            System.out.println("Added NightMurderA to " + player.getName());
         }
         game.addActivity(nightkillerActivity);
 
@@ -132,7 +133,7 @@ public class ActivityCycler {
         for (Player player : investigatorPlayers) {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
-            System.out.println("Added NightInvestA to " + player.getName() );
+            System.out.println("Added NightInvestA to " + player.getName());
         }
 
         //Handle WITCH  killers
@@ -142,15 +143,15 @@ public class ActivityCycler {
             game.addActivity(nightWitchActivity);
             player.setActivity(nightWitchActivity);
             nightWitchActivity.getPlayers().put(player.getSessionId(), player);
-            System.out.println("Added NightWitchrA to " + player.getName() );
+            System.out.println("Added NightWitchrA to " + player.getName());
         }
-        
+
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);
-        
+
     }
-    
+
     private static void moveGameToActivityDawn(Game game) {
         game.setActivityPhase(DAWN);
 
@@ -162,7 +163,7 @@ public class ActivityCycler {
             player.setActivity(dawnWitchActivity);
             game.addActivity(dawnWitchActivity);
         }
-        
+
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now dawn time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);

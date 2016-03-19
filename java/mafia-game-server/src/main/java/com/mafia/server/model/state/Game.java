@@ -181,4 +181,14 @@ public class Game {
         thoseWhoAreAboutToDie.add(player);
     }
 
+    public void executeActivities() {
+        if (activities == null) {
+            System.err.println("Activities is null in Game");
+        }
+        for (Activity activity : activities) {
+            activity.execute();
+        }
+
+    }
+
 }

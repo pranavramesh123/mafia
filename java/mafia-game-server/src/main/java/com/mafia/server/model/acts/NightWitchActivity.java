@@ -46,7 +46,7 @@ public class NightWitchActivity extends Activity {
             return;
         }
 
-        System.out.println("Got here 4");
+        MessageRouter.sendMessage(player, new ChatMessage("You voted for " + vote + ".<br />"));
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
         ActivityCycler.checkGame(player.getGame());
@@ -66,6 +66,7 @@ public class NightWitchActivity extends Activity {
                     System.err.println("Could not find player " + vote + "(NightWitchActivity.execute)");
                     return;
                 }
+                System.out.println("Added " + player.getName() + " to chopping block (Witch)");
                 getGame().addToChoppingBlock(player);
 
             }
@@ -75,7 +76,6 @@ public class NightWitchActivity extends Activity {
     @Override
     public boolean isDone() {
         boolean result = getVotes().size() == 1;
-        System.out.println("Activity WITCH " + result);
         return result;
 
     }

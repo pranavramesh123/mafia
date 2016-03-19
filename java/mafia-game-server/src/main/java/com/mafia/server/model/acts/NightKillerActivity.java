@@ -60,15 +60,12 @@ public class NightKillerActivity extends Activity {
                 while (elements.hasMoreElements()) {
                     String next = elements.nextElement();
                     if (!next.equals(last)) {
-                        System.out.println("Activity killer FALSE");
                         return false;
                     }
                 }
-                System.out.println("Activity killer TRUE");
                 return true;
             }
         }
-        System.out.println("Activity killer FALSE");
         return false;
     }
 
@@ -76,6 +73,7 @@ public class NightKillerActivity extends Activity {
     public void execute() {
 
         getGame().addToChoppingBlock(getVotedPlayer());
+        System.out.println("Added " + getVotedPlayer().getName() + " to chopping block (Killer)");
 
 //        ConcurrentHashMap<Player, String> votes = getVotes();
 //        Set<Player> players = votes.keySet();

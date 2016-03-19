@@ -50,7 +50,6 @@ public class NightInvestigateActivity extends Activity {
     @Override
     public boolean isDone() {
         boolean result = getVotes().size() == 1;
-        System.out.println("Activity investigate " + result);
         return result;
 
     }
@@ -59,7 +58,12 @@ public class NightInvestigateActivity extends Activity {
     public void execute() {
         Player votePlayer = getVotedPlayer();
         if (votePlayer != null) {
-            MessageRouter.sendMessage(getAPlayer(), new ChatMessage(votePlayer.getName() + " is a " + votePlayer.getRole().name()));
+            MessageRouter.sendMessage(
+                    getAPlayer(),
+                    new ChatMessage("<font color='red'>" + votePlayer.getName() + " is a " + votePlayer.getRole().name() + "</font><br />")
+            );
+        } else {
+            System.err.println("Could not find voted player (NightInvestigator)");
         }
     }
 
