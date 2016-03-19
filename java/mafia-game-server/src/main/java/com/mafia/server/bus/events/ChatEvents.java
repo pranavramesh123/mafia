@@ -13,6 +13,7 @@ import com.mafia.server.model.comm.client.Vote;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
@@ -50,7 +51,7 @@ public class ChatEvents {
             voteAction.run();
             return;
         } else {
-            if (creator.getRole().equals(CIVILIAN) && creator.getGame().getActivityPhase().equals(NIGHT)) {
+            if (creator.getRole().equals(CIVILIAN) && !creator.getGame().getActivityPhase().equals(DAY)) {
                 MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You are sleeping!", ""));
                 return;
             }

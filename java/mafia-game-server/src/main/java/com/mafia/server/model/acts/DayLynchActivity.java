@@ -8,8 +8,6 @@ package com.mafia.server.model.acts;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  *
@@ -17,8 +15,8 @@ import java.util.Collection;
  */
 public class DayLynchActivity extends Activity {
 
-    public DayLynchActivity(Collection<Player> players) {
-        super(100, MafiaTypes.ACTIVITY_PARTICIPATION.GROUP, new ArrayList<>(players));
+    public DayLynchActivity() {
+        super(100, MafiaTypes.ACTIVITY_PARTICIPATION.GROUP, null);
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.acts.DawnWitchActivity;
+import com.mafia.server.model.acts.DayLynchActivity;
 import com.mafia.server.model.acts.NightInvestigateActivity;
 import com.mafia.server.model.acts.NightKillerActivity;
 import com.mafia.server.model.acts.NightWitchActivity;
@@ -54,6 +55,12 @@ public class ActivityCycler {
             if (game.getActivityPhase().equals(NIGHT)) {
                 moveGameToActivity(game, DAWN);
                 return;
+            } else if (game.getActivityPhase().equals(DAWN)) {
+                moveGameToActivity(game, DAY);
+                return;
+            } else if (game.getActivityPhase().equals(DAY)) {
+                moveGameToActivity(game, NIGHT);
+                return;
             }
 
             return;
@@ -98,7 +105,7 @@ public class ActivityCycler {
                 moveGameToActivityDawn(game);
                 break;
             case DAY:
-
+                moveGameToActivityDay(game);
                 break;
             default:
 
@@ -157,21 +164,52 @@ public class ActivityCycler {
 
         //Handle witch saving people
         ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
+        System.out.println("Players about to die: " + playersAboutToDie.size());
         ArrayList<Player> witches = game.getPlayersWithRole(WITCH_TYPE);
-        DawnWitchActivity dawnWitchActivity = new DawnWitchActivity();
+        System.out.println("Witches: " + witches.size());
 
-        for (Player witch : witches) {
-            for (Player victim : playersAboutToDie) {
+        if (witches.size() > 0 && playersAboutToDie.size() > 0) {
+            for (Player witch : witches) {
+                DawnWitchActivity dawnWitchActivity = new DawnWitchActivity();
                 dawnWitchActivity.getPlayers().put(witch.getSessionId(), witch);
                 witch.setActivity(dawnWitchActivity);
-                MessageRouter.sendMessage(game, new ChatMessage(victim.getName() + " may be resurrected"));
+                for (Player victim : playersAboutToDie) {
+                    MessageRouter.sendMessage(witch, new ChatMessage(victim.getName() + " may be resurrected<br />"));
+                }
+                game.addActivity(dawnWitchActivity);
+                System.out.println("Added witch save activity to game ");
             }
-        }
-        if (dawnWitchActivity.getPlayers().size() > 0) {
-            game.addActivity(dawnWitchActivity);
+        } else {
+            System.out.println("No witches or no dying");
         }
 
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now dawn time***</strong><br />"));
+        NotifyViewState.nofity(game);
+        NotifyGame.sendPlayerList(game);
+
+        //Check incase no dawn required
+        ActivityCycler.checkGame(game);
+
+    }
+
+    private static void moveGameToActivityDay(Game game) {
+        game.setActivityPhase(DAY);
+
+        ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
+        for (Player player : playersAboutToDie) {
+            player.setAlive(false);
+        }
+
+        DayLynchActivity dayLynchActivity = new DayLynchActivity();
+        game.addActivity(dayLynchActivity);
+        for (Player player : game.getPlayersAsList()) {
+            if (player.isAlive()) {
+                dayLynchActivity.getPlayers().put(player.getSessionId(), player);
+                player.setActivity(dayLynchActivity);
+            }
+        }
+
+        MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now day time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);
 

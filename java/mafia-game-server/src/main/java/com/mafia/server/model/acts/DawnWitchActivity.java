@@ -31,7 +31,7 @@ public class DawnWitchActivity extends Activity {
             return;
         }
 
-        if (!vote.equals("abstain") && (getGame().getPlayerByName(vote) != null)) {
+        if (!vote.equals("abstain") && (getGame().getPlayerByName(vote) == null)) {
             //Could not find X
             MessageRouter.sendMessage(player, Messagebox.createMessageBoxError("Could not find player", vote));
             return;
@@ -45,12 +45,16 @@ public class DawnWitchActivity extends Activity {
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Player votedPlayer = getVotedPlayer();
+        if (votedPlayer != null) {
+            //Save them
+            getGame().savePlayer(votedPlayer);
+        }
     }
 
     @Override
     public boolean isDone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getVotes().size() == 1;
     }
 
 }

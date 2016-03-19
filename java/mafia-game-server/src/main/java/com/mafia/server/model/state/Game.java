@@ -150,7 +150,6 @@ public class Game {
 
     public void removeActivities() {
         activities.clear();
-        thoseWhoAreAboutToDie.clear();
         //Remove the activity from the player
         for (Player player : getPlayersAsList()) {
             player.setActivity(null);
@@ -182,7 +181,9 @@ public class Game {
     }
 
     public void addToChoppingBlock(Player player) {
-        thoseWhoAreAboutToDie.add(player);
+        if (!thoseWhoAreAboutToDie.contains(player)) {
+            thoseWhoAreAboutToDie.add(player);
+        }
     }
 
     public void executeActivities() {
@@ -197,6 +198,10 @@ public class Game {
 
     public ArrayList<Player> getPlayersAboutToDie() {
         return thoseWhoAreAboutToDie;
+    }
+
+    public void savePlayer(Player votedPlayer) {
+        thoseWhoAreAboutToDie.remove(votedPlayer);
     }
 
 }
