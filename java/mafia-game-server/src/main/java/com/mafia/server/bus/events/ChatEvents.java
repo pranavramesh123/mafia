@@ -13,11 +13,15 @@ import com.mafia.server.model.comm.client.Vote;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.WITCH_TYPE;
 import com.mafia.server.model.state.Player;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,6 +59,18 @@ public class ChatEvents {
                 MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You are sleeping!", ""));
                 return;
             }
+            if (creator.getRole().equals(WITCH_TYPE) && !creator.getGame().getActivityPhase().equals(DAY)) {
+                MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You cannot chat now", ""));
+                return;
+            }
+            if (creator.getRole().equals(INVESTIGATOR) && !creator.getGame().getActivityPhase().equals(DAY)) {
+                MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You cannot chat now", ""));
+                return;
+            }
+            if (creator.getRole().equals(KILLER) && creator.getGame().getActivityPhase().equals(DAWN)) {
+                MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You are sleeping!", ""));
+                return;
+            }
             out.append("> ");
             out.append("<font color='blue'>");
             out.append(creator.getName());
@@ -64,14 +80,18 @@ public class ChatEvents {
         }
         out.append("<br />");
 
+        ChatMessage chatMessage = new ChatMessage(out.toString());
         if (creator.getRole().equals(KILLER) && creator.getGame().getActivityPhase().equals(NIGHT)) {
-            ChatMessage chatMessage = new ChatMessage(out.toString());
             MessageRouter.sendMessage(game.getPlayersWithRole(KILLER), chatMessage);
             return;
         }
+        if (creator.isAlive()) {
+            MessageRouter.sendMessage(game, chatMessage);
+        } else {
+            ArrayList<Player> players = creator.getGame().getPlayersWhoAreDead();
+            MessageRouter.sendMessage(players, chatMessage);
 
-        ChatMessage chatMessage = new ChatMessage(out.toString());
-        MessageRouter.sendMessage(game, chatMessage);
+        }
 
     }
 }
