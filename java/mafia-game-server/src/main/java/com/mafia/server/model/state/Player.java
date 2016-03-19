@@ -6,7 +6,6 @@
 package com.mafia.server.model.state;
 
 import com.mafia.server.model.acts.Activity;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**

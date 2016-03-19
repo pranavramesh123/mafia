@@ -5,7 +5,6 @@
  */
 package com.mafia.server.util;
 
-import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

@@ -13,7 +13,6 @@ import com.mafia.server.model.comm.server.ChatMessage;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION.GROUP;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Set;
@@ -36,17 +35,15 @@ public class NightKillerActivity extends Activity {
             MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " removed their vote."));
             return;
         }
-        
+
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
         ActivityCycler.checkGame(player.getGame());
-        
-        
+
     }
 
     @Override
     public boolean isDone() {
-        System.out.println("Asked if NightMurderActivity isDone!");
         if (getPlayers().size() == getVotes().size()) {
             if (getConcensusPercentage() == 100) {
                 Enumeration<String> elements = getVotes().elements();
