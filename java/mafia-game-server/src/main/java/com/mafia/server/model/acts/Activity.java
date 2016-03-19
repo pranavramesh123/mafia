@@ -5,6 +5,7 @@
  */
 package com.mafia.server.model.acts;
 
+import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
@@ -113,6 +114,26 @@ public abstract class Activity {
      */
     public void setVotes(ConcurrentHashMap<Player, String> votes) {
         this.votes = votes;
+    }
+
+    public Player getVotedPlayer() {
+        Enumeration<String> elements = votes.elements();
+        while (elements.hasMoreElements()) {
+            String vote = elements.nextElement();
+            if (vote.equals("abstain")) {
+                continue;
+            }
+            Player player = getGame().getPlayerByName(vote);
+            if (player == null) {
+                System.err.println("Serious error: found null player (Activity.getVotedPlayer()");
+            }
+            return player;
+        }
+        return null;
+    }
+
+    public Game getGame() {
+        return getAPlayer().getGame();
     }
 
 }
