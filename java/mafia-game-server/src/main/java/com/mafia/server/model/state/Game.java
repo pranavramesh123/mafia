@@ -216,4 +216,15 @@ public class Game {
         return list;
     }
 
+    public ArrayList<Player> getPlayersWhoAreAlive() {
+        ArrayList<Player> list = (ArrayList<Player>) getPlayersAsList();
+        new ArrayListUtils<Player>().removeSome(list, new ArrayListUtils.Checker<Player>() {
+            @Override
+            public boolean check(Player t) {
+                return !t.isAlive();
+            }
+        });
+        return list;
+    }
+
 }
