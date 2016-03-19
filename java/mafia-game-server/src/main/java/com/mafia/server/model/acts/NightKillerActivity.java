@@ -23,27 +23,35 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Just1689
  */
 public class NightKillerActivity extends Activity {
-    
+
     public NightKillerActivity() {
         super(100, GROUP, null);
     }
-    
+
     @Override
     public void vote(Player player, String vote) {
         if (vote == null) {
             getVotes().remove(player);
-            MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " removed their vote."));
+            MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " removed their vote.<br />"));
             return;
         }
-        
+
+        String previousVote = getVotes().get(player);
+        if (previousVote != null) {
+            previousVote = previousVote.toLowerCase();
+            if (!previousVote.equals(vote.toLowerCase())) {
+                MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " changed their voted to " + vote + "<br />"));
+            }
+        }
+
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
         ActivityCycler.checkGame(player.getGame());
-        
-        MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " voted for " + vote));
-        
+
+        MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " voted for " + vote + "<br />"));
+
     }
-    
+
     @Override
     public boolean isDone() {
         if (getPlayers().size() == getVotes().size()) {
@@ -64,7 +72,7 @@ public class NightKillerActivity extends Activity {
         }
         return false;
     }
-    
+
     @Override
     public void execute() {
         ConcurrentHashMap<Player, String> votes = getVotes();
@@ -72,12 +80,12 @@ public class NightKillerActivity extends Activity {
         Iterator<Player> iterator = players.iterator();
         iterator.hasNext();
         Player player = iterator.next();
-        
+
         String playerName = votes.get(player);
         Player playerToKill = player.getGame().getPlayerByName(playerName);
-        
+
         PlayerEvents.playerDies(playerToKill);
-        
+
     }
-    
+
 }
