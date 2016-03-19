@@ -11,9 +11,11 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.client.KickPlayer;
 import com.mafia.server.model.comm.client.Vote;
 import com.mafia.server.model.comm.server.ChatMessage;
+import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 
 /**
@@ -49,7 +51,7 @@ public class ChatEvents {
             return;
         } else {
             if (creator.getRole().equals(CIVILIAN) && creator.getGame().getActivityPhase().equals(NIGHT)) {
-                MessageRouter.sendMessage(creator, new ChatMessage("You are sleeping!<br />"));
+                MessageRouter.sendMessage(creator, Messagebox.createMessageBoxError("You are sleeping!", ""));
                 return;
             }
             out.append("> ");
@@ -60,6 +62,13 @@ public class ChatEvents {
             out.append(message);
         }
         out.append("<br />");
+
+        if (creator.getRole().equals(KILLER) && creator.getGame().getActivityPhase().equals(NIGHT)) {
+            ChatMessage chatMessage = new ChatMessage(out.toString());
+            MessageRouter.sendMessage(game.getPlayersWithRole(KILLER), chatMessage);
+            return;
+        }
+
         ChatMessage chatMessage = new ChatMessage(out.toString());
         MessageRouter.sendMessage(game, chatMessage);
 
