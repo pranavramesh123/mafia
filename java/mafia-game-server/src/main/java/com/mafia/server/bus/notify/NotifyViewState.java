@@ -9,6 +9,7 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.ViewState;
 import com.mafia.server.model.state.Game;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
+import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
@@ -18,6 +19,7 @@ import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.WITCH_TYPE;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -154,6 +156,22 @@ public class NotifyViewState {
                     viewState.setReady(true);
                     viewState.setInstructDiv(true);
                     viewState.setInstructMessage("<strong>DAWN:</strong> You are asleep");
+                    MessageRouter.sendMessage(player, viewState);
+                }
+
+            } else if (game.getActivityPhase().equals(DAY)) {
+                List<Player> list = game.getPlayersAsList();
+                for (Player player : list) {
+                    ViewState viewState = new ViewState();
+                    viewState.setKey(game.getKey());
+                    viewState.setChat(true);
+                    viewState.setChatInput(true);
+                    viewState.setCreateOrJoin(false);
+                    viewState.setLeaveGame(true);
+                    viewState.setVote(false);
+                    viewState.setReady(true);
+                    viewState.setInstructDiv(true);
+                    viewState.setInstructMessage("<strong>DAY:</strong> Lynch someone");
                     MessageRouter.sendMessage(player, viewState);
                 }
 
