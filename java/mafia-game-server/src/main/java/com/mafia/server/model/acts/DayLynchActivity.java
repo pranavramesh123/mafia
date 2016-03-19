@@ -62,7 +62,7 @@ public class DayLynchActivity extends Activity {
             return false;
         }
 
-        int needed = getGame().getPlayersWhoAreAlive().size();
+        int needed = getGame().getPlayersWhoAreAlive().size() / 2;
         System.out.println("Need " + needed + " votes to kill");
         HashMap<String, Integer> totals = new HashMap<>();
         for (Map.Entry<Player, String> entry : getVotes().entrySet()) {
