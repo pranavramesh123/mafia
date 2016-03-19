@@ -13,7 +13,9 @@ import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
+import com.mafia.server.util.ArrayListUtils;
 import com.mafia.server.util.StringUtils;
+import java.util.ArrayList;
 import java.util.List;
 import javax.websocket.Session;
 
@@ -90,7 +92,8 @@ public class GameEvents {
 
     public static void assignRoles(Game game) {
         //To implement
-        List<Player> players = game.getPlayersAsList();
+        ArrayList<Player> players = (ArrayList<Player>) game.getPlayersAsList();
+        new ArrayListUtils<Player>().orderRandomly(players);
 
         boolean civ = false;
         for (int i = 0; i < players.size(); i++) {
