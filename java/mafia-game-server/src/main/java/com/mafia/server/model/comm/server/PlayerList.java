@@ -6,6 +6,8 @@
 package com.mafia.server.model.comm.server;
 
 import com.mafia.server.model.state.Player;
+import com.mafia.server.util.ArrayListUtils;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
 public class PlayerList extends ServerMessage {
 
     public static PlayerList makeReadyVsNot(List<Player> players) {
+        new ArrayListUtils<Player>().order((ArrayList<Player>) players, Player.NAME_COMPARATOR);
         PlayerList playerList = new PlayerList();
         StringBuilder out = new StringBuilder();
         for (Player player : players) {
@@ -31,6 +34,7 @@ public class PlayerList extends ServerMessage {
     }
 
     public static PlayerList makeAliveVsDead(List<Player> players) {
+        new ArrayListUtils<Player>().order((ArrayList<Player>) players, Player.NAME_COMPARATOR);
         PlayerList playerList = new PlayerList();
         StringBuilder out = new StringBuilder();
         for (Player player : players) {
@@ -53,6 +57,7 @@ public class PlayerList extends ServerMessage {
     }
 
     public PlayerList(List<Player> players) {
+        new ArrayListUtils<Player>().order((ArrayList<Player>) players, Player.NAME_COMPARATOR);
         StringBuilder out = new StringBuilder();
         for (Player player : players) {
             out.append("<span class=\"label label-default\">");
