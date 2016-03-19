@@ -27,31 +27,25 @@ public class NightWitchActivity extends Activity {
 
     @Override
     public void vote(Player player, String vote) {
-        System.out.println("Got here");
         if (vote == null) {
             getVotes().remove(player);
             MessageRouter.sendMessage(player, new ChatMessage("You removed your vote.<br />"));
             return;
         }
 
-        System.out.println("Got here 2");
         if (vote.equals("abstain")) {
             getVotes().put(player, vote);
             ActivityCycler.checkGame(player.getGame());
             return;
         }
 
-        System.out.println("Got here 3");
         Game game = getGame();
-        System.out.println("Got here 3.10");
-                
         if (game.getPlayerByName(vote) == null) {
-            System.out.println("Got here 3.11");
             //Could not find X
             MessageRouter.sendMessage(player, Messagebox.createMessageBoxError("Could not find player", vote));
             return;
         }
-        
+
         System.out.println("Got here 4");
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
