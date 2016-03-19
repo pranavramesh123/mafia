@@ -112,16 +112,16 @@ public class GameEvents {
         LinkedList<PLAYER_ROLES> result = new LinkedList<>();
         int playerCount = game.getPlayers().size();
         int killerCount = 0;
-        if (playerCount == 4) {
-            killerCount = 1;
-        } else if (playerCount >= 6) {
-            killerCount = 2;
-        } else if (playerCount >= 8) {
-            killerCount = 3;
+        if (playerCount > 12) {
+            killerCount = 5;
         } else if (playerCount >= 11) {
             killerCount = 4;
+        } else if (playerCount >= 8) {
+            killerCount = 3;
+        } else if (playerCount >= 6) {
+            killerCount = 2;
         } else {
-            killerCount = 5;
+            killerCount = 1;
         }
 
         int investigatorCount = 1;
