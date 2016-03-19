@@ -54,6 +54,7 @@ public class NotifyGame {
             String role = player.getRole().name();
             Messagebox messagebox = Messagebox.createMessageBoxTimed("Role", role);
             MessageRouter.sendMessage(player, messagebox);
+            ChatMessage chatMessage = new ChatMessage("<strong>You are a " + role + "</strong><br />");
             MessageRouter.sendMessage(player, chatMessage);
         }
     }
