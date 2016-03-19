@@ -6,7 +6,6 @@
 package com.mafia.server.model.acts;
 
 import com.mafia.server.bus.events.ActivityCycler;
-import com.mafia.server.bus.events.GameEvents;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
