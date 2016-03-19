@@ -12,7 +12,6 @@ import com.mafia.server.model.comm.client.KickPlayer;
 import com.mafia.server.model.comm.client.Vote;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.MafiaTypes;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import com.mafia.server.model.state.Player;

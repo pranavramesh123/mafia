@@ -9,7 +9,6 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.MafiaTypes;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
