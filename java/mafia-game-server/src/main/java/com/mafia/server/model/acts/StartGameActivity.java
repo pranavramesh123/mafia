@@ -60,7 +60,7 @@ public class StartGameActivity extends Activity {
 
     @Override
     public void execute() {
-        GameEvents.assignRoles(getAPlayer().getGame());
+        //
     }
 
 }

@@ -55,6 +55,11 @@ public class ActivityCycler {
         //Set the new phase
         game.setGamePhase(phase);
 
+        //Handle once off assignment
+        if (phase.equals(ACTIVITY)) {
+            GameEvents.assignRoles(game);
+        }
+
         //Conform state to that phase
         if (phase.equals(ACTIVITY)) {
             moveGameToActivity(game, NIGHT);

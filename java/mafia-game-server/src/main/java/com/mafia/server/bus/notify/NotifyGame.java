@@ -6,6 +6,7 @@
 package com.mafia.server.bus.notify;
 
 import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.comm.server.PlayerList;
 import com.mafia.server.model.state.Game;
@@ -14,6 +15,7 @@ import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
+import java.util.List;
 
 /**
  *
@@ -44,6 +46,16 @@ public class NotifyGame {
 
         PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
         MessageRouter.sendMessage(game, playerList);
+    }
+
+    public static void nofityOfRole(Game game) {
+        List<Player> players = game.getPlayersAsList();
+        for (Player player : players) {
+            String role = player.getRole().name();
+            Messagebox messagebox = Messagebox.createMessageBoxTimed("Role", role);
+            MessageRouter.sendMessage(player, messagebox);
+            MessageRouter.sendMessage(player, chatMessage);
+        }
     }
 
 }

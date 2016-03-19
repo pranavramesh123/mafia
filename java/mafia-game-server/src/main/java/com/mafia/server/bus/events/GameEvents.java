@@ -9,9 +9,13 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.MafiaTypes;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 import com.mafia.server.util.StringUtils;
+import java.util.List;
 import javax.websocket.Session;
 
 /**
@@ -87,6 +91,27 @@ public class GameEvents {
 
     public static void assignRoles(Game game) {
         //To implement
+        List<Player> players = game.getPlayersAsList();
+
+        boolean civ = false;
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            if (i == 0) {
+                player.setRole(CIVILIAN);
+                continue;
+            }
+
+            civ = !civ;
+
+            if (civ) {
+                player.setRole(CIVILIAN);
+                continue;
+            }
+
+            player.setRole(KILLER);
+
+        }
+        NotifyGame.nofityOfRole(game);
     }
 
 }
