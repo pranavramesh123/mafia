@@ -5,6 +5,7 @@
  */
 package com.mafia.server.util;
 
+import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +23,11 @@ public class ArrayListUtils<T> {
         Collections.shuffle(list, new Random());
     }
 
-    public interface Checker<T> {
+    public void order(ArrayList<T> list, Comparator<T> comparator) {
+        Collections.sort(list, comparator);
+    }
+
+    public static interface Checker<T> {
 
         public boolean check(T t);
     }
