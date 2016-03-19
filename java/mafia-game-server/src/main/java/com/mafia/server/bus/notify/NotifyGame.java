@@ -38,13 +38,14 @@ public class NotifyGame {
 
         if (game.getGamePhase().equals(ACTIVITY)) {
             if (game.getActivityPhase().equals(NIGHT)) {
-                PlayerList playerList = new PlayerList(game.getPlayersAsList());
+                PlayerList playerList = PlayerList.makeAliveVsDead(game.getPlayersAsList());
                 MessageRouter.sendMessage(game, playerList);
                 return;
             }
         }
 
-        PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
+//        PlayerList playerList = new PlayerList(game.getPlayersAsList());
+        PlayerList playerList = PlayerList.makeAliveVsDead(game.getPlayersAsList());
         MessageRouter.sendMessage(game, playerList);
     }
 

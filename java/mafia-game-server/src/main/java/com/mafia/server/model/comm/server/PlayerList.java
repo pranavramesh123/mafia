@@ -30,6 +30,22 @@ public class PlayerList extends ServerMessage {
         return playerList;
     }
 
+    public static PlayerList makeAliveVsDead(List<Player> players) {
+        PlayerList playerList = new PlayerList();
+        StringBuilder out = new StringBuilder();
+        for (Player player : players) {
+            if (player.isAlive()) {
+                out.append("<span class=\"label label-default\">");
+            } else {
+                out.append("<span class=\"label label-danger\">");
+            }
+            out.append(player.getName());
+            out.append("</span> ");
+        }
+        playerList.setMessage(out.toString());
+        return playerList;
+    }
+
     private String message;
 
     public PlayerList() {
