@@ -198,6 +198,7 @@ public class ActivityCycler {
         ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
         for (Player player : playersAboutToDie) {
             player.setAlive(false);
+            MessageRouter.sendMessage(game, new ChatMessage(player.getName() + " has died<br />"));
         }
 
         DayLynchActivity dayLynchActivity = new DayLynchActivity();
