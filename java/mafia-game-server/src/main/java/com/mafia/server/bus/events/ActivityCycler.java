@@ -9,7 +9,7 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.acts.NightInvestigateActivity;
-import com.mafia.server.model.acts.NightMurderActivity;
+import com.mafia.server.model.acts.NightKillerActivity;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
@@ -97,7 +97,7 @@ public class ActivityCycler {
 
         //Handle Killers
         ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
-        NightMurderActivity nightMurderActivity = new NightMurderActivity(killerPlayers, true);
+        NightKillerActivity nightMurderActivity = new NightKillerActivity(killerPlayers, true);
         game.addActivity(nightMurderActivity);
 
         //Handle investigators

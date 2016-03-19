@@ -18,9 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Just1689
  */
-public class NightMurderActivity extends Activity {
+public class NightKillerActivity extends Activity {
 
-    public NightMurderActivity(ArrayList<Player> players, boolean assignToPlayer) {
+    public NightKillerActivity(ArrayList<Player> players, boolean assignToPlayer) {
         super(100, GROUP, players);
         if (assignToPlayer) {
             for (Player player : players) {
@@ -31,11 +31,17 @@ public class NightMurderActivity extends Activity {
 
     @Override
     public void vote(Player player, String vote) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (vote == null) {
+            getVotes().remove(player);
+            return;
+        }
+        
+        
     }
 
     @Override
     public boolean isDone() {
+        System.out.println("Asked if NightMurderActivity isDone!");
         if (getPlayers().size() == getVotes().size()) {
             if (getConcensusPercentage() == 100) {
                 Enumeration<String> elements = getVotes().elements();
