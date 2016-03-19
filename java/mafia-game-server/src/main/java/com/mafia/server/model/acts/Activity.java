@@ -11,6 +11,7 @@ import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -50,7 +51,7 @@ public abstract class Activity {
     }
 
     public Player getAPlayer() {
-        for (Map.Entry<String, Player> entry : players.entrySet()) {
+        for (Entry<String, Player> entry : players.entrySet()) {
             Player player = entry.getValue();
             return player;
         }
@@ -136,7 +137,9 @@ public abstract class Activity {
     }
 
     public Game getGame() {
-        return getAPlayer().getGame();
+        Player player = getAPlayer();
+        Game game = player.getGame();
+        return game;
     }
 
 }
