@@ -60,12 +60,15 @@ public class NightKillerActivity extends Activity {
                 while (elements.hasMoreElements()) {
                     String next = elements.nextElement();
                     if (!next.equals(last)) {
+                        System.out.println("Activity killer FALSE");
                         return false;
                     }
                 }
+                System.out.println("Activity killer TRUE");
                 return true;
             }
         }
+        System.out.println("Activity killer FALSE");
         return false;
     }
 

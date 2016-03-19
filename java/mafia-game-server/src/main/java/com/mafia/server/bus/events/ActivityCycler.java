@@ -119,18 +119,20 @@ public class ActivityCycler {
         //Handle Killers
         ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
         new ArrayListUtils<Player>().removeSome(killerPlayers, checker);
-        NightKillerActivity nightMurderActivity = new NightKillerActivity();
+        NightKillerActivity nightkillerActivity = new NightKillerActivity();
         for (Player player : killerPlayers) {
-            nightMurderActivity.getPlayers().put(player.getSessionId(), player);
-            player.setActivity(nightMurderActivity);
+            nightkillerActivity.getPlayers().put(player.getSessionId(), player);
+            player.setActivity(nightkillerActivity);
+            System.out.println("Added NightMurderA to " + player.getName() );
         }
-        game.addActivity(nightMurderActivity);
+        game.addActivity(nightkillerActivity);
 
         //Handle investigators
         ArrayList<Player> investigatorPlayers = game.getPlayersWithRole(INVESTIGATOR);
         for (Player player : investigatorPlayers) {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
+            System.out.println("Added NightInvestA to " + player.getName() );
         }
 
         //Handle witch killers
@@ -139,6 +141,7 @@ public class ActivityCycler {
             NightWitchActivity nightWitchActivity = new NightWitchActivity();
             game.addActivity(nightWitchActivity);
             player.setActivity(nightWitchActivity);
+            System.out.println("Added NightWitchrA to " + player.getName() );
         }
         
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong><br />"));

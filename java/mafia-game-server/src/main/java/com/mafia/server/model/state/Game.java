@@ -10,6 +10,7 @@ import com.mafia.server.model.acts.StartGameActivity;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -101,13 +102,14 @@ public class Game {
 
     public Player getPlayerByName(String playerName) {
         playerName = playerName.toUpperCase();
-        Enumeration<Player> elements = players.elements();
-        while (elements.hasMoreElements()) {
-            Player player = elements.nextElement();
+
+        for (Map.Entry<String, Player> entry : players.entrySet()) {
+            Player player = entry.getValue();
             if (player.getName().toUpperCase().equals(playerName)) {
                 return player;
             }
         }
+
         return null;
     }
 
