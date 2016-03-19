@@ -9,13 +9,19 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
+import com.mafia.server.model.state.MafiaTypes;
+import com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.WITCH_TYPE;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;
 import com.mafia.server.util.ArrayListUtils;
 import com.mafia.server.util.StringUtils;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import javax.websocket.Session;
 
 /**
@@ -91,28 +97,55 @@ public class GameEvents {
 
     public static void assignRoles(Game game) {
         //To implement
+        LinkedList<PLAYER_ROLES> roles = getRolesListForGame(game);
+
         ArrayList<Player> players = (ArrayList<Player>) game.getPlayersAsList();
         new ArrayListUtils<Player>().orderRandomly(players);
 
-        boolean civ = false;
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            if (i == 0) {
-                player.setRole(CIVILIAN);
-                continue;
-            }
-
-            civ = !civ;
-
-            if (civ) {
-                player.setRole(CIVILIAN);
-                continue;
-            }
-
-            player.setRole(KILLER);
-
+        for (Player player : players) {
+            player.setRole(roles.pop());
         }
         NotifyGame.nofityOfRole(game);
+    }
+
+    private static LinkedList<PLAYER_ROLES> getRolesListForGame(Game game) {
+        LinkedList<PLAYER_ROLES> result = new LinkedList<>();
+        int playerCount = game.getPlayers().size();
+        int killerCount = 0;
+        if (playerCount == 4) {
+            killerCount = 1;
+        } else if (playerCount >= 6) {
+            killerCount = 2;
+        } else if (playerCount >= 8) {
+            killerCount = 3;
+        } else if (playerCount >= 11) {
+            killerCount = 4;
+        } else {
+            killerCount = 5;
+        }
+
+        int investigatorCount = 1;
+        int witchCount = 1;
+
+        int civilianCount = playerCount;
+        civilianCount -= killerCount;
+        civilianCount -= investigatorCount;
+        civilianCount -= witchCount;
+
+        for (int i = 0; i < civilianCount; i++) {
+            result.add(CIVILIAN);
+        }
+        for (int i = 0; i < investigatorCount; i++) {
+            result.add(INVESTIGATOR);
+        }
+        for (int i = 0; i < witchCount; i++) {
+            result.add(WITCH_TYPE);
+        }
+        for (int i = 0; i < killerCount; i++) {
+            result.add(KILLER);
+        }
+        return result;
+
     }
 
 }
