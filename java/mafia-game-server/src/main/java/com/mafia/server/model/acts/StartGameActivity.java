@@ -51,7 +51,7 @@ public class StartGameActivity extends Activity {
     
     @Override
     public boolean isDone() {
-        return getPlayers().size() == getVotes().size() && getPlayers().size() > 1;
+        return getPlayers().size() == getVotes().size() && getPlayers().size() >= 4;
     }
     
     public void addPlayer(Player player) {
