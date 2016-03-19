@@ -38,7 +38,7 @@ public class Game {
         this.creator = creator;
         this.activities = new ArrayList<>();
         this.activities.add(new StartGameActivity(players.values()));
-        this.thoseWhoAreAboutToDie  = new ArrayList<>();
+        this.thoseWhoAreAboutToDie = new ArrayList<>();
     }
 
     /**
@@ -174,7 +174,7 @@ public class Game {
         }
         return results;
     }
-    
+
     public void addToChoppingBlock(Player player) {
         thoseWhoAreAboutToDie.add(player);
     }
