@@ -6,6 +6,8 @@
 package com.mafia.server.model.state;
 
 import com.mafia.server.model.acts.Activity;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -133,5 +135,11 @@ public class Player {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    public static Comparator<Player> NAME_COMPARATOR = new Comparator<Player>() {
+        public int compare(Player o1, Player o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    };
 
 }
