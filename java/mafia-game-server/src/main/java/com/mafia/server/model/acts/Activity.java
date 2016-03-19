@@ -36,8 +36,10 @@ public abstract class Activity {
         this.concensusPercentage = concensusPercentage;
         this.participationType = participationType;
         this.players = new ConcurrentHashMap<>();
-        for (Player player : players) {
-            this.players.put(player.getSessionId(), player);
+        if (players != null) {
+            for (Player player : players) {
+                this.players.put(player.getSessionId(), player);
+            }
         }
     }
 
