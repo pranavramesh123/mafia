@@ -21,6 +21,7 @@ import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
+import com.mafia.server.util.ArrayListUtils;
 import java.util.ArrayList;
 
 /**
@@ -97,7 +98,16 @@ public class ActivityCycler {
 
         //Handle Killers
         ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
-        NightKillerActivity nightMurderActivity = new NightKillerActivity(killerPlayers, true);
+        new ArrayListUtils<Player>().removeSome(killerPlayers, new Checker<Player>() {
+            public boolean check(Player player) {
+                return !player.isAlive();
+            }
+        });
+        NightKillerActivity nightMurderActivity = new NightKillerActivity();
+        for (Player player : killerPlayers) {
+            nightMurderActivity.getPlayers().put(player.getSessionId(), player);
+            player.setActivity(nightMurderActivity);
+        }
         game.addActivity(nightMurderActivity);
 
         //Handle investigators

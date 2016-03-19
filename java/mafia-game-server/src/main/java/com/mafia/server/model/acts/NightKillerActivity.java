@@ -5,8 +5,13 @@
  */
 package com.mafia.server.model.acts;
 
+import com.mafia.server.bus.events.ActivityCycler;
 import com.mafia.server.bus.events.PlayerEvents;
+import com.mafia.server.bus.notify.NotifyGame;
+import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.comm.server.ChatMessage;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION.GROUP;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -20,21 +25,21 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class NightKillerActivity extends Activity {
 
-    public NightKillerActivity(ArrayList<Player> players, boolean assignToPlayer) {
-        super(100, GROUP, players);
-        if (assignToPlayer) {
-            for (Player player : players) {
-                player.setActivity(this);
-            }
-        }
+    public NightKillerActivity() {
+        super(100, GROUP, null);
     }
 
     @Override
     public void vote(Player player, String vote) {
         if (vote == null) {
             getVotes().remove(player);
+            MessageRouter.sendMessage(player.getGame().getPlayersWithRole(KILLER), new ChatMessage(player.getName() + " removed their vote."));
             return;
         }
+        
+        getVotes().put(player, vote);
+        NotifyGame.sendPlayerList(player.getGame());
+        ActivityCycler.checkGame(player.getGame());
         
         
     }
