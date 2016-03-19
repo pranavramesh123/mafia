@@ -11,6 +11,7 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.acts.DawnWitchActivity;
 import com.mafia.server.model.acts.NightInvestigateActivity;
 import com.mafia.server.model.acts.NightKillerActivity;
+import com.mafia.server.model.acts.NightWitchActivity;
 import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
@@ -109,14 +110,14 @@ public class ActivityCycler {
     private static void moveGameToActivityNight(Game game) {
         game.setActivityPhase(NIGHT);
 
-        //Handle Killers
-        ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
-
         Checker checker = new Checker<Player>() {
             public boolean check(Player player) {
                 return !player.isAlive();
             }
         };
+        
+        //Handle Killers
+        ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
         new ArrayListUtils<Player>().removeSome(killerPlayers, checker);
         NightKillerActivity nightMurderActivity = new NightKillerActivity();
         for (Player player : killerPlayers) {
@@ -130,6 +131,14 @@ public class ActivityCycler {
         for (Player player : investigatorPlayers) {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
+        }
+
+        //Handle witch killers
+        ArrayList<Player> witchPlayers = game.getPlayersWithRole(WITCH_TYPE);
+        for (Player player : witchPlayers) {
+            NightWitchActivity nightWitchActivity = new NightWitchActivity();
+            game.addActivity(nightWitchActivity);
+            player.setActivity(nightWitchActivity);
         }
 
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong><br />"));
