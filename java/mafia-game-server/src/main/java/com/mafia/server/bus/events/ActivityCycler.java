@@ -42,10 +42,21 @@ public class ActivityCycler {
 
     private static void moveGameToNextSomething(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
-            moveGameToPhase(game, ACTIVITY);
+            moveGameToGamePhase(game, ACTIVITY);
+            
             return;
         }
 
+        
+        if (game.getGamePhase().equals(ACTIVITY)) {
+            if (game.getActivityPhase().equals(NIGHT)) {
+                moveGameToActivity(game, DAWN);
+                return;
+            }
+            
+            return;
+        }
+        
         if (game.getActivityPhase().equals(DAWN)) {
             moveGameToActivity(game, DAY);
             return;
@@ -53,7 +64,7 @@ public class ActivityCycler {
 
     }
 
-    private static void moveGameToPhase(Game game, MafiaTypes.GAME_PHASE phase) {
+    private static void moveGameToGamePhase(Game game, MafiaTypes.GAME_PHASE phase) {
         //Set the new phase
         game.setGamePhase(phase);
 
