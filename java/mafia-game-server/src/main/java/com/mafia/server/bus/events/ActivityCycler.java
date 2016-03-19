@@ -123,10 +123,11 @@ public class ActivityCycler {
                 return !player.isAlive();
             }
         };
+        ArrayListUtils<Player> utils = new ArrayListUtils<>();
 
         //Handle Killers
         ArrayList<Player> killerPlayers = game.getPlayersWithRole(KILLER);
-        new ArrayListUtils<Player>().removeSome(killerPlayers, checker);
+        utils.removeSome(killerPlayers, checker);
         NightKillerActivity nightkillerActivity = new NightKillerActivity();
         for (Player player : killerPlayers) {
             nightkillerActivity.getPlayers().put(player.getSessionId(), player);
@@ -137,6 +138,7 @@ public class ActivityCycler {
 
         //Handle investigators
         ArrayList<Player> investigatorPlayers = game.getPlayersWithRole(INVESTIGATOR);
+        utils.removeSome(investigatorPlayers, checker);
         for (Player player : investigatorPlayers) {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
@@ -145,6 +147,7 @@ public class ActivityCycler {
 
         //Handle WITCH  killers
         ArrayList<Player> witchPlayers = game.getPlayersWithRole(WITCH_TYPE);
+        utils.removeSome(witchPlayers, checker);
         for (Player player : witchPlayers) {
             NightWitchActivity nightWitchActivity = new NightWitchActivity();
             game.addActivity(nightWitchActivity);
@@ -162,10 +165,18 @@ public class ActivityCycler {
     private static void moveGameToActivityDawn(Game game) {
         game.setActivityPhase(DAWN);
 
+        Checker checker = new Checker<Player>() {
+            public boolean check(Player player) {
+                return !player.isAlive();
+            }
+        };
+        ArrayListUtils<Player> utils = new ArrayListUtils<>();
+
         //Handle witch saving people
         ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
         System.out.println("Players about to die: " + playersAboutToDie.size());
         ArrayList<Player> witches = game.getPlayersWithRole(WITCH_TYPE);
+        utils.removeSome(witches, checker);
         System.out.println("Witches: " + witches.size());
 
         if (witches.size() > 0 && playersAboutToDie.size() > 0) {
