@@ -34,13 +34,13 @@ public class ActivityCycler {
     public static void checkGame(Game game) {
         if (game.isActivityComplete()) {
             System.out.println("Activity is complete");
-            moveGameToNextState(game);
+            moveGameToNextSomething(game);
         } else {
             System.out.println("Activity is not complete");
         }
     }
 
-    private static void moveGameToNextState(Game game) {
+    private static void moveGameToNextSomething(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
             moveGameToPhase(game, ACTIVITY);
             return;
