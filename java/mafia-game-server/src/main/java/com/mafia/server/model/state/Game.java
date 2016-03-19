@@ -7,6 +7,7 @@ package com.mafia.server.model.state;
 
 import com.mafia.server.model.acts.Activity;
 import com.mafia.server.model.acts.StartGameActivity;
+import com.mafia.server.util.ArrayListUtils;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -202,6 +203,17 @@ public class Game {
 
     public void savePlayer(Player votedPlayer) {
         thoseWhoAreAboutToDie.remove(votedPlayer);
+    }
+
+    public ArrayList<Player> getPlayersWhoAreDead() {
+        ArrayList<Player> list = (ArrayList<Player>) getPlayersAsList();
+        new ArrayListUtils<Player>().removeSome(list, new ArrayListUtils.Checker<Player>() {
+            @Override
+            public boolean check(Player t) {
+                return t.isAlive();
+            }
+        });
+        return list;
     }
 
 }
