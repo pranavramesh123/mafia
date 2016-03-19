@@ -18,7 +18,7 @@ import com.mafia.server.model.state.Player;
  * @author Just1689
  */
 public class NightInvestigateActivity extends Activity {
-    
+
     public NightInvestigateActivity(Player player, boolean assignToPlayer) {
         super(100, INDIVIDUAL);
         getPlayers().put(player.getSessionId(), player);
@@ -26,7 +26,7 @@ public class NightInvestigateActivity extends Activity {
             player.setActivity(this);
         }
     }
-    
+
     @Override
     public void vote(Player player, String vote) {
         Game game = player.getGame();
@@ -39,13 +39,13 @@ public class NightInvestigateActivity extends Activity {
             MessageRouter.sendMessage(player, Messagebox.createMessageBoxError("Error", "Player does not exist: " + vote));
             return;
         }
-        
+
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
         ActivityCycler.checkGame(player.getGame());
-        
+
     }
-    
+
     @Override
     public boolean isDone() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -55,5 +55,5 @@ public class NightInvestigateActivity extends Activity {
     public void execute() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

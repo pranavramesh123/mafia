@@ -39,7 +39,7 @@ public class NightMurderActivity extends Activity {
         if (getPlayers().size() == getVotes().size()) {
             if (getConcensusPercentage() == 100) {
                 Enumeration<String> elements = getVotes().elements();
-                String last=  null;
+                String last = null;
                 if (elements.hasMoreElements()) {
                     last = elements.nextElement();
                 }
@@ -62,12 +62,12 @@ public class NightMurderActivity extends Activity {
         Iterator<Player> iterator = players.iterator();
         iterator.hasNext();
         Player player = iterator.next();
-        
+
         String playerName = votes.get(player);
         Player playerToKill = player.getGame().getPlayerByName(playerName);
-        
+
         PlayerEvents.playerDies(playerToKill);
-        
+
     }
 
 }

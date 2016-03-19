@@ -66,7 +66,7 @@ public class NotifyViewState {
                     viewState.setInstructMessage("<strong>NIGHT:</strong> You are asleep");
                     MessageRouter.sendMessage(player, viewState);
                 }
-                
+
             }
         }
     }

@@ -5,14 +5,11 @@
  */
 package com.mafia.server.model.acts;
 
-import com.mafia.server.io.MessageRouter;
-import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *

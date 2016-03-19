@@ -9,7 +9,6 @@ import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.comm.server.PlayerList;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.MafiaTypes;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;

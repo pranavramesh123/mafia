@@ -22,7 +22,6 @@ import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -102,7 +101,7 @@ public class ActivityCycler {
             NightInvestigateActivity nightInvestigateActivity = new NightInvestigateActivity(player, true);
             game.addActivity(nightInvestigateActivity);
         }
-        
+
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now night time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);

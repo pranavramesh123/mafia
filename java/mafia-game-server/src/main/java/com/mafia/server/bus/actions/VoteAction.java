@@ -6,7 +6,6 @@
 package com.mafia.server.bus.actions;
 
 import com.mafia.server.model.acts.Activity;
-import com.mafia.server.model.comm.client.CreateGame;
 import com.mafia.server.model.comm.client.Vote;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.model.state.Repository;

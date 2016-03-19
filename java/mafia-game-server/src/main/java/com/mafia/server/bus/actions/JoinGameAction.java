@@ -31,7 +31,7 @@ public class JoinGameAction implements Runnable, Action {
             return;
         }
         data.formatName();
-        
+
         if (!NameUtils.isNameOk(data.getName())) {
             MessageboxEvents.notifyOfFail("Bad name", "Use only letters", createdBy);
             return;
