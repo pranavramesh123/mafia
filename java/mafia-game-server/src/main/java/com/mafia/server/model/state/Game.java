@@ -22,6 +22,7 @@ public class Game {
     private final ConcurrentHashMap<String, Player> players;
 
     private ArrayList<Activity> activities;
+    private ArrayList<Player> thoseWhoAreAboutToDie;
 
     private Player creator;
 
@@ -37,6 +38,7 @@ public class Game {
         this.creator = creator;
         this.activities = new ArrayList<>();
         this.activities.add(new StartGameActivity(players.values()));
+        this.thoseWhoAreAboutToDie  = new ArrayList<>();
     }
 
     /**
@@ -142,6 +144,7 @@ public class Game {
 
     public void removeActivities() {
         activities.clear();
+        thoseWhoAreAboutToDie.clear();
         //Remove the activity from the player
         for (Player player : getPlayersAsList()) {
             player.setActivity(null);
@@ -170,6 +173,10 @@ public class Game {
             }
         }
         return results;
+    }
+    
+    public void addToChoppingBlock(Player player) {
+        thoseWhoAreAboutToDie.add(player);
     }
 
 }
