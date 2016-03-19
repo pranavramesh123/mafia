@@ -8,6 +8,7 @@ package com.mafia.server.bus.events;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageRouter;
+import com.mafia.server.model.acts.DawnWitchActivity;
 import com.mafia.server.model.acts.NightInvestigateActivity;
 import com.mafia.server.model.acts.NightKillerActivity;
 import com.mafia.server.model.comm.server.ChatMessage;
@@ -20,6 +21,7 @@ import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
+import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.WITCH_TYPE;
 import com.mafia.server.model.state.Player;
 import com.mafia.server.util.ArrayListUtils;
 import com.mafia.server.util.ArrayListUtils.Checker;
@@ -43,20 +45,19 @@ public class ActivityCycler {
     private static void moveGameToNextSomething(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
             moveGameToGamePhase(game, ACTIVITY);
-            
+
             return;
         }
 
-        
         if (game.getGamePhase().equals(ACTIVITY)) {
             if (game.getActivityPhase().equals(NIGHT)) {
                 moveGameToActivity(game, DAWN);
                 return;
             }
-            
+
             return;
         }
-        
+
         if (game.getActivityPhase().equals(DAWN)) {
             moveGameToActivity(game, DAY);
             return;
@@ -92,7 +93,7 @@ public class ActivityCycler {
                 moveGameToActivityNight(game);
                 break;
             case DAWN:
-
+                moveGameToActivityDawn(game);
                 break;
             case DAY:
 
@@ -135,5 +136,22 @@ public class ActivityCycler {
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);
 
+    }
+
+    private static void moveGameToActivityDawn(Game game) {
+        game.setActivityPhase(DAWN);
+
+        //Handle investigators
+        ArrayList<Player> witchPlayers = game.getPlayersWithRole(WITCH_TYPE);
+        for (Player player : witchPlayers) {
+            DawnWitchActivity dawnWitchActivity = new DawnWitchActivity();
+            dawnWitchActivity.getPlayers().put(player.getSessionId(), player);
+            player.setActivity(dawnWitchActivity);
+            game.addActivity(dawnWitchActivity);
+        }
+
+        MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now dawn time***</strong><br />"));
+        NotifyViewState.nofity(game);
+        NotifyGame.sendPlayerList(game);
     }
 }
