@@ -155,17 +155,28 @@ public class ActivityCycler {
     private static void moveGameToActivityDawn(Game game) {
         game.setActivityPhase(DAWN);
 
-        //Handle investigators
-        ArrayList<Player> witchPlayers = game.getPlayersWithRole(WITCH_TYPE);
-        for (Player player : witchPlayers) {
-            DawnWitchActivity dawnWitchActivity = new DawnWitchActivity();
-            dawnWitchActivity.getPlayers().put(player.getSessionId(), player);
-            player.setActivity(dawnWitchActivity);
+        //Handle witch saving people
+        ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
+        ArrayList<Player> witches = game.getPlayersWithRole(WITCH_TYPE);
+        DawnWitchActivity dawnWitchActivity = new DawnWitchActivity();
+
+        for (Player witch : witches) {
+            for (Player victim : playersAboutToDie) {
+                dawnWitchActivity.getPlayers().put(witch.getSessionId(), witch);
+                witch.setActivity(dawnWitchActivity);
+                MessageRouter.sendMessage(game, new ChatMessage(victim.getName() + " may be resurrected"));
+            }
+        }
+        if (dawnWitchActivity.getPlayers().size() > 0) {
             game.addActivity(dawnWitchActivity);
         }
 
         MessageRouter.sendMessage(game, new ChatMessage("<strong>***It is now dawn time***</strong><br />"));
         NotifyViewState.nofity(game);
         NotifyGame.sendPlayerList(game);
+
+        //Check incase no dawn required
+        ActivityCycler.checkGame(game);
+
     }
 }

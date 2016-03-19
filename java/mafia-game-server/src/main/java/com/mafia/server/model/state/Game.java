@@ -136,6 +136,10 @@ public class Game {
     }
 
     public boolean isActivityComplete() {
+        if (activities.isEmpty()) {
+            System.out.println("Empty acitivities on Game");
+            return true;
+        }
         for (Activity activity : activities) {
             if (!activity.isDone()) {
                 return false;
@@ -189,6 +193,10 @@ public class Game {
             activity.execute();
         }
 
+    }
+
+    public ArrayList<Player> getPlayersAboutToDie() {
+        return thoseWhoAreAboutToDie;
     }
 
 }
