@@ -60,7 +60,7 @@ public class NightInvestigateActivity extends Activity {
         if (votePlayer != null) {
             MessageRouter.sendMessage(
                     getAPlayer(),
-                    new ChatMessage("<font color='red'>" + votePlayer.getName() + " is a " + votePlayer.getRole().name() + "</font><br />")
+                    new ChatMessage("<font color='red'>" + votePlayer.getName() + " is a " + votePlayer.getRole().getTeam().name() + "</font><br />")
             );
         } else {
             System.err.println("Could not find voted player (NightInvestigator)");
