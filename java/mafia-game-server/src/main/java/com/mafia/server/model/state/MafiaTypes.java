@@ -18,7 +18,7 @@ public class MafiaTypes {
 
     public enum PLAYER_ROLES {
 
-        NONE(TEAM.NONE, "None"), CIVILIAN(TEAM.CIVILIAN, "Civilian"), KILLER(TEAM.KILLER, "Killer"), INVESTIGATOR(TEAM.CIVILIAN, "Invesigator"), WITCH_TYPE(TEAM.CIVILIAN, "Civilian"), VIGILANTE(TEAM.CIVILIAN, "Civilian"), HANDICAPPED(TEAM.CIVILIAN, "Civilian"), SUICIDE(TEAM.CIVILIAN, "Civilian");
+        NONE(TEAM.NONE, "None"), CIVILIAN(TEAM.CIVILIAN, "Civilian"), KILLER(TEAM.KILLER, "Killer"), INVESTIGATOR(TEAM.CIVILIAN, "Invesigator"), WITCH_TYPE(TEAM.CIVILIAN, "Witch"), VIGILANTE(TEAM.CIVILIAN, "Vigilante"), HANDICAPPED(TEAM.CIVILIAN, "Handicapped"), SUICIDE(TEAM.CIVILIAN, "Suicide");
 
         private final TEAM team;
         private final String label;
