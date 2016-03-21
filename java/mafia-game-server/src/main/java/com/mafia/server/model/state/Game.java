@@ -206,6 +206,10 @@ public class Game {
         thoseWhoAreAboutToDie.remove(votedPlayer);
     }
 
+    public void clearChoppingBlock() {
+        thoseWhoAreAboutToDie.clear();
+    }
+
     public ArrayList<Player> getPlayersWhoAreDead() {
         ArrayList<Player> list = (ArrayList<Player>) getPlayersAsList();
         new ArrayListUtils<Player>().removeSome(list, new ArrayListUtils.Checker<Player>() {

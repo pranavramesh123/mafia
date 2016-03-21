@@ -237,6 +237,7 @@ public class CycleActivity {
             MessageRouter.sendMessage(player, new ChatMessage("You are dead<br />"));
             MessageRouter.sendMessage(game, new ChatMessage(player.getName() + " has died<br />"));
         }
+        game.clearChoppingBlock();
 
         DayLynchActivity dayLynchActivity = new DayLynchActivity();
         game.addActivity(dayLynchActivity);
