@@ -13,7 +13,9 @@ import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.Player;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,7 +62,7 @@ public class DayLynchActivity extends Activity {
             return false;
         }
 
-        int needed = getGame().getPlayersWhoAreAlive().size() / 2;
+        int needed = getVotesRequired();
         System.out.println("Need " + needed + " votes to kill");
         HashMap<String, Integer> totals = new HashMap<>();
         for (Map.Entry<Player, String> entry : getVotes().entrySet()) {
@@ -87,7 +89,7 @@ public class DayLynchActivity extends Activity {
 
     @Override
     public void execute() {
-        int needed = getGame().getPlayersWhoAreAlive().size() / 2;
+        int needed = getVotesRequired();
         HashMap<String, Integer> totals = new HashMap<>();
         for (Map.Entry<Player, String> entry : getVotes().entrySet()) {
             Player player = entry.getKey();
@@ -110,6 +112,16 @@ public class DayLynchActivity extends Activity {
 
             }
         }
+    }
+
+    public int getVotesRequired() {
+        Game game = getGame();
+        ArrayList<Player> playersAsList = (ArrayList<Player>) game.getPlayersAsList();
+        game.removeDead(playersAsList);
+        int livingPlayers = playersAsList.size();
+
+        int votes = livingPlayers / 2 + 1;
+        return votes;
     }
 
 }

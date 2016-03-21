@@ -32,7 +32,7 @@ public class NotifyGame {
 
     public static void sendPlayerList(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
-            PlayerList playerList = PlayerList.makeReadyVsNot(game.getPlayersAsList());
+            PlayerList playerList = PlayerList.makeAliveVsDead(game.getPlayersAsList());
             MessageRouter.sendMessage(game, playerList);
             return;
         }
