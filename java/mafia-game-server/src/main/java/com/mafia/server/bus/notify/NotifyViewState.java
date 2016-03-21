@@ -39,7 +39,7 @@ public class NotifyViewState {
             viewState.setVote(false);
             viewState.setReady(true);
             viewState.setInstructDiv(true);
-            viewState.setInstructMessage("<strong>PREGAME:</strong> Type \"\\vote ready\" when ready to begin game");
+            viewState.setInstructMessage("PREGAME");
             MessageRouter.sendMessage(game, viewState);
         }
 
@@ -56,7 +56,7 @@ public class NotifyViewState {
                     viewState.setVote(false);
                     viewState.setReady(true);
                     viewState.setInstructDiv(true);
-                    viewState.setInstructMessage("<strong>NIGHT:</strong> Type \"\\vote name\" of person to kill");
+                    viewState.setInstructMessage("<strong>NIGHT:</strong> Vote");
                     MessageRouter.sendMessage(player, viewState);
                 }
                 ArrayList<Player> villagers = game.getPlayersWithRole(CIVILIAN);
@@ -84,7 +84,7 @@ public class NotifyViewState {
                     viewState.setVote(false);
                     viewState.setReady(true);
                     viewState.setInstructDiv(true);
-                    viewState.setInstructMessage("<strong>NIGHT:</strong> Kill someone");
+                    viewState.setInstructMessage("<strong>NIGHT:</strong> Vote");
                     MessageRouter.sendMessage(player, viewState);
                 }
                 ArrayList<Player> investigators = game.getPlayersWithRole(INVESTIGATOR);
@@ -98,7 +98,7 @@ public class NotifyViewState {
                     viewState.setVote(false);
                     viewState.setReady(true);
                     viewState.setInstructDiv(true);
-                    viewState.setInstructMessage("<strong>NIGHT:</strong> Investigate someone");
+                    viewState.setInstructMessage("<strong>NIGHT:</strong> Vote");
                     MessageRouter.sendMessage(player, viewState);
                 }
 
@@ -172,7 +172,7 @@ public class NotifyViewState {
                     viewState.setVote(false);
                     viewState.setReady(true);
                     viewState.setInstructDiv(true);
-                    viewState.setInstructMessage("<strong>DAY:</strong> Lynch someone");
+                    viewState.setInstructMessage("<strong>DAY:</strong> Vote");
                     MessageRouter.sendMessage(player, viewState);
                 }
 

@@ -76,12 +76,15 @@ public class CycleActivity {
         if (game.getGamePhase().equals(ACTIVITY)) {
             if (game.getActivityPhase().equals(NIGHT)) {
                 moveGameToActivity(game, DAWN);
+                checkForWinners(game);
                 return;
             } else if (game.getActivityPhase().equals(DAWN)) {
                 moveGameToActivity(game, DAY);
+                checkForWinners(game);
                 return;
             } else if (game.getActivityPhase().equals(DAY)) {
                 moveGameToActivity(game, NIGHT);
+                checkForWinners(game);
                 return;
             }
 
@@ -231,6 +234,7 @@ public class CycleActivity {
         ArrayList<Player> playersAboutToDie = game.getPlayersAboutToDie();
         for (Player player : playersAboutToDie) {
             player.setAlive(false);
+            MessageRouter.sendMessage(player, new ChatMessage("You are dead<br />"));
             MessageRouter.sendMessage(game, new ChatMessage(player.getName() + " has died<br />"));
         }
 
@@ -255,23 +259,25 @@ public class CycleActivity {
     private static void civiliansWin(Game game) {
         handleEndGame(
                 game,
-                Player.getPlayersNamesString(game.getCivilians()) + "<br />",
-                Player.getPlayersNamesString(game.getKillers()) + "<br />"
+                "Civilians win!",
+                Player.getPlayersNamesString(game.getCivilians()),
+                Player.getPlayersNamesString(game.getKillers())
         );
     }
 
     private static void killersWin(Game game) {
         handleEndGame(
                 game,
-                Player.getPlayersNamesString(game.getKillers()) + "<br />",
-                Player.getPlayersNamesString(game.getCivilians()) + "<br />"
+                "Killers win!",
+                Player.getPlayersNamesString(game.getKillers()),
+                Player.getPlayersNamesString(game.getCivilians())
         );
     }
 
-    private static void handleEndGame(Game game, String winners, String losers) {
+    private static void handleEndGame(Game game, String message, String winners, String losers) {
         game.setGamePhase(POSTGAME);
         game.removeActivities();
-        MessageRouter.sendMessage(game, new ChatMessage("GAME OVER"));
+        MessageRouter.sendMessage(game, new ChatMessage("GAME OVER - " + message + "<br />"));
         MessageRouter.sendMessage(game, new ChatMessage("WINNERS: " + winners + "<br />"));
         MessageRouter.sendMessage(game, new ChatMessage("LOSERS: " + losers + "<br />"));
 
