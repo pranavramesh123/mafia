@@ -12,11 +12,9 @@ import com.mafia.server.model.comm.server.ChatMessage;
 import com.mafia.server.model.comm.server.Messagebox;
 import com.mafia.server.model.state.Game;
 import com.mafia.server.model.state.MafiaTypes;
-import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
 import com.mafia.server.model.state.Player;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  *
