@@ -18,6 +18,16 @@ import java.util.logging.Logger;
  */
 public class JacksonUtils<T> {
 
+    public static String objectToString(Object t) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(t);
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(JacksonUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public T stringToObject(String json, Class clazz) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -26,16 +36,6 @@ public class JacksonUtils<T> {
             return result;
         } catch (IOException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    public static String objectToString(Object t) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(t);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(JacksonUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -19,15 +19,15 @@ import org.junit.Test;
  */
 public class JacksonUtilsTest {
 
-    public JacksonUtilsTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() {
     }
 
     @AfterClass
     public static void tearDownClass() {
+    }
+
+    public JacksonUtilsTest() {
     }
 
     @Before

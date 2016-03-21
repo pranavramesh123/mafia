@@ -9,7 +9,6 @@ import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.bus.notify.NotifyViewState;
 import com.mafia.server.io.MessageHandler;
 import com.mafia.server.model.state.Game;
-import com.mafia.server.model.state.MafiaTypes;
 import com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
@@ -21,7 +20,6 @@ import com.mafia.server.util.ArrayListUtils;
 import com.mafia.server.util.StringUtils;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
 import javax.websocket.Session;
 
 /**

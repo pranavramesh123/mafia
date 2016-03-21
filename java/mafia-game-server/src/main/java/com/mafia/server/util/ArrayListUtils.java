@@ -26,10 +26,6 @@ public class ArrayListUtils<T> {
         Collections.sort(list, comparator);
     }
 
-    public static interface Checker<T> {
-
-        public boolean check(T t);
-    }
 
     public void removeSome(ArrayList<T> list, Checker<T> checker) {
         Iterator<T> iterator = list.iterator();
@@ -39,5 +35,10 @@ public class ArrayListUtils<T> {
                 iterator.remove();
             }
         }
+    }
+
+    public static interface Checker<T> {
+
+        public boolean check(T t);
     }
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mafia.server.model.acts;
 
 import com.mafia.server.model.state.Game;
@@ -10,7 +6,6 @@ import com.mafia.server.model.state.MafiaTypes.ACTIVITY_PARTICIPATION;
 import com.mafia.server.model.state.Player;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,10 +25,6 @@ public abstract class Activity {
     private int concensusPercentage;
     private ACTIVITY_PARTICIPATION participationType;
 
-    public abstract void vote(Player player, String vote);
-
-    public abstract void execute();
-
     public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType, ArrayList<Player> players) {
         this.votes = new ConcurrentHashMap<>();
         this.concensusPercentage = concensusPercentage;
@@ -49,6 +40,10 @@ public abstract class Activity {
     public Activity(int concensusPercentage, ACTIVITY_PARTICIPATION participationType) {
         this(concensusPercentage, participationType, new ArrayList<Player>());
     }
+
+    public abstract void vote(Player player, String vote);
+
+    public abstract void execute();
 
     public Player getAPlayer() {
         for (Entry<String, Player> entry : players.entrySet()) {
