@@ -5,7 +5,7 @@
  */
 package com.mafia.server.model.acts;
 
-import com.mafia.server.bus.events.ActivityCycler;
+import com.mafia.server.bus.events.CycleActivity;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.ChatMessage;
@@ -35,7 +35,7 @@ public class NightWitchActivity extends Activity {
 
         if (vote.equals("abstain")) {
             getVotes().put(player, vote);
-            ActivityCycler.checkGame(player.getGame());
+            CycleActivity.checkGame(player.getGame());
             return;
         }
 
@@ -49,7 +49,7 @@ public class NightWitchActivity extends Activity {
         MessageRouter.sendMessage(player, new ChatMessage("You voted for " + vote + ".<br />"));
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
-        ActivityCycler.checkGame(player.getGame());
+        CycleActivity.checkGame(player.getGame());
 
     }
 

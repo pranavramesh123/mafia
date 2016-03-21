@@ -33,7 +33,7 @@ import java.util.ArrayList;
  *
  * @author Just1689
  */
-public class ActivityCycler {
+public class CycleActivity {
 
     public static void checkGame(Game game) {
         if (game.isActivityComplete()) {
@@ -199,7 +199,7 @@ public class ActivityCycler {
         NotifyGame.sendPlayerList(game);
 
         //Check incase no dawn required
-        ActivityCycler.checkGame(game);
+        CycleActivity.checkGame(game);
 
     }
 
@@ -226,7 +226,7 @@ public class ActivityCycler {
         NotifyGame.sendPlayerList(game);
 
         //Check incase no dawn required
-        ActivityCycler.checkGame(game);
+        CycleActivity.checkGame(game);
 
     }
 }

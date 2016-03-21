@@ -5,7 +5,7 @@
  */
 package com.mafia.server.model.acts;
 
-import com.mafia.server.bus.events.ActivityCycler;
+import com.mafia.server.bus.events.CycleActivity;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.Messagebox;
@@ -45,7 +45,7 @@ public class StartGameActivity extends Activity {
 
         getVotes().put(player, vote);
         NotifyGame.sendPlayerList(player.getGame());
-        ActivityCycler.checkGame(player.getGame());
+        CycleActivity.checkGame(player.getGame());
     }
 
     @Override

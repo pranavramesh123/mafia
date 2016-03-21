@@ -5,7 +5,7 @@
  */
 package com.mafia.server.model.acts;
 
-import com.mafia.server.bus.events.ActivityCycler;
+import com.mafia.server.bus.events.CycleActivity;
 import com.mafia.server.bus.notify.NotifyGame;
 import com.mafia.server.io.MessageRouter;
 import com.mafia.server.model.comm.server.ChatMessage;
@@ -51,7 +51,7 @@ public class DayLynchActivity extends Activity {
         getVotes().put(player, vote);
         MessageRouter.sendMessage(player.getGame().getPlayersAsList(), new ChatMessage(player.getName() + " voted for " + vote + "<br />"));
         NotifyGame.sendPlayerList(player.getGame());
-        ActivityCycler.checkGame(player.getGame());
+        CycleActivity.checkGame(player.getGame());
 
     }
 
