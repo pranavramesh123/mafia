@@ -20,6 +20,7 @@ import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.POSTGAME;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.KILLER;
@@ -44,10 +45,31 @@ public class CycleActivity {
         }
     }
 
+    public static void checkForWinners(Game game) {
+
+        ArrayList<Player> civilians = game.getCivilians();
+        game.removeDead(civilians);
+        int civilianCount = civilians.size();
+
+        ArrayList<Player> killers = game.getKillers();
+        game.removeDead(killers);
+        int killerCount = killers.size();
+
+        if (killerCount == 0) {
+            civiliansWin(game);
+            return;
+        }
+
+        if (civilianCount <= 1) {
+            killersWin(game);
+            return;
+        }
+
+    }
+
     private static void moveGameToNextSomething(Game game) {
         if (game.getGamePhase().equals(PREGAME)) {
             moveGameToGamePhase(game, ACTIVITY);
-
             return;
         }
 
@@ -228,5 +250,32 @@ public class CycleActivity {
         //Check incase no dawn required
         CycleActivity.checkGame(game);
 
+    }
+
+    private static void civiliansWin(Game game) {
+        handleEndGame(
+                game,
+                Player.getPlayersNamesString(game.getCivilians()) + "<br />",
+                Player.getPlayersNamesString(game.getKillers()) + "<br />"
+        );
+    }
+
+    private static void killersWin(Game game) {
+        handleEndGame(
+                game,
+                Player.getPlayersNamesString(game.getKillers()) + "<br />",
+                Player.getPlayersNamesString(game.getCivilians()) + "<br />"
+        );
+    }
+
+    private static void handleEndGame(Game game, String winners, String losers) {
+        game.setGamePhase(POSTGAME);
+        game.removeActivities();
+        MessageRouter.sendMessage(game, new ChatMessage("GAME OVER"));
+        MessageRouter.sendMessage(game, new ChatMessage("WINNERS: " + winners + "<br />"));
+        MessageRouter.sendMessage(game, new ChatMessage("LOSERS: " + losers + "<br />"));
+
+        NotifyViewState.nofity(game);
+        NotifyGame.sendPlayerList(game);
     }
 }

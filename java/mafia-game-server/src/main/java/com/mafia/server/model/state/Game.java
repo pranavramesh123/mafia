@@ -7,9 +7,10 @@ package com.mafia.server.model.state;
 
 import com.mafia.server.model.acts.Activity;
 import com.mafia.server.model.acts.StartGameActivity;
+import com.mafia.server.model.state.MafiaTypes.TEAM;
 import com.mafia.server.util.ArrayListUtils;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -225,6 +226,36 @@ public class Game {
             }
         });
         return list;
+    }
+
+    public ArrayList<Player> getCivilians() {
+        ArrayList<Player> results = new ArrayList<>();
+        for (Player player : getPlayersAsList()) {
+            if (player.getRole().getTeam().equals(TEAM.CIVILIAN)) {
+                results.add(player);
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Player> getKillers() {
+        ArrayList<Player> results = new ArrayList<>();
+        for (Player player : getPlayersAsList()) {
+            if (player.getRole().getTeam().equals(TEAM.KILLER)) {
+                results.add(player);
+            }
+        }
+        return results;
+    }
+
+    public void removeDead(ArrayList<Player> list) {
+        Iterator<Player> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Player next = iterator.next();
+            if (!next.isAlive()) {
+                iterator.remove();
+            }
+        }
     }
 
 }

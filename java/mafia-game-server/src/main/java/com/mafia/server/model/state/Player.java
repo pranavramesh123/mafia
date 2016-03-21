@@ -6,6 +6,7 @@
 package com.mafia.server.model.state;
 
 import com.mafia.server.model.acts.Activity;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -13,6 +14,22 @@ import java.util.Comparator;
  * @author Just1689
  */
 public class Player {
+    public static Comparator<Player> NAME_COMPARATOR = new Comparator<Player>() {
+        public int compare(Player o1, Player o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    };
+
+    public static String getPlayersNamesString(ArrayList<Player> list) {
+        StringBuilder out = new StringBuilder();
+        for (Player player : list) {
+            if (out.length() > 0) {
+                out.append(", ");
+            }
+            out.append(player.getName());
+        }
+        return out.toString();
+    }
 
     private String name;
     private String passKey;
@@ -135,10 +152,5 @@ public class Player {
         this.alive = alive;
     }
 
-    public static Comparator<Player> NAME_COMPARATOR = new Comparator<Player>() {
-        public int compare(Player o1, Player o2) {
-            return o1.getName().compareTo(o2.getName());
-        }
-    };
 
 }

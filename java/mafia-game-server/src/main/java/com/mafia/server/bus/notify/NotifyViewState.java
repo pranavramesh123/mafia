@@ -12,6 +12,7 @@ import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAWN;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.DAY;
 import static com.mafia.server.model.state.MafiaTypes.ACTIVITY_PHASE.NIGHT;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.ACTIVITY;
+import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.POSTGAME;
 import static com.mafia.server.model.state.MafiaTypes.GAME_PHASE.PREGAME;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.CIVILIAN;
 import static com.mafia.server.model.state.MafiaTypes.PLAYER_ROLES.INVESTIGATOR;
@@ -177,5 +178,20 @@ public class NotifyViewState {
 
             }
         }
+
+        if (game.getGamePhase().equals(POSTGAME)) {
+            ViewState viewState = new ViewState();
+            viewState.setKey(game.getKey());
+            viewState.setChat(true);
+            viewState.setChatInput(true);
+            viewState.setCreateOrJoin(false);
+            viewState.setLeaveGame(true);
+            viewState.setVote(false);
+            viewState.setReady(true);
+            viewState.setInstructDiv(true);
+            viewState.setInstructMessage("GAME OVER");
+            MessageRouter.sendMessage(game, viewState);
+        }
+
     }
 }
