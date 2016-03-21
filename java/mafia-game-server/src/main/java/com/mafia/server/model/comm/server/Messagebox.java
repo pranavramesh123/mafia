@@ -11,11 +11,6 @@ package com.mafia.server.model.comm.server;
  */
 public class Messagebox extends ServerMessage {
 
-    private String type;
-    private String title;
-    private String text;
-    private String url;
-
     public static Messagebox createMessageBoxOk(String text) {
         Messagebox messagebox = new Messagebox();
         messagebox.setType("messageBoxOk");
@@ -51,6 +46,11 @@ public class Messagebox extends ServerMessage {
         messagebox.setTitleAndText(title, text);
         return messagebox;
     }
+
+    private String type;
+    private String title;
+    private String text;
+    private String url;
 
     public void setTitleAndText(String title, String text) {
         this.title = title;
@@ -113,5 +113,6 @@ public class Messagebox extends ServerMessage {
     public void setUrl(String url) {
         this.url = url;
     }
+
 
 }
