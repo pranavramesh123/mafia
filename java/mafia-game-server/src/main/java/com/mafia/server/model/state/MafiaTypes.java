@@ -18,17 +18,24 @@ public class MafiaTypes {
 
     public enum PLAYER_ROLES {
 
-        NONE(TEAM.NONE), CIVILIAN(TEAM.CIVILIAN), KILLER(TEAM.KILLER), INVESTIGATOR(TEAM.CIVILIAN), WITCH_TYPE(TEAM.CIVILIAN), VIGILANTE(TEAM.CIVILIAN), HANDICAPPED(TEAM.CIVILIAN), SUICIDE(TEAM.CIVILIAN);
+        NONE(TEAM.NONE, "None"), CIVILIAN(TEAM.CIVILIAN, "Civilian"), KILLER(TEAM.KILLER, "Killer"), INVESTIGATOR(TEAM.CIVILIAN, "Invesigator"), WITCH_TYPE(TEAM.CIVILIAN, "Civilian"), VIGILANTE(TEAM.CIVILIAN, "Civilian"), HANDICAPPED(TEAM.CIVILIAN, "Civilian"), SUICIDE(TEAM.CIVILIAN, "Civilian");
 
         private final TEAM team;
+        private final String label;
 
-        PLAYER_ROLES(TEAM teamS) {
+        PLAYER_ROLES(TEAM teamS, String lbl) {
             this.team = teamS;
+            this.label = lbl;
         }
 
         public TEAM getTeam() {
             return team;
         }
+
+        public String getLabel() {
+            return label;
+        }
+
     }
 
     public enum GAME_PHASE {

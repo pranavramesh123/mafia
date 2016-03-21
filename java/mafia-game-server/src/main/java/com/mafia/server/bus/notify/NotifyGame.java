@@ -58,10 +58,10 @@ public class NotifyGame {
     public static void nofityOfRole(Game game) {
         List<Player> players = game.getPlayersAsList();
         for (Player player : players) {
-            String role = player.getRole().name();
+            String role = player.getRole().getLabel();
             Messagebox messagebox = Messagebox.createMessageBoxTimed("Role", role);
             MessageRouter.sendMessage(player, messagebox);
-            ChatMessage chatMessage = new ChatMessage("<strong>You are a " + role + "</strong><br />");
+            ChatMessage chatMessage = new ChatMessage("You are a <strong>" + role + "</strong><br />");
             MessageRouter.sendMessage(player, chatMessage);
         }
     }
